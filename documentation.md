@@ -5,15 +5,15 @@ Here's the checklist in clean markdown format:
 ## Phase 1 - Planning and Setup (January – March 2025)
 
 - [ ] Approval of system requirements and architecture
-- [ ] Deployment of initial cloud environment
+- [x] Deployment of initial cloud environment
 - [ ] Completion of security assessments
 - [ ] Establishment of clear roles and responsibilities within the project team
-- [ ] Initial budgeting plan approved, and resources allocated
+- [x] Initial budgeting plan approved, and resources allocated
 
 ## Phase 2 - Data Ingestion and Processing (April – September 2025)
 
-- [ ] Successful acquisition and ingestion of initial data sets
-- [ ] Implementation of basic ODC features
+- [x] Successful acquisition and indexing of initial data sets
+- [x] Implementation of basic ODC features
 - [ ] Creation and storage of high-quality derived products
 - [ ] Validation of data accuracy and completeness
 - [ ] Completion of the indexing framework
