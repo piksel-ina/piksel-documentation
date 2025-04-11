@@ -7,7 +7,7 @@ This document outlines the proposed multi-repository architecture for the Piksel
 ## Repository Structure
 
 ```mermaid
-graph TD
+graph LR
     org[Piksel Organization] --> infra[piksel-infra]
     org --> core[piksel-core]
     org --> jupyter[piksel-jupyter]
