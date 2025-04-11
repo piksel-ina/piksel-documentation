@@ -42,82 +42,94 @@ graph LR
 
 Infrastructure as Code repository containing all AWS resource definitions.
 
+<!-- prettier-ignore-start -->
 ```markdown
 piksel-infra/
 ├── terraform/
-│ ├── ec2-deployment/ # Phase 1: EC2-based deployment resources
-│ ├── kubernetes-deployment/ # Phase 2: Kubernetes resources  
-│ └── shared-resources/ # Shared infrastructure (ECR, S3, IAM, etc.)
-└── .github/workflows/ # Infrastructure CI/CD pipelines
+│ ├── ec2-deployment/           # Phase 1: EC2-based deployment resources
+│ ├── kubernetes-deployment/    # Phase 2: Kubernetes resources  
+│ └── shared-resources/         # Shared infrastructure (ECR, S3, IAM, etc.)
+└── .github/workflows/          # Infrastructure CI/CD pipelines
 ```
+<!-- prettier-ignore-end -->
 
 ### 2. `piksel-core`
 
 Open Data Cube core services repository.
 
+<!-- prettier-ignore-start -->
 ```markdown
 piksel-core/
-├── docker/ # Container definitions for ODC
-├── products/ # Earth observation product definitions
-└── .github/workflows/ # Core services CI/CD pipelines
+├── docker/                     # Container definitions for ODC
+├── products/                   # Earth observation product definitions
+└── .github/workflows/          # Core services CI/CD pipelines
 ```
+<!-- prettier-ignore-end -->
 
 ### 3. `piksel-jupyter`
 
 Custom Jupyter environment with Dask integration.
 
+<!-- prettier-ignore-start -->
 ```markdown
 piksel-jupyter/
-├── docker/ # Custom Jupyter container with Dask support
-├── notebooks/ # Example and template notebooks
-└── .github/workflows/ # Jupyter image CI/CD pipelines
+├── docker/                     # Custom Jupyter container with Dask support
+├── notebooks/                  # Example and template notebooks
+└── .github/workflows/          # Jupyter image CI/CD pipelines
 ```
+<!-- prettier-ignore-end -->
 
 ### 4. `piksel-geo-services`
 
 Geospatial services for data access and cataloging.
 
+<!-- prettier-ignore-start -->
 ```markdown
 piksel-geo-services/
-├── wcs-wms/ # Web Coverage/Map Service implementation
-├── stac/ # SpatioTemporal Asset Catalog service
-└── .github/workflows/ # Geo-services CI/CD pipelines
+├── wcs-wms/                    # Web Coverage/Map Service implementation
+├── stac/                       # SpatioTemporal Asset Catalog service
+└── .github/workflows/          # Geo-services CI/CD pipelines
 ```
+<!-- prettier-ignore-end -->
 
 ### 5. `piksel-website`
 
 Landing page and documentation site.
 
+<!-- prettier-ignore-start -->
 ```markdown
 piksel-website/
-├── public/ # Static website content
-└── .github/workflows/ # Website deployment workflows
+├── public/                     # Static website content
+└── .github/workflows/          # Website deployment workflows
 ```
+<!-- prettier-ignore-end -->
 
 ### 6. `piksel-meta`
 
 Coordination repository for system-wide concerns.
 
+<!-- prettier-ignore-start -->
 ```markdown
 piksel-meta/
-├── docs/ # System-wide documentation
-│ ├── architecture/ # System architecture diagrams
-│ ├── deployment/ # End-to-end deployment guides
-│ └── operations/ # Day 2 operations documentation
-├── deployment/ # Deployment orchestration
-│ ├── scripts/ # Deployment automation scripts
-│ └── config/ # Environment configuration templates
-└── scripts/ # Cross-repository utilities
-├── development/ # Developer environment setup
-└── monitoring/ # System monitoring configuration
+├── docs/                       # System-wide documentation
+│ ├── architecture/             # System architecture diagrams
+│ ├── deployment/               # End-to-end deployment guides
+│ └── operations/               # Day 2 operations documentation
+├── deployment/                 # Deployment orchestration
+│ ├── scripts/                  # Deployment automation scripts
+│ └── config/                   # Environment configuration templates
+└── scripts/                    # Cross-repository utilities
+├── development/                # Developer environment setup
+└── monitoring/                 # System monitoring configuration
 ```
+<!-- prettier-ignore-end -->
 
 ## CI/CD Strategy
 
 ### Infrastructure Repository CI/CD
 
 ```mermaid
-flowchart TD
+flowchart LR
     A[Developer Push] --> B[Terraform Validation]
     B --> C[Security Scanning]
     C --> D[PR Review]
@@ -141,7 +153,7 @@ flowchart TD
 ### Service Repositories CI/CD
 
 ```mermaid
-flowchart TD
+flowchart LR
     A[Code Push] --> B[Tests & Linting]
     B --> C[Build Container]
     C --> D[Security Scan]
@@ -165,7 +177,7 @@ flowchart TD
 ### Static Website CI/CD
 
 ```mermaid
-flowchart TD
+flowchart LR
     A[Content Update] --> B[Build Static Site]
     B --> C[Validate Links]
     C --> D{Branch?}
@@ -190,15 +202,6 @@ The meta repository serves as the coordination point with:
 3. **Cross-Repository Automation**: GitHub Actions workflows that can trigger events in multiple repositories
 4. **Developer Onboarding**: Complete setup instructions for the development environment
 5. **Monitoring Configuration**: Centralized monitoring and alerting configuration
-
-## Advantages of Multi-Repository Approach
-
-1. **Clear Separation of Concerns**: Each component has its own lifecycle and release cadence
-2. **Specialized CI/CD Pipelines**: Tailored workflows for each component type
-3. **Independent Development**: Teams can work on different components without interference
-4. **Repository Size Management**: Prevents any single repository from becoming unwieldy
-5. **Focused Pull Requests**: Reviews are focused on specific component changes
-6. **Access Control**: Fine-grained access control for different components
 
 ## Migration Plan
 
