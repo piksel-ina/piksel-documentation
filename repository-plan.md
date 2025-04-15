@@ -46,10 +46,49 @@ Infrastructure as Code repository containing all AWS resource definitions.
 ```markdown
 piksel-infra/
 ├── terraform/
-│ ├── ec2-deployment/           # Phase 1: EC2-based deployment resources
-│ ├── kubernetes-deployment/    # Phase 2: Kubernetes resources  
-│ └── shared-resources/         # Shared infrastructure (ECR, S3, IAM, etc.)
-└── .github/workflows/          # Infrastructure CI/CD pipelines
+│   ├── modules/                # Reusable modules
+│   │   ├── network/            # VPC, subnets, etc.
+│   │   ├── compute/            # EC2, etc.
+│   │   ├── shared/             # S3, ECR, IAM, etc.
+│   │   ├── kubernetes/         # EKS cluster, node groups, etc.
+│   │   └── kubernetes-addons/  # Metrics server, storage, monitoring, etc.
+│   │
+│   ├── network/                # Maps to piksel-network-dev workspace
+│   │   ├── main.tf             # Calls network module
+│   │   ├── variables.tf
+│   │   ├── outputs.tf
+│   │   ├── terraform.tf        # Backend config for piksel-network-dev
+│   │   ├── dev.tfvars          # Development-specific variables
+│   │   └── prod.tfvars         # Production-specific variables
+│   │
+│   ├── shared/                 # Maps to piksel-shared-dev workspace
+│   │   ├── main.tf             # Calls shared module
+│   │   ├── variables.tf
+│   │   ├── outputs.tf
+│   │   ├── terraform.tf        # Backend config for piksel-network-dev
+│   │   ├── dev.tfvars          # Development-specific variables
+│   │   └── prod.tfvars         # Production-specific variables
+│   │
+│   ├── compute/                # Maps to piksel-compute-dev workspace
+│   │   ├── main.tf             # Calls compute module
+│   │   ├── variables.tf
+│   │   ├── outputs.tf
+│   │   └── terraform.tf
+│   │
+│   └── kubernetes/             # Maps to piksel-kubernetes-dev workspace (future)
+│       ├── main.tf             # Calls kubernetes and kubernetes-addons modules
+│       ├── variables.tf
+│       ├── outputs.tf
+│       ├── terraform.tf        # Backend config for piksel-network-dev
+│       ├── dev.tfvars          # Development-specific variables
+│       └── prod.tfvars         # Production-specific variables
+│
+└── .github/
+    └── workflows/
+        ├── terraform-plan.yml         # Runs on PRs
+        ├── terraform-apply-dev.yml    # Runs on merges to develop
+        └── terraform-apply-prod.yml   # Runs on merges to main
+
 ```
 <!-- prettier-ignore-end -->
 
