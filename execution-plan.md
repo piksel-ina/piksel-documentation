@@ -53,6 +53,9 @@
 - Sub-issue 2.3.1: Create ECR repositories for containers
 - Sub-issue 2.3.2: Set up S3 buckets for data storage
 - Sub-issue 2.3.3: Configure CloudWatch for logging
+- Sub-issue 2.3.4: Configure RDS instances for database services
+- Sub-issue 2.3.5: Set up database security groups and access policies
+- Sub-issue 2.3.6: Configure database backup and recovery procedures
 
 ### Issue 2.4: Configure EC2 instances for services (**piksel-infra**)
 
@@ -64,6 +67,13 @@
 - Sub-issue 2.5.1: Create GitHub Actions workflow for terraform validation
 - Sub-issue 2.5.2: Set up deployment workflow using OIDC authentication
 - Sub-issue 2.5.3: Create infrastructure testing scripts
+
+### Issue 2.6: Infrastructure Documentation (**piksel-infra**)
+
+- Sub-issue 2.6.1: Document network infrastructure architecture and components
+- Sub-issue 2.6.2: Create documentation for shared resources configuration
+- Sub-issue 2.6.3: Document compute resources setup and management
+- Sub-issue 2.6.4: Create infrastructure module usage guides
 
 ## 3️⃣ - Core Service Implementation
 
