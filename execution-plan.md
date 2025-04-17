@@ -54,11 +54,10 @@
 - Sub-issue 2.3.2: Set up S3 buckets for data storage
 - Sub-issue 2.3.3: Configure CloudWatch for logging
 
-### Issue 2.4: EC2 Deployment Resources (**piksel-infra**)
+### Issue 2.4: Configure EC2 instances for services (**piksel-infra**)
 
 - Sub-issue 2.4.1: Configure EC2 instances for services
-- Sub-issue 2.4.2: Set up auto-scaling groups
-- Sub-issue 2.4.3: Configure load balancers
+- Sub-issue 2.4.2: Set up SSH for Developper
 
 ### Issue 2.5: CI/CD for Infrastructure (**piksel-infra**)
 
