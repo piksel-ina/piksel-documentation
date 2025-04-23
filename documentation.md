@@ -4,10 +4,10 @@ Here's the checklist in clean markdown format:
 
 ## Phase 1 - Planning and Setup (January – March 2025)
 
-- [ ] Approval of system requirements and architecture
+- [x] Approval of system requirements and architecture
 - [x] Deployment of initial cloud environment
 - [ ] Completion of security assessments
-- [ ] Establishment of clear roles and responsibilities within the project team
+- [x] Establishment of clear roles and responsibilities within the project team
 - [x] Initial budgeting plan approved, and resources allocated
 
 ## Phase 2 - Data Ingestion and Processing (April – September 2025)
