@@ -11,29 +11,29 @@ graph LR
     org[Piksel Organization] --> infra[piksel-infra]
     org --> core[piksel-core]
     org --> jupyter[piksel-jupyter]
-    org --> geo[piksel-geo-services]
-    org --> website[piksel-website]
-    org --> meta[piksel-meta]
+    org --> k8s[piksel-kubernetes]
+    org --> doc[piksel-document]
+    org --> test[piksel-test]
 
     infra --> terraform[Terraform IaC]
-    terraform --> ec2[EC2 Deployment]
-    terraform --> k8s[Kubernetes Deployment]
-    terraform --> shared[Shared Resources]
+    terraform --> main[Root Configuration]
+    terraform --> modules[Modules]
+
+    k8s --> eks[EKS Configuration]
+    k8s --> flux[Flux GitOps]
+    k8s --> workloads[Application Workloads]
 
     core --> docker_core[Container Definitions]
     core --> products[Product Definitions]
 
-    jupyter --> docker_jupyter[Custom Jupyter Container]
-    jupyter --> notebooks[Example Notebooks]
+    jupyter --> docker_jupyter[Jupyter/Dask Setup]
+    jupyter --> notebooks[Analysis Examples]
 
-    geo --> wcs[WCS/WMS Service]
-    geo --> stac[STAC Server]
+    doc --> system_docs[System Documentation]
+    doc --> api_docs[API Documentation]
 
-    website --> public[Static Website]
-
-    meta --> docs[System Documentation]
-    meta --> deployment[Deployment Orchestration]
-    meta --> scripts[Cross-repo Utilities]
+    test --> integration[Integration Tests]
+    test --> validation[Deployment Validation]
 ```
 
 ## Repository Details
@@ -45,46 +45,14 @@ Infrastructure as Code repository containing all AWS resource definitions.
 <!-- prettier-ignore-start -->
 ```markdown
 piksel-infra/
-├── terraform/
-│   ├── network/                # Maps to piksel-network-dev workspace
-│   │   ├── modules/network            
-│   │   ├── main.tf             # Calls network module
-│   │   ├── variables.tf
-│   │   ├── outputs.tf
-│   │   ├── terraform.tf        # Backend config for piksel-network-dev
-│   │   ├── dev.tfvars          # Development-specific variables
-│   │   └── prod.tfvars         # Production-specific variables
-│   │
-│   ├── shared/                 # Maps to piksel-shared-dev workspace
-│   │   ├── modules/shared
-│   │   ├── main.tf             # Calls shared module
-│   │   ├── variables.tf
-│   │   ├── outputs.tf
-│   │   ├── terraform.tf        # Backend config for piksel-network-dev
-│   │   ├── dev.tfvars          # Development-specific variables
-│   │   └── prod.tfvars         # Production-specific variables
-│   │
-│   ├── compute/                # Maps to piksel-compute-dev workspace
-│   │   ├── modules/compute
-│   │   ├── main.tf             # Calls compute module
-│   │   ├── variables.tf
-│   │   ├── outputs.tf
-│   │   └── terraform.tf
-│   │
-│   └── kubernetes/             # Maps to piksel-kubernetes-dev workspace (future)
-│       ├── modules/kubernetes
-│       ├── main.tf             # Calls kubernetes and kubernetes-addons modules
-│       ├── variables.tf
-│       ├── outputs.tf
-│       ├── terraform.tf        # Backend config for piksel-network-dev
-│       ├── dev.tfvars          # Development-specific variables
-│       └── prod.tfvars         # Production-specific variables
-│
-└── .github/
-    └── workflows/
-        ├── terraform-plan.yml         # Runs on PRs
-        ├── terraform-apply-dev.yml    # Runs on merges to develop
-        └── terraform-apply-prod.yml   # Runs on merges to main
+├── main.tf           # All resource orchestration here
+├── variables.tf
+├── providers.tf
+├── outputs.tf
+└── modules/
+    ├── network/
+    ├── security/
+    └── storage/
 ```
 <!-- prettier-ignore-end -->
 
@@ -108,22 +76,22 @@ Custom Jupyter environment with Dask integration.
 <!-- prettier-ignore-start -->
 ```markdown
 piksel-jupyter/
-├── docker/                     # Custom Jupyter container with Dask support
+├── config/                     # JupyterHub/Dask config
 ├── notebooks/                  # Example and template notebooks
 └── .github/workflows/          # Jupyter image CI/CD pipelines
 ```
 <!-- prettier-ignore-end -->
 
-### 4. `piksel-geo-services`
+### 4. `piksel-kubernetes`
 
-Geospatial services for data access and cataloging.
+Kubernetes and GitOps management:
 
 <!-- prettier-ignore-start -->
 ```markdown
-piksel-geo-services/
-├── wcs-wms/                    # Web Coverage/Map Service implementation
-├── stac/                       # SpatioTemporal Asset Catalog service
-└── .github/workflows/          # Geo-services CI/CD pipelines
+piksel-kubernetes/
+├── terraform/           # EKS infrastructure
+├── clusters/            # Flux configurations
+└── workloads/           # Application manifests
 ```
 <!-- prettier-ignore-end -->
 
@@ -139,23 +107,31 @@ piksel-website/
 ```
 <!-- prettier-ignore-end -->
 
-### 6. `piksel-meta`
+### 6. `piksel-test`
 
-Coordination repository for system-wide concerns.
+Testing and validation:
 
 <!-- prettier-ignore-start -->
 ```markdown
-piksel-meta/
-├── docs/                       # System-wide documentation
-│ ├── architecture/             # System architecture diagrams
-│ ├── deployment/               # End-to-end deployment guides
-│ └── operations/               # Day 2 operations documentation
-├── deployment/                 # Deployment orchestration
-│ ├── scripts/                  # Deployment automation scripts
-│ └── config/                   # Environment configuration templates
-└── scripts/                    # Cross-repository utilities
-├── development/                # Developer environment setup
-└── monitoring/                 # System monitoring configuration
+piksel-test/
+├── integration/        # Integration tests
+└── deployment/         # Deployment validation
+```
+<!-- prettier-ignore-end -->
+
+### 7. `piksel-document`
+
+Centralized documentation:
+
+<!-- prettier-ignore-start -->
+```markdown
+piksel-document/
+├── security/           # Security foundations, policies, compliance
+├── project-plans/      # Project plans, milestones 
+├── achitecture/        # System architecture
+├── operations/         # Runbooks, procedures, how-tos
+├── assets/             # Logos, and etc
+└── api/                # API documentation
 ```
 <!-- prettier-ignore-end -->
 
@@ -169,7 +145,7 @@ flowchart LR
     B --> C[Security Scanning]
     C --> D[PR Review]
     D --> E{Branch?}
-    E -->|dev| F[Apply to Dev Environment]
+    E -->|development| F[Apply to Dev Environment]
     E -->|main| G[Apply to Production]
     F --> H[Integration Tests]
     H -->|Success| I[Update Status]
@@ -193,7 +169,7 @@ flowchart LR
     B --> C[Build Container]
     C --> D[Security Scan]
     D --> E{Branch?}
-    E -->|dev| F[Push to ECR with dev tag]
+    E -->|development| F[Push to ECR with dev tag]
     E -->|main| G[Push to ECR with version tag]
     F --> H[Deploy to Dev Environment]
     G --> I[Deploy to Production]
