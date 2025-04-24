@@ -190,6 +190,28 @@ graph TD
   - Standard pull request workflow
   - No specific protection rules
 
+### Workflow Guidelines for Infrastructure Repo (piksel-infra, piksel-kubernetes)
+
+1. **Feature Development**
+
+   - Create feature branch from main
+   - Submit pull request when ready
+   - Get approval from 1 reviewer
+   - Ensure format/validation checks pass
+   - Merge to main
+
+2. **Release Process**
+
+   - Infrastructure: Update appropriate environment directory
+   - Applications: Create new tag (v1.0.0, v1.1.0, etc.)
+
+3. **Hotfix Process**
+   - Create hotfix branch from main
+   - Follow same PR process as features
+   - Automated deployment after merge via respective tools
+     - Terraform Cloud for infrastructure
+     - FluxCD for Kubernetes resources
+
 ### Application Repositories (piksel-core, piksel-jupyter)
 
 ```mermaid
@@ -221,109 +243,59 @@ graph TD
   - Standard pull request workflow
   - No specific protection rules
 
-### Directory Structure (Infrastructure)
-
-```
-repository/
-├── environments/
-│   ├── dev/
-│   ├── staging/
-│   └── prod/
-├── modules/
-└── shared/
-```
-
-### Workflow Guidelines
-
-1. **Feature Development**
-
-   - Create feature branch from main
-   - Submit pull request when ready
-   - Get approval from 1 reviewer
-   - Ensure status checks pass
-   - Merge to main
-
-2. **Release Process**
-
-   - Infrastructure: Update appropriate environment directory
-   - Applications: Create new tag (v1.0.0, v1.1.0, etc.)
-
-3. **Hotfix Process**
-   - Create hotfix branch from main
-   - Follow same PR process as features
-   - Deploy after merge
-     Based on your current setup, I'll help structure the CI/CD strategy that aligns with your repository and branching strategy. Let's break it down by repository type:
-
 ## CI/CD Strategy
 
-### 1. Infrastructure Repositories CI/CD (piksel-infra, piksel-kubernetes)
+### 1. Infrastructure Repository CI/CD (piksel-infra)
 
 ```mermaid
 flowchart LR
-    A[Push to feature/*] --> B[Terraform Init & Validate]
-    B --> C[Security Scan]
-    C --> D[Plan & Generate Report]
+    A[Push to feature/*] --> B[Terraform Format Check]
+    B --> C[Terraform Validate]
+    C --> D[TFSec Scan]
     D --> E[PR Review]
 
-    F[Merge to main] --> G[Terraform Init]
-    G --> H[Security Scan]
-    H --> I[Plan & Apply Dev]
-    I --> J[Integration Tests]
-    J --> K[Plan & Apply Staging]
-    K --> L[Plan & Apply Prod]
+    F[Merge to main] --> G[Terraform Cloud Trigger]
+    G --> H[TF Cloud Plan Dev]
+    H --> I[TF Cloud Apply Dev]
+    I --> J[TF Cloud Plan Staging]
+    J --> K[TF Cloud Apply Staging]
+    K --> L[TF Cloud Plan Prod]
+    L --> M[TF Cloud Apply Prod]
 ```
 
 **GitHub Actions Workflow Structure**
 
 ```yaml
-# Feature Branch Workflow
-name: Feature Branch Checks
+name: Terraform Validate
 on:
   pull_request:
     branches: [main]
     paths:
-      - 'environments/**'
-      - 'modules/**'
+      - "**/*.tf"
+      - "**/*.tfvars"
 
 jobs:
   validate:
     runs-on: ubuntu-latest
     steps:
-      - terraform-init
-      - terraform-validate
-      - tfsec-scan
-      - terraform-plan
+      - uses: actions/checkout@v3
 
-# Main Branch Workflow
-name: Environment Deployment
-on:
-  push:
-    branches: [main]
-    paths:
-      - 'environments/**'
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
 
-jobs:
-  deploy-dev:
-    environment: dev
-    steps:
-      - terraform-apply
-      - integration-tests
+      - name: Terraform Format Check
+        run: terraform fmt -check -recursive
 
-  deploy-staging:
-    needs: deploy-dev
-    environment: staging
-    steps:
-      - terraform-apply
+      - name: Run tfsec
+        uses: aquasecurity/tfsec-action@v1.0.0
+        with:
+          soft_fail: true # Won't fail the pipeline but will show warnings
 
-  deploy-prod:
-    environment:
-      name: production
-      url: https://piksel.example.com
-    needs: [deploy-staging]
-    steps:
-      - manual-approval
-      - deploy
-
+      - name: Terraform Init & Validate
+        run: |
+          cd dev && terraform init -backend=false && terraform validate
+          cd ../staging && terraform init -backend=false && terraform validate
+          cd ../prod && terraform init -backend=false && terraform validate
 ```
 
 **Key Components**
@@ -335,8 +307,9 @@ jobs:
   - Separate Terraform Cloud workspaces per environment
   - State locked and managed in Terraform Cloud
 - **Security:**
-  - tfsec and checkov scans in PR checks
-  - Infrastructure policy checks via Terraform Cloud
+  - Pre-commit hooks for local security checks
+  - TFSec scans in PR checks for IaC security validation
+  - TFLint for Terraform best practices enforcement
 - **Environment Protection**:
   - Required approvals in Terraform Cloud for staging/prod
   - Manual approval gates between environments
@@ -583,3 +556,90 @@ jobs:
       - publish-report
 
 ```
+
+I'll update the CI/CD Strategy section following the original document's structure:
+
+## CI/CD Strategy
+
+### 2. Kubernetes Repository CI/CD (piksel-kubernetes)
+
+```mermaid
+flowchart LR
+    A[Push to feature/*] --> B[Helm Lint]
+    B --> C[Kubeval Check]
+    C --> D[PR Review]
+
+    E[Merge to main] --> F[FluxCD Detection]
+    F --> G[Sync Dev]
+    G --> H[Integration Tests]
+    H --> I[Sync Staging]
+    I --> J[Sync Production]
+```
+
+**GitHub Actions Workflow Structure**
+
+```yaml
+# Feature Branch Workflow
+name: Kubernetes Validate
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "helm-charts/**"
+      - "flux/**"
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Helm
+        uses: azure/setup-helm@v3
+
+      - name: Run Helm lint
+        run: |
+          for chart in helm-charts/*; do
+            if [ -d "$chart" ]; then
+              helm lint $chart
+            fi
+          done
+
+      - name: Setup Kubeval
+        run: |
+          wget https://github.com/instrumenta/kubeval/releases/latest/download/kubeval-linux-amd64.tar.gz
+          tar xf kubeval-linux-amd64.tar.gz
+          sudo cp kubeval /usr/local/bin
+
+      - name: Validate Kubernetes manifests
+        run: |
+          kubeval --strict flux/**/*.yaml
+```
+
+### Branch Strategy
+
+[This section remains unchanged as it's still valid for both repositories]
+
+### Workflow Guidelines
+
+1. **Feature Development**
+
+   - Create feature branch from main
+   - Submit pull request when ready
+   - Get approval from 1 reviewer
+   - Ensure format/validation checks pass
+   - Merge to main
+
+2. **Release Process**
+
+   - piksel-infra: Terraform Cloud automatically applies changes
+   - piksel-kubernetes: FluxCD automatically syncs changes
+
+3. **Hotfix Process**
+   - Create hotfix branch from main
+   - Follow same PR process as features
+   - Automated deployment after merge via respective tools
+     - Terraform Cloud for infrastructure
+     - FluxCD for Kubernetes resources
+
+Would you like me to elaborate on any specific section?
