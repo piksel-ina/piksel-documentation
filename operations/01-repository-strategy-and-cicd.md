@@ -45,14 +45,28 @@ Infrastructure as Code repository containing all AWS resource definitions.
 <!-- prettier-ignore-start -->
 ```markdown
 piksel-infra/
-├── main.tf           # All resource orchestration here
-├── variables.tf
-├── providers.tf
-├── outputs.tf
-└── modules/
-    ├── network/
-    ├── security/
-    └── storage/
+├── .github/
+│   └── workflows/
+│       └── tf-validate.yml     # Only format and validation checks
+├── .gitignore
+├── .pre-commit-config.yaml
+├── README.md
+├── modules/                    # Only for complex/unique configurations
+│   └── custom-setup/           # Example: Special configuration needed
+│       ├── main.tf
+│       ├── variables.tf
+│       └── outputs.tf
+├── dev/
+│   ├── README.md               # Dev environment specifics
+│   ├── main.tf                 # Uses registry modules
+│   ├── variables.tf
+│   ├── outputs.tf
+│   ├── providers.tf
+│   └── terraform.tfvars
+├── staging/
+│   └── [same structure as dev]
+└── prod/
+    └── [same structure as dev]
 ```
 <!-- prettier-ignore-end -->
 
