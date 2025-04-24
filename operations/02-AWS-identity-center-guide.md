@@ -4,7 +4,7 @@
 
 Piksel implements AWS Organizations with multiple accounts to ensure proper security boundaries and resource isolation. Each environment (development, staging, production) operates in separate AWS accounts managed through AWS Identity Center (formerly AWS SSO).
 
-For detailed information about our AWS Organizations structure and security guidelines, refer to [Piksel - AWS Organization Foundational Security Guidelines](../security/Piksel%20-%20AWS%20Organization%20Foundational%20Security%20Guidelines.md)
+For detailed information about our AWS Organizations structure and security guidelines, refer to [Piksel - AWS Organization Foundational Security Guidelines](../security/01-piksel-AWS-Organization-Foundational-Security-Guidelines.md)
 
 ## Creating New AWS Users
 
