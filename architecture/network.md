@@ -1,6 +1,6 @@
 ## 1. Overview
 
-This document outlines the networking infrastructure for the Piksel project.
+This document outlines the networking infrastructure for the Piksel project, optimized for EKS deployment.
 
 ## 2. Network Architecture
 
@@ -9,18 +9,21 @@ This document outlines the networking infrastructure for the Piksel project.
 VPC (10.0.0.0/16)
 ├── Availability Zone A
 │   ├── Public Subnet       (10.0.0.0/24)
-│   │   └── Resources: NAT Gateway
+│   │   └── Resources: NAT Gateway, ALB
 │   ├── Private App Subnet  (10.0.1.0/24)
-│   │   └── Resources: EKS nodes, temporary EC2 instances
+│   │   └── Resources: EKS nodes
 │   └── Private Data Subnet (10.0.2.0/24)
 │       └── Resources: RDS, ElastiCache
 ├── Availability Zone B
 │   ├── Public Subnet       (10.0.3.0/24)
-│   │   └── Resources: NAT Gateway
+│   │   └── Resources: NAT Gateway, ALB
 │   ├── Private App Subnet  (10.0.4.0/24)
-│   │   └── Resources: EKS nodes, temporary EC2 instances
+│   │   └── Resources: EKS nodes
 │   └── Private Data Subnet (10.0.5.0/24)
 │       └── Resources: RDS, ElastiCache
+└── VPC Endpoints
+    ├── Gateway Endpoints: S3, DynamoDB
+    └── Interface Endpoints: ECR, CloudWatch, SSM
 ```
 <!-- prettier-ignore-end -->
 
@@ -28,88 +31,129 @@ VPC (10.0.0.0/16)
 
 ### 3.1 Public Subnets
 
-| Subnet   | CIDR Block  | Availability Zone | Purpose     |
-| -------- | ----------- | ----------------- | ----------- |
-| Public A | 10.0.0.0/24 | AZ-a              | NAT Gateway |
-| Public B | 10.0.3.0/24 | AZ-b              | NAT Gateway |
+| Subnet   | CIDR Block  | AZ  | Purpose          |
+| -------- | ----------- | --- | ---------------- |
+| Public A | 10.0.0.0/24 | A   | NAT Gateway, ALB |
+| Public B | 10.0.3.0/24 | B   | NAT Gateway, ALB |
 
 **Configuration:**
 
 - Internet Gateway attached
 - Route table includes route to Internet Gateway
-- Auto-assign public IP enabled
+- Tagged for AWS Load Balancer Controller discovery
 
 ### 3.2 Private Application Subnets
 
-| Subnet        | CIDR Block  | Availability Zone | Purpose                  |
-| ------------- | ----------- | ----------------- | ------------------------ |
-| Private App A | 10.0.1.0/24 | AZ-a              | EC2 instances, EKS nodes |
-| Private App B | 10.0.4.0/24 | AZ-b              | EC2 instances, EKS nodes |
+| Subnet        | CIDR Block  | AZ  | Purpose   |
+| ------------- | ----------- | --- | --------- |
+| Private App A | 10.0.1.0/24 | A   | EKS nodes |
+| Private App B | 10.0.4.0/24 | B   | EKS nodes |
 
 **Configuration:**
 
 - Route table includes route to NAT Gateway
-- Tagged for future EKS cluster discovery
-- Shared between temporary EC2 instances and future EKS nodes
+- Required EKS cluster tags:
+  - `kubernetes.io/cluster/<cluster-name>: shared`
+  - `kubernetes.io/role/internal-elb: 1`
 
 ### 3.3 Private Data Subnets
 
-| Subnet         | CIDR Block  | Availability Zone | Purpose          |
-| -------------- | ----------- | ----------------- | ---------------- |
-| Private Data A | 10.0.2.0/24 | AZ-a              | RDS, ElastiCache |
-| Private Data B | 10.0.5.0/24 | AZ-b              | RDS, ElastiCache |
-
-**Configuration:**
-
-- Route table includes route to NAT Gateway
-- Tagged for database subnet groups
-- Isolated from direct internet access
+| Subnet         | CIDR Block  | AZ  | Purpose          |
+| -------------- | ----------- | --- | ---------------- |
+| Private Data A | 10.0.2.0/24 | A   | RDS, ElastiCache |
+| Private Data B | 10.0.5.0/24 | B   | RDS, ElastiCache |
 
 ## 4. Network Components
 
-### 4.1 NAT Gateways
+### 4.1 VPC Endpoints
 
-- **Purpose**: Allow outbound internet access from private subnets
-- **Deployment**: One per Availability Zone for high availability
-- **Location**: Public subnets (10.0.0.0/24 and 10.0.3.0/24)
+**Gateway Endpoints (Free):**
+
+- S3: For container images, logs, backups, EO data
+- DynamoDB: For application data if needed
+- Example: When EKS pods need to access S3 for EO data storage
+
+**Interface Endpoints (Paid):**
+
+- ECR: Container image pulling
+- CloudWatch: Log collection
+- Systems Manager: Cluster management
+- Example: When EKS nodes need to pull images from ECR
 
 ### 4.2 Security Groups
 
-| Security Group | Purpose                          | Key Rules                                                    |
-| -------------- | -------------------------------- | ------------------------------------------------------------ |
-| EC2 App SG     | Control traffic to EC2 instances | Allow SSH from developer IPs; Allow outbound internet access |
-| Data SG        | Control traffic to databases     | Allow traffic from EC2 App SG                                |
+```yaml
+EKS Cluster SG:
+  Inbound:
+    - Allow all from node group SG
+  Outbound:
+    - Allow all
 
-## 5. Migration Strategy
+Node Group SG:
+  Inbound:
+    - Allow all from cluster SG
+    - Allow 443 from ALB SG
+  Outbound:
+    - Allow all
 
-### 5.1 Phase 1: EC2-Based Testing
+ALB SG:
+  Inbound:
+    - Allow 80/443 from internet
+  Outbound:
+    - Allow all to node group SG
 
-- Deploy core application components on EC2 instances in private app subnets
-- Configure SSH access for developer team
-- Validate core functionality
+Database SG:
+  Inbound:
+    - Allow database port from node group SG
+  Outbound:
+    - Allow all
+```
 
-### 5.2 Phase 2: EKS Deployment
+## 5. Deployment Strategy
 
-- Deploy EKS cluster using the same private app subnets
-- Configure AWS Load Balancer Controller for Kubernetes ingress
-- Deploy applications to EKS
+### Phase 1: Base Network Setup
 
-### 5.3 Phase 3: Migration Completion
+1. VPC and subnet creation
+2. Internet Gateway deployment
+3. NAT Gateway setup
+4. VPC Endpoint configuration
+5. Initial security group creation
+6. Route table configuration
 
-- Gradually shift functionality from EC2 to EKS-hosted services
-- Monitor performance and stability
-- Decommission EC2 instances when migration is complete
+### Phase 2: EKS Network Integration
+
+1. Add EKS-required subnet tags
+2. Deploy AWS Load Balancer Controller
+3. Configure node security groups
+4. Set up cluster IAM roles with necessary networking permissions
+5. Configure CoreDNS for cluster DNS
+6. Deploy CNI plugin with custom networking (if required)
+
+### Phase 3: Application Network Configuration
+
+1. Configure ingress resources
+2. Set up service mesh (if needed)
+3. Implement network policies
+4. Configure cross-namespace communication
 
 ## 6. Network Security Measures
 
 ### 6.1 Network ACLs
 
-- Public subnets: Allow SSH inbound from developer IPs only
-- Private subnets: Deny direct inbound from internet
+- Public subnets: Allow HTTP/HTTPS inbound
+- Private subnets: Deny direct internet inbound
 - All subnets: Allow established connections
 
-### 6.2 VPC Flow Logs
+### 6.2 Monitoring
 
-- Enabled for security monitoring and troubleshooting
-- Logs stored in CloudWatch Logs
-- Retention period: 30 days
+- VPC Flow Logs enabled
+- CloudWatch Logs integration
+- 30-day retention period
+- Network traffic metrics collection
+
+### 6.3 Cost Optimization
+
+1. Use VPC endpoints to reduce NAT Gateway traffic
+2. Implement proper auto-scaling
+3. Monitor and optimize ALB usage
+4. Regular review of network flow logs for optimization opportunities
