@@ -177,3 +177,39 @@ The promotion of data, notebooks, and web assets between environments MUST be au
     - Terraform Cloud performs `terraform plan`.
     - Terraform Cloud performs `terraform apply` to deploy changes to the corresponding AWS environment (`dev`, `staging`, `prod`).
     - **Environment Protection:** Manual approvals within Terraform Cloud MUST be configured and required for applying changes to `staging` and `prod` workspaces.
+
+# Design vs Implementation
+
+[🔗 Configuration file](https://github.com/piksel-ina/piksel-infra/blob/main/dev/main.tf)
+
+## Comparison Table
+
+| Component              | Design Specification (object-storage.md)        | Implementation (Your Configuration)                                           | Status               |
+| ---------------------- | ----------------------------------------------- | ----------------------------------------------------------------------------- | -------------------- |
+| Naming Convention      | `Piksel-<environment>-<purpose>`                | `${local.name}-data`, `${local.name}-notebooks`, `${local.name}-web`          | ✅ Aligned           |
+| Standard Tagging       | Project, Environment, Purpose, ManagedBy, Owner | All tags present through `local.tags` with additional Purpose tag             | ✅ Aligned           |
+| Encryption             | SSE-KMS with dedicated KMS keys                 | SSE-KMS with `aws_kms_key.s3_key.arn` for all buckets                         | ✅ Aligned           |
+| VPC Endpoint           | S3 VPC Endpoint required                        | VPC endpoint enforcement via policy for data/notebooks buckets                | ✅ Aligned           |
+| Storage Classes        | STANDARD for web, INTELLIGENT_TIERING for data  | STANDARD (default) for web, Intelligent-Tiering configured for data bucket    | ✅ Aligned           |
+| Lifecycle Rules        | Required for data and notebooks                 | Implemented for both data (raw transition) and notebooks (outputs expiration) | ✅ Aligned           |
+| Public Access          | Block Public Access for all except web buckets  | Block Public Access enabled for all buckets including web (dev environment)   | ✅ Aligned           |
+| Versioning             | Required for data/notebooks, not for web        | Enabled for data/notebooks, disabled for web                                  | ✅ Aligned           |
+| Access Logging         | Required for all buckets                        | Configured for all buckets to `module.s3_log_bucket`                          | ✅ Aligned           |
+| TLS Enforcement        | Required via bucket policies                    | TLS enforcement policy attached to all buckets                                | ✅ Aligned           |
+| CloudFront Integration | Not explicitly in blueprint                     | CloudFront integration configured for web bucket                              | ✅ Enhanced security |
+
+## Notes
+
+While the table shows alignment with the blueprint, the implementation of S3 Intelligent-Tiering for the data bucket includes specific configurations worth noting:
+
+1.  **Archive Tier Configuration**: Settings are configured to automatically move objects tagged "tier=archive" under "path/to/data/" to ARCHIVE_ACCESS after 90 days and DEEP_ARCHIVE_ACCESS after 180 days. This provides cost optimization for long-term archived data.
+2.  **Automatic Cost Optimization**: Intelligent-Tiering automatically manages data movement between tiers based on access patterns, offering cost savings without manual effort, unlike standard lifecycle policies.
+3.  **No Retrieval Fees**: Retrieval from the frequent and infrequent access tiers within Intelligent-Tiering incurs no charges, which is beneficial for data with unpredictable access patterns compared to Standard-IA.
+
+CloudFront integration for the web bucket is also an enhancement beyond the basic blueprint requirements, improving content delivery security.
+
+## Recommendations
+
+1.  **Consider Environment-Specific Configurations**: Future environments (staging/production) may require different settings, particularly for web bucket public access.
+2.  **Refine Intelligent-Tiering Path**: The "path/to/data/" prefix in the Intelligent-Tiering configuration appears to be a placeholder. Review and update this to match the actual data organization for correct application.
+3.  **Complete Lifecycle Rules**: Add the currently commented-out lifecycle rules for processed data once those requirements are defined.
