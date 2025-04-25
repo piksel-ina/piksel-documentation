@@ -17,13 +17,13 @@ These principles apply globally unless explicitly overridden in environment-spec
 
 - **Infrastructure as Code (IaC):** All S3 resources (buckets, policies, configurations) **MUST** be defined and managed using Terraform code stored in the designated Git repository.
 - **GitOps:** Changes to the infrastructure **MUST** follow the GitOps workflow (e.g., Pull Request -> Review -> Merge -> Automated Apply via CI/CD).
-- **Naming Convention:** `piksel-ina-<purpose>-<environment>`
+- **Naming Convention:** `Piksel-<environment>-<purpose>`
   - <purpose>: `data`, `notebooks`, `web`
   - <environment>: `dev`, `staging`, `prod`
 - **Standard Tagging:** All buckets MUST include the following tags:
 
   - Project: Piksel
-  - Environment: `Dev`, `Staging`, `Prod`
+  - Environment: `dev`, `staging`, `prod`
   - Purpose: `data`, `notebooks`, `web`
   - ManagedBy: `Terraform`
   - Owner = "DevOps-Team"
@@ -48,11 +48,11 @@ This section details the specific configuration for each bucket within each envi
 
   - All access (except potentially initial developer setup) should ideally route through a VPC endpoint for S3 within the development VPC.
 
-  | Bucket Name                | Purpose & Content                           | Storage Class       | Lifecycle Rules                                   | Key Access Patterns & Policies                                                                                                                                                         |
-  | :------------------------- | :------------------------------------------ | :------------------ | :------------------------------------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-  | `piksel-ina-data-dev`      | Raw EO data, intermediate processing, tiles | INTELLIGENT_TIERING | `/raw/`: 30d to IA. `/processed/`, `/tiles/`: TBD | **Write:** Data Ingestion Pipelines (`/raw/`), EKS Pods via IRSA (`/processed/`, `/tiles/`), Developers. <br> **Read:** Developers, OWS Server (via role). Access restricted via VPCe. |
-  | `piksel-ina-notebooks-dev` | Jupyter notebooks, user workspaces, outputs | STANDARD            | `/outputs/`: 30d delete.                          | **Full:** Developers, JupyterHub Service Account (via IRSA/Role). Access restricted via VPCe.                                                                                          |
-  | `piksel-ina-web-dev`       | Static web assets for development testing   | STANDARD            | None                                              | **Write:** CI/CD Pipeline Role, Developers. <br> **Read:** Developers (direct access allowed for testing). <br> **NO Public Access.** Block Public Access Enabled.                     |
+  | Bucket Name            | Purpose & Content                           | Storage Class       | Lifecycle Rules                                   | Key Access Patterns & Policies                                                                                                                                                         |
+  | :--------------------- | :------------------------------------------ | :------------------ | :------------------------------------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+  | `Piksel-dev-data`      | Raw EO data, intermediate processing, tiles | INTELLIGENT_TIERING | `/raw/`: 30d to IA. `/processed/`, `/tiles/`: TBD | **Write:** Data Ingestion Pipelines (`/raw/`), EKS Pods via IRSA (`/processed/`, `/tiles/`), Developers. <br> **Read:** Developers, OWS Server (via role). Access restricted via VPCe. |
+  | `Piksel-dev-notebooks` | Jupyter notebooks, user workspaces, outputs | STANDARD            | `/outputs/`: 30d delete.                          | **Full:** Developers, JupyterHub Service Account (via IRSA/Role). Access restricted via VPCe.                                                                                          |
+  | `Piksel-dev-web`       | Static web assets for development testing   | STANDARD            | None                                              | **Write:** CI/CD Pipeline Role, Developers. <br> **Read:** Developers (direct access allowed for testing). <br> **NO Public Access.** Block Public Access Enabled.                     |
 
 ### 3.2. Staging Environment (`staging`)
 
@@ -63,11 +63,11 @@ This section details the specific configuration for each bucket within each envi
 
   - All access MUST route through a VPC endpoint for S3 within the staging VPC.
 
-  | Bucket Name                    | Purpose & Content                               | Storage Class | Lifecycle Rules                             | Key Access Patterns & Policies                                                                                                                                                                                               |
-  | :----------------------------- | :---------------------------------------------- | :------------ | :------------------------------------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-  | `piksel-ina-data-staging`      | Validated datasets and tiles pending production | STANDARD      | Delete unvalidated/stale data after 14 days | **Write:** ONLY via automated Promotion Workflow (CI/CD Pipeline Role). <br> **Read:** Validation Pipelines (via role), Developers (Read-Only recommended), OWS Server (via role). Access restricted via VPCe.               |
-  | `piksel-ina-notebooks-staging` | Approved notebooks aligned with staging data    | STANDARD      | None                                        | **Write:** ONLY via automated Promotion Workflow (CI/CD Pipeline Role). <br>**Read:** Developers. Access restricted via VPCe.                                                                                                |
-  | `piksel-ina-web-staging`       | Static web assets for staging/QA                | STANDARD      | None                                        | **Write:** ONLY via automated Promotion Workflow (CI/CD Pipeline Role). <br>**Read:** ONLY via CloudFront Distribution using OAI/OAC. Bucket Policy MUST restrict access to CloudFront. <br>**Block Public Access Enabled.** |
+  | Bucket Name                | Purpose & Content                               | Storage Class | Lifecycle Rules                             | Key Access Patterns & Policies                                                                                                                                                                                               |
+  | :------------------------- | :---------------------------------------------- | :------------ | :------------------------------------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+  | `Piksel-staging-data`      | Validated datasets and tiles pending production | STANDARD      | Delete unvalidated/stale data after 14 days | **Write:** ONLY via automated Promotion Workflow (CI/CD Pipeline Role). <br> **Read:** Validation Pipelines (via role), Developers (Read-Only recommended), OWS Server (via role). Access restricted via VPCe.               |
+  | `Piksel-staging-notebooks` | Approved notebooks aligned with staging data    | STANDARD      | None                                        | **Write:** ONLY via automated Promotion Workflow (CI/CD Pipeline Role). <br>**Read:** Developers. Access restricted via VPCe.                                                                                                |
+  | `Piksel-staging-web`       | Static web assets for staging/QA                | STANDARD      | None                                        | **Write:** ONLY via automated Promotion Workflow (CI/CD Pipeline Role). <br>**Read:** ONLY via CloudFront Distribution using OAI/OAC. Bucket Policy MUST restrict access to CloudFront. <br>**Block Public Access Enabled.** |
 
 ### 3.3. Production Environment (`prod`)
 
@@ -80,11 +80,11 @@ This section details the specific configuration for each bucket within each envi
 
   - MUST be enabled for `piksel-ina-prod-data` bucket.
 
-  | Bucket Name                 | Purpose & Content                              | Storage Class       | Lifecycle Rules                                        | Key Access Patterns & Policies                                                                                                                                                                                                                                                  |
-  | :-------------------------- | :--------------------------------------------- | :------------------ | :----------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-  | `piksel-ina-data-prod`      | Production datasets and tiles                  | INTELLIGENT_TIERING | 90d to IA, 180d to GLACIER_IR (or appropriate archive) | **Write:** ONLY via approved/automated Promotion Workflow (CI/CD Pipeline Role). <br>**Read:** Production Applications (via IAM Roles/IRSA), OWS Server (via role), Developers (Read-Only access strongly recommended). Access restricted via VPCe. <br>**MFA Delete Enabled.** |
-  | `piksel-ina-notebooks-prod` | Published notebooks corresponding to prod data | STANDARD            | None                                                   | **Write:** ONLY via approved/automated Promotion Workflow (CI/CD Pipeline Role). <br>**Read:** Developers (Reference only). Access restricted via VPCe.                                                                                                                         |
-  | `piksel-ina-web-prod`       | Production static website assets               | STANDARD            | None                                                   | **Write:** ONLY via approved/automated Promotion Workflow (CI/CD Pipeline Role). <br>**Read:** ONLY via CloudFront Distribution using OAI/OAC. Bucket Policy MUST restrict access to CloudFront. <br>**Block Public Access Enabled.**                                           |
+  | Bucket Name             | Purpose & Content                              | Storage Class       | Lifecycle Rules                                        | Key Access Patterns & Policies                                                                                                                                                                                                                                                  |
+  | :---------------------- | :--------------------------------------------- | :------------------ | :----------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+  | `Piksel-prod-data`      | Production datasets and tiles                  | INTELLIGENT_TIERING | 90d to IA, 180d to GLACIER_IR (or appropriate archive) | **Write:** ONLY via approved/automated Promotion Workflow (CI/CD Pipeline Role). <br>**Read:** Production Applications (via IAM Roles/IRSA), OWS Server (via role), Developers (Read-Only access strongly recommended). Access restricted via VPCe. <br>**MFA Delete Enabled.** |
+  | `Piksel-prod-notebooks` | Published notebooks corresponding to prod data | STANDARD            | None                                                   | **Write:** ONLY via approved/automated Promotion Workflow (CI/CD Pipeline Role). <br>**Read:** Developers (Reference only). Access restricted via VPCe.                                                                                                                         |
+  | `Piksel-prod-web`       | Production static website assets               | STANDARD            | None                                                   | **Write:** ONLY via approved/automated Promotion Workflow (CI/CD Pipeline Role). <br>**Read:** ONLY via CloudFront Distribution using OAI/OAC. Bucket Policy MUST restrict access to CloudFront. <br>**Block Public Access Enabled.**                                           |
 
 ## 4. Access Control Strategy (IAM & Service Integration)
 
