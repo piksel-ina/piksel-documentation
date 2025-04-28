@@ -29,7 +29,7 @@ These principles apply globally unless explicitly overridden in environment-spec
   - Owner = "DevOps-Team"
 
 - **Default Security Posture:**
-  - **Encryption:** Server-Side Encryption with AWS KMS-managed keys (SSE-KMS) MUST be enabled on all buckets. Use a dedicated KMS key per environment or purpose where appropriate.
+  - **Encryption:** Server-Side Encryption with AWS KMS (SSE-KMS) MUST be enabled on all buckets.
   - **Public Access:** Block Public Access settings MUST be enabled for all buckets _except_ for `web` buckets, which are accessed via CloudFront OAI/OAC.
   - **Versioning:** Versioning MUST be enabled on all buckets _except_ `web` buckets.
   - **Access Logging:** S3 server access logging MUST be enabled for all buckets. Configure a dedicated logging bucket (e.g., `piksel-ina-logs`). Logs should be stored with appropriate lifecycle policies.
@@ -46,13 +46,13 @@ This section details the specific configuration for each bucket within each envi
   - Cost optimization is prioritized.
 - **VPC Endpoint:**
 
-  - All access (except potentially initial developer setup) should ideally route through a VPC endpoint for S3 within the development VPC.
+  - A VPC endpoint for S3 is enabled within the development VPC to allow private access for internal resources.
 
-  | Bucket Name            | Purpose & Content                           | Storage Class       | Lifecycle Rules                                   | Key Access Patterns & Policies                                                                                                                                                         |
-  | :--------------------- | :------------------------------------------ | :------------------ | :------------------------------------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-  | `Piksel-dev-data`      | Raw EO data, intermediate processing, tiles | INTELLIGENT_TIERING | `/raw/`: 30d to IA. `/processed/`, `/tiles/`: TBD | **Write:** Data Ingestion Pipelines (`/raw/`), EKS Pods via IRSA (`/processed/`, `/tiles/`), Developers. <br> **Read:** Developers, OWS Server (via role). Access restricted via VPCe. |
-  | `Piksel-dev-notebooks` | Jupyter notebooks, user workspaces, outputs | STANDARD            | `/outputs/`: 30d delete.                          | **Full:** Developers, JupyterHub Service Account (via IRSA/Role). Access restricted via VPCe.                                                                                          |
-  | `Piksel-dev-web`       | Static web assets for development testing   | STANDARD            | None                                              | **Write:** CI/CD Pipeline Role, Developers. <br> **Read:** Developers (direct access allowed for testing). <br> **NO Public Access.** Block Public Access Enabled.                     |
+  | Bucket Name            | Purpose & Content                           | Storage Class       | Lifecycle Rules                                   | Key Access Patterns & Policies                                                                                                                                                                             |
+  | :--------------------- | :------------------------------------------ | :------------------ | :------------------------------------------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+  | `Piksel-dev-data`      | Raw EO data, intermediate processing, tiles | INTELLIGENT_TIERING | `/raw/`: 30d to IA. `/processed/`, `/tiles/`: TBD | **Write:** Data Ingestion Pipelines (`/raw/`), EKS Pods via IRSA (`/processed/`, `/tiles/`), Developers. <br> **Read:** Developers, OWS Server (via role). Access enabled via VPCe for internal resources. |
+  | `Piksel-dev-notebooks` | Jupyter notebooks, user workspaces, outputs | STANDARD            | `/outputs/`: 30d delete.                          | **Full:** Developers, JupyterHub Service Account (via IRSA/Role). Access enabled via VPCe for internal resources.                                                                                          |
+  | `Piksel-dev-web`       | Static web assets for development testing   | STANDARD            | None                                              | **Write:** CI/CD Pipeline Role, Developers. <br> **Read:** Developers (direct access allowed for testing). <br> **NO Public Access.** Block Public Access Enabled.                                         |
 
 ### 3.2. Staging Environment (`staging`)
 
@@ -61,13 +61,13 @@ This section details the specific configuration for each bucket within each envi
   - Mirrors production configuration closely but allows for testing promotion workflows.
 - **VPC Endpoint:**
 
-  - All access MUST route through a VPC endpoint for S3 within the staging VPC.
+  - A VPC endpoint for S3 is enabled within the staging VPC to allow private access for internal resources. Bucket policies do not strictly enforce this path for all access patterns to allow flexibility for necessary external integrations or specific IAM-based access.
 
-  | Bucket Name                | Purpose & Content                               | Storage Class | Lifecycle Rules                             | Key Access Patterns & Policies                                                                                                                                                                                               |
-  | :------------------------- | :---------------------------------------------- | :------------ | :------------------------------------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-  | `Piksel-staging-data`      | Validated datasets and tiles pending production | STANDARD      | Delete unvalidated/stale data after 14 days | **Write:** ONLY via automated Promotion Workflow (CI/CD Pipeline Role). <br> **Read:** Validation Pipelines (via role), Developers (Read-Only recommended), OWS Server (via role). Access restricted via VPCe.               |
-  | `Piksel-staging-notebooks` | Approved notebooks aligned with staging data    | STANDARD      | None                                        | **Write:** ONLY via automated Promotion Workflow (CI/CD Pipeline Role). <br>**Read:** Developers. Access restricted via VPCe.                                                                                                |
-  | `Piksel-staging-web`       | Static web assets for staging/QA                | STANDARD      | None                                        | **Write:** ONLY via automated Promotion Workflow (CI/CD Pipeline Role). <br>**Read:** ONLY via CloudFront Distribution using OAI/OAC. Bucket Policy MUST restrict access to CloudFront. <br>**Block Public Access Enabled.** |
+  | Bucket Name                | Purpose & Content                               | Storage Class | Lifecycle Rules                             | Key Access Patterns & Policies                                                                                                                                                                                                     |
+  | :------------------------- | :---------------------------------------------- | :------------ | :------------------------------------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+  | `Piksel-staging-data`      | Validated datasets and tiles pending production | STANDARD      | Delete unvalidated/stale data after 14 days | **Write:** ONLY via automated Promotion Workflow (CI/CD Pipeline Role). <br> **Read:** Validation Pipelines (via role), Developers (Read-Only recommended), OWS Server (via role). Access enabled via VPCe for internal resources. |
+  | `Piksel-staging-notebooks` | Approved notebooks aligned with staging data    | STANDARD      | None                                        | **Write:** ONLY via automated Promotion Workflow (CI/CD Pipeline Role). <br>**Read:** Developers. Access enabled via VPCe for internal resources.                                                                                  |
+  | `Piksel-staging-web`       | Static web assets for staging/QA                | STANDARD      | None                                        | **Write:** ONLY via automated Promotion Workflow (CI/CD Pipeline Role). <br>**Read:** ONLY via CloudFront Distribution using OAI/OAC. Bucket Policy MUST restrict access to CloudFront. <br>**Block Public Access Enabled.**       |
 
 ### 3.3. Production Environment (`prod`)
 
@@ -75,16 +75,16 @@ This section details the specific configuration for each bucket within each envi
   - Live environment serving end-users and applications.
   - Stability, security, and availability are paramount.
 - **VPC Endpoint:**
-  - All internal access MUST route through a VPC endpoint for S3 within the production VPC.
+  - A VPC endpoint for S3 is enabled within the production VPC to allow private access for internal resources. Bucket policies do not strictly enforce this path for all access patterns to allow flexibility for necessary external integrations (e.g., via CloudFront OAC for web buckets) or specific IAM-based access.
 - **MFA Delete:**
 
   - MUST be enabled for `piksel-ina-prod-data` bucket.
 
-  | Bucket Name             | Purpose & Content                              | Storage Class       | Lifecycle Rules                                        | Key Access Patterns & Policies                                                                                                                                                                                                                                                  |
-  | :---------------------- | :--------------------------------------------- | :------------------ | :----------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-  | `Piksel-prod-data`      | Production datasets and tiles                  | INTELLIGENT_TIERING | 90d to IA, 180d to GLACIER_IR (or appropriate archive) | **Write:** ONLY via approved/automated Promotion Workflow (CI/CD Pipeline Role). <br>**Read:** Production Applications (via IAM Roles/IRSA), OWS Server (via role), Developers (Read-Only access strongly recommended). Access restricted via VPCe. <br>**MFA Delete Enabled.** |
-  | `Piksel-prod-notebooks` | Published notebooks corresponding to prod data | STANDARD            | None                                                   | **Write:** ONLY via approved/automated Promotion Workflow (CI/CD Pipeline Role). <br>**Read:** Developers (Reference only). Access restricted via VPCe.                                                                                                                         |
-  | `Piksel-prod-web`       | Production static website assets               | STANDARD            | None                                                   | **Write:** ONLY via approved/automated Promotion Workflow (CI/CD Pipeline Role). <br>**Read:** ONLY via CloudFront Distribution using OAI/OAC. Bucket Policy MUST restrict access to CloudFront. <br>**Block Public Access Enabled.**                                           |
+  | Bucket Name             | Purpose & Content                              | Storage Class       | Lifecycle Rules                                        | Key Access Patterns & Policies                                                                                                                                                                                                                                                                       |
+  | :---------------------- | :--------------------------------------------- | :------------------ | :----------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+  | `Piksel-prod-data`      | Production datasets and tiles                  | INTELLIGENT_TIERING | 90d to IA, 180d to GLACIER_IR (or appropriate archive) | **Write:** ONLY via approved/automated Promotion Workflow (CI/CD Pipeline Role). <br>**Read:** Production Applications (via IAM Roles/IRSA), OWS Server (via role), Developers (Read-Only access strongly recommended). "Access enabled via VPCe for internal resources. <br>**MFA Delete Enabled.** |
+  | `Piksel-prod-notebooks` | Published notebooks corresponding to prod data | STANDARD            | None                                                   | **Write:** ONLY via approved/automated Promotion Workflow (CI/CD Pipeline Role). <br>**Read:** Developers (Reference only). "Access enabled via VPCe for internal resources.                                                                                                                         |
+  | `Piksel-prod-web`       | Production static website assets               | STANDARD            | None                                                   | **Write:** ONLY via approved/automated Promotion Workflow (CI/CD Pipeline Role). <br>**Read:** ONLY via CloudFront Distribution using OAI/OAC. Bucket Policy MUST restrict access to CloudFront. <br>**Block Public Access Enabled.**                                                                |
 
 ## 4. Access Control Strategy (IAM & Service Integration)
 
@@ -106,7 +106,7 @@ Terraform code MUST create and manage the necessary IAM Roles and Policies based
 - **Bucket Policies:** Use bucket policies primarily for:
   - Enforcing TLS (`aws:SecureTransport`).
   - Granting access to CloudFront OAI/OAC.
-  - Denying unintended access patterns (e.g., denying access if not via VPC Endpoint).
+  - Denying unintended access patterns (e.g., enforcing CloudFront OAC access for web buckets).
   - Potentially enforcing object ownership (Bucket owner enforced).
 
 ## 5. Data Promotion Workflow (GitOps Integration)
@@ -136,7 +136,7 @@ The promotion of data, notebooks, and web assets between environments MUST be au
   - Implement SSE-KMS using Terraform `aws_s3_bucket_server_side_encryption_configuration` resource.
 - **VPC Endpoints:**
   - Define `aws_vpc_endpoint` resources for S3 (Gateway type) in relevant VPCs.
-  - Use bucket policies and IAM condition keys (`aws:sourceVpce`) to enforce access via endpoints.
+  - Define `aws_vpc_endpoint` resources for S3 (Gateway type) in relevant VPCs to enable private access.
 - **MFA Delete:**
   - Enable via Terraform `aws_s3_bucket_versioning` resource (`mfa_delete = "Enabled"`) for the production data bucket.
   - Requires manual setup initially.
@@ -188,8 +188,8 @@ The promotion of data, notebooks, and web assets between environments MUST be au
 | ---------------------- | ----------------------------------------------- | ----------------------------------------------------------------------------- | -------------------- |
 | Naming Convention      | `Piksel-<environment>-<purpose>`                | `${local.name}-data`, `${local.name}-notebooks`, `${local.name}-web`          | ✅ Aligned           |
 | Standard Tagging       | Project, Environment, Purpose, ManagedBy, Owner | All tags present through `local.tags` with additional Purpose tag             | ✅ Aligned           |
-| Encryption             | SSE-KMS with dedicated KMS keys                 | SSE-KMS with `aws_kms_key.s3_key.arn` for all buckets                         | ✅ Aligned           |
-| VPC Endpoint           | S3 VPC Endpoint required                        | VPC endpoint enforcement via policy for data/notebooks buckets                | ✅ Aligned           |
+| Encryption             | Required Server Side Encryption (SSE-KMS)       | SSE-KMS with `aws_kms_key.s3_key.arn` for all buckets                         | ✅ Aligned           |
+| VPC Endpoint           | S3 VPC Endpoint enabled for private access      | VPC endpoint enabled via policy for data/notebooks buckets                    | ✅ Aligned           |
 | Storage Classes        | STANDARD for web, INTELLIGENT_TIERING for data  | STANDARD (default) for web, Intelligent-Tiering configured for data bucket    | ✅ Aligned           |
 | Lifecycle Rules        | Required for data and notebooks                 | Implemented for both data (raw transition) and notebooks (outputs expiration) | ✅ Aligned           |
 | Public Access          | Block Public Access for all except web buckets  | Block Public Access enabled for all buckets including web (dev environment)   | ✅ Aligned           |
@@ -213,3 +213,4 @@ CloudFront integration for the web bucket is also an enhancement beyond the basi
 1.  **Consider Environment-Specific Configurations**: Future environments (staging/production) may require different settings, particularly for web bucket public access.
 2.  **Refine Intelligent-Tiering Path**: The "path/to/data/" prefix in the Intelligent-Tiering configuration appears to be a placeholder. Review and update this to match the actual data organization for correct application.
 3.  **Complete Lifecycle Rules**: Add the currently commented-out lifecycle rules for processed data once those requirements are defined.
+4.  This design enables private S3 access from within the VPCs using Gateway Endpoints. However, to facilitate integration with required external services (like TerriaMap) and allow necessary direct IAM access patterns from outside the VPC, bucket policies do not strictly enforce the use of the VPC endpoint using aws:sourceVpce conditions (except where needed for specific controls like CloudFront OAC). Access control for external patterns relies primarily on IAM permissions, CORS configuration, and specific bucket policy statements (e.g., for CloudFront).
