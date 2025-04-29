@@ -1,89 +1,67 @@
 # 🌏 Piksel Project: Execution Plan
 
-## 1️⃣ - Initial Repository Setup
+➡️[Piksel Project Board](https://github.com/orgs/piksel-ina/projects/3)
 
-### Issue 1.1: GitHub and Terraform Organization Creation
+## 1️⃣ - Foundation Setup [#1](https://github.com/piksel-ina/piksel-document/issues/1) ✅
+
+### Issue 1.1: GitHub and Terraform Organization Creation [#5](https://github.com/piksel-ina/piksel-document/issues/5#issuecomment-2837370142) ✅
 
 - Create Piksel GitHub organization
 - Create Terraform Accounts
 - Create Terraform Organization
 
-### Issue 1.2: Repository Structure Setup
+### Issue 1.2: Repository Structure Setup [#2](https://github.com/piksel-ina/piksel-document/issues/2) ✅
 
-- **piksel-infra**: Initialize repository with README and basic structure
+- `piksel-infra`: Initialize repository with README and basic structure
 
-  - Sub-issue 1.2.1: Create directory structure for terraform configurations
-  - Sub-issue 1.2.2: Set up branch protection rules
+- `piksel-kubernetes`: Initialize repository for complete Kubernetes management
 
-- **piksel-kubernetes**: Initialize repository for complete Kubernetes management
+- `piksel-core`: Initialize repository with README and basic structure
 
-  - Sub-issue 1.2.1: Create directory structure:
-    - /terraform - EKS and related infrastructure
-    - /helm-charts - Application Helm charts
-      - /core - Core service charts
-      - /addons - Cluster add-on charts
-      - /values - Environment-specific values
-    - /flux - Flux configurations
-  - Sub-issue 1.2.2: Set up branch protection rules
-  - Sub-issue 1.2.3: Configure Terraform backend for Kubernetes state
+- `piksel-jupyter`: Initialize repository with README and basic structure
 
-- **piksel-core**: Initialize repository with README and basic structure
+- `piksel-document`: Initialize repository for project documentation
+  
+- `piksel-test`: Initialize repository for integration testing
 
-  - Sub-issue 1.2.4: Create directory structure:
-    - /docker - ODC Dockerfile and compose files
-    - /products - Product definitions
-    - /scripts - Indexing scripts
-    - /docs - Technical documentation
 
-- **piksel-jupyter**: Initialize repository with README and basic structure
+## 2️⃣ - Infrastructure Configuration [#1](https://github.com/piksel-ina/piksel-infra/issues/1) 🔄️
 
-  - Sub-issue 1.2.5: Create directory structure:
-    - /notebooks - Analysis and examples
-    - /config - JupyterHub and Dask configurations
-    - /docs - Technical documentation
+### Issue 2.1: AWS Base Infrastructure (**piksel-infra**) [#3](https://github.com/piksel-ina/piksel-infra/issues/3) 🔄️
 
-- **piksel-document**: Initialize repository for project documentation
-  - Sub-issue 1.2.6: Create documentation structure
-  - Sub-issue 1.2.7: Set up guidelines
+- Sub-issue 2.1.1: Create AWS account structure [#3a](https://github.com/piksel-ina/piksel-infra/issues/3#issuecomment-2801091792) ✅
+- Sub-issue 2.1.2: Configure IAM roles for OIDC authentication [#3b](https://github.com/piksel-ina/piksel-infra/issues/3#issuecomment-2803761832) ✅
+- Sub-issue 2.1.3: Set up IAM Access Analyzer 
+- Sub-issue 2.1.4: Create IAM activity monitoring and reporting workflow
+  
+### Issue 2.2: Terraform Cloud Setup (**piksel-infra**) [#12](https://github.com/piksel-ina/piksel-infra/issues/12) ✅
 
-## 2️⃣ - Infrastructure Configuration
+- Sub-issue 2.2.1: Configure OIDC in Terraform ✅ 
+- Sub-issue 2.2.2: Set up VCS integration with GitHub ✅
 
-### Issue 2.1: Terraform Cloud Setup (**piksel-infra**)
+### Issue 2.3: Shared Resources (**piksel-infra**) [#4](https://github.com/piksel-ina/piksel-infra/issues/4) ✅
 
-- Sub-issue 2.1.1: Configure workspaces for different environments
-- Sub-issue 2.1.2: Set up VCS integration with GitHub
-
-### Issue 2.2: AWS Base Infrastructure (**piksel-infra**)
-
-- Sub-issue 2.2.1: Create AWS account structure
-- Sub-issue 2.2.2: Configure IAM roles for OIDC authentication
-- Sub-issue 2.2.3: Set up IAM Access Analyzer
-- Sub-issue 2.2.4: Create IAM activity monitoring and reporting workflow
-
-### Issue 2.3: Shared Resources (**piksel-infra**)
-
-- Sub-issue 2.3.1: Configure core networking (VPC, subnets, routing)
+- Sub-issue 2.3.1: Configure core networking (VPC, subnets, routing) ✅
 - Sub-issue 2.3.2: Set up internal DNS using Route53 private hosted zones
 - Sub-issue 2.3.3: Create DNS migration strategy for future external DNS
 - Sub-issue 2.3.4: Create ECR for docker images
-- Sub-issue 2.3.5: Set up S3 buckets
+- Sub-issue 2.3.5: Set up S3 buckets ✅
 - Sub-issue 2.3.6: Configure CloudWatch logging
 - Sub-issue 2.3.7: Set up RDS instances
-- Sub-issue 2.3.8: Configure security groups and access policies
+- Sub-issue 2.3.8: Configure security groups and access policies 
 - Sub-issue 2.3.9: Set up backup procedures
 
-### Issue 2.4: CI/CD for Infrastructure (**piksel-infra**)
+### Issue 2.4: CI/CD for Infrastructure (**piksel-infra**) [#6](https://github.com/piksel-ina/piksel-infra/issues/6) ✅
+> 📑 Note: Issue Closed, but infrastructure testing haven't been implemented yet
 
-- Sub-issue 2.4.1: Create GitHub Actions workflow for terraform validation
-- Sub-issue 2.4.2: Set up deployment workflow using OIDC authentication
-- Sub-issue 2.4.3: Create infrastructure testing scripts
+- Sub-issue 2.4.1: Create GitHub Actions workflow for terraform validation ✅
+- Sub-issue 2.4.2: Set up deployment workflow using OIDC authentication ✅
+- Sub-issue 2.4.3: Create infrastructure testing scripts ⚠️
 
-### Issue 2.5: Infrastructure Documentation (**piksel-infra**)
-
-- Sub-issue 2.5.1: Document network infrastructure architecture and components
-- Sub-issue 2.5.2: Create documentation for shared resources configuration
-- Sub-issue 2.5.3: Document compute resources setup and management
-- Sub-issue 2.5.4: Create infrastructure module usage guides
+### Issue 2.5: Infrastructure Documentation (**piksel-infra**) [#27](https://github.com/piksel-ina/piksel-infra/issues/27) 🔄️
+- Sub-issue 2.5.1: Implement terraform-docs via pre-commit for automated module docs. ✅
+- Sub-issue 2.5.2: Create high-level infrastructure architecture documentation. ✅
+- Sub-issue 2.5.3: Develop piksel-infra repository README (purpose, structure, workflow). 🔄️
 
 ## 3️⃣ - Core Service Implementation
 
