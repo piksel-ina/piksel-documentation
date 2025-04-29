@@ -21,9 +21,7 @@
 - `piksel-jupyter`: Initialize repository with README and basic structure
 
 - `piksel-document`: Initialize repository for project documentation
-  
 - `piksel-test`: Initialize repository for integration testing
-
 
 ## 2️⃣ - Infrastructure Configuration [#1](https://github.com/piksel-ina/piksel-infra/issues/1) 🔄️
 
@@ -31,15 +29,15 @@
 
 - Sub-issue 2.1.1: Create AWS account structure [#3a](https://github.com/piksel-ina/piksel-infra/issues/3#issuecomment-2801091792) ✅
 - Sub-issue 2.1.2: Configure IAM roles for OIDC authentication [#3b](https://github.com/piksel-ina/piksel-infra/issues/3#issuecomment-2803761832) ✅
-- Sub-issue 2.1.3: Set up IAM Access Analyzer 
+- Sub-issue 2.1.3: Set up IAM Access Analyzer
 - Sub-issue 2.1.4: Create IAM activity monitoring and reporting workflow
-  
+
 ### Issue 2.2: Terraform Cloud Setup (**piksel-infra**) [#12](https://github.com/piksel-ina/piksel-infra/issues/12) ✅
 
-- Sub-issue 2.2.1: Configure OIDC in Terraform ✅ 
+- Sub-issue 2.2.1: Configure OIDC in Terraform ✅
 - Sub-issue 2.2.2: Set up VCS integration with GitHub ✅
 
-### Issue 2.3: Shared Resources (**piksel-infra**) [#4](https://github.com/piksel-ina/piksel-infra/issues/4) ✅
+### Issue 2.3: Shared Resources (**piksel-infra**) [#4](https://github.com/piksel-ina/piksel-infra/issues/4) 🔄️
 
 - Sub-issue 2.3.1: Configure core networking (VPC, subnets, routing) ✅ [#4a](https://github.com/piksel-ina/piksel-infra/issues/4#issuecomment-2837380199)
 - Sub-issue 2.3.2: Set up internal DNS using Route53 private hosted zones
@@ -48,10 +46,11 @@
 - Sub-issue 2.3.5: Set up S3 buckets ✅ [#4b](https://github.com/piksel-ina/piksel-infra/issues/4#issuecomment-2837446027)
 - Sub-issue 2.3.6: Configure CloudWatch logging
 - Sub-issue 2.3.7: Set up RDS instances
-- Sub-issue 2.3.8: Configure security groups and access policies 
+- Sub-issue 2.3.8: Configure security groups and access policies ✅ [#4c](https://github.com/piksel-ina/piksel-infra/issues/4#issuecomment-2837821898)
 - Sub-issue 2.3.9: Set up backup procedures
 
 ### Issue 2.4: CI/CD for Infrastructure (**piksel-infra**) [#6](https://github.com/piksel-ina/piksel-infra/issues/6) ✅
+
 > 📑 Note: Issue Closed, but infrastructure testing haven't been implemented yet
 
 - Sub-issue 2.4.1: Create GitHub Actions workflow for terraform validation ✅
@@ -59,6 +58,7 @@
 - Sub-issue 2.4.3: Create infrastructure testing scripts ⚠️
 
 ### Issue 2.5: Infrastructure Documentation (**piksel-infra**) [#27](https://github.com/piksel-ina/piksel-infra/issues/27) 🔄️
+
 - Sub-issue 2.5.1: Implement terraform-docs via pre-commit for automated module docs. ✅
 - Sub-issue 2.5.2: Create high-level infrastructure architecture documentation. ✅
 - Sub-issue 2.5.3: Develop piksel-infra repository README (purpose, structure, workflow). 🔄️
