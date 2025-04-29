@@ -41,11 +41,11 @@
 
 ### Issue 2.3: Shared Resources (**piksel-infra**) [#4](https://github.com/piksel-ina/piksel-infra/issues/4) ✅
 
-- Sub-issue 2.3.1: Configure core networking (VPC, subnets, routing) ✅
+- Sub-issue 2.3.1: Configure core networking (VPC, subnets, routing) ✅ [#4a](https://github.com/piksel-ina/piksel-infra/issues/4#issuecomment-2837380199)
 - Sub-issue 2.3.2: Set up internal DNS using Route53 private hosted zones
 - Sub-issue 2.3.3: Create DNS migration strategy for future external DNS
 - Sub-issue 2.3.4: Create ECR for docker images
-- Sub-issue 2.3.5: Set up S3 buckets ✅
+- Sub-issue 2.3.5: Set up S3 buckets ✅ [#4b](https://github.com/piksel-ina/piksel-infra/issues/4#issuecomment-2837446027)
 - Sub-issue 2.3.6: Configure CloudWatch logging
 - Sub-issue 2.3.7: Set up RDS instances
 - Sub-issue 2.3.8: Configure security groups and access policies 
