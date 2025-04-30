@@ -39,6 +39,8 @@ piksel-document/
 ### Architecture
 
 - [Network Architecture](architecture/network.md) - Network design and infrastructure layout
+- [Object Storage Architecture](architecture/object-storage.md) - Technical specifications for the AWS S3 infrastructure
+- [Database Architecture](architecture/database.md) - Technical specifications for the AWS Relational Database Service (RDS)
 
 ### Project Planning
 
