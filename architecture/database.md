@@ -122,3 +122,62 @@ Terraform code MUST create and manage the necessary IAM Roles, Policies, and Sec
 - **CI/CD Pipeline (Infrastructure via `piksel-infra`):**
   - **Pull Request Validation (GitHub Actions):** As defined in the S3 blueprint (fmt, validate, tfsec).
   - **Apply Workflow (Terraform Cloud):** Merges to `main` trigger runs in Terraform Cloud workspaces. Manual approvals **MUST** be configured for `staging` and `prod` workspace applies.
+
+## 9. Design vs. Implementation (ODC Index Database - `dev` Environment)
+
+[🔗 Configuration file](https://github.com/piksel-ina/piksel-infra/blob/main/dev/main.tf)
+
+This section compares the core design principles and specific configurations outlined in this blueprint against the actual Terraform implementation provided for the `dev` environment's ODC Index database (`module "odc_rds"`).
+
+| Design Principle / Feature        | Blueprint Requirement                                                             | Terraform Implementation (`module "odc_rds"`)                                                                                                                      | Status     | Notes                                                                                                              |
+| :-------------------------------- | :-------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------- | :--------- | :----------------------------------------------------------------------------------------------------------------- |
+| **IaC / GitOps**                  | Managed via Terraform in Git repository, GitOps workflow.                         | Implemented using `terraform-aws-modules/rds/aws` module within the Terraform configuration. Assumes GitOps process is followed externally.                        | ✅ Aligned | Module usage promotes IaC best practices.                                                                          |
+| **Naming Convention**             | `piksel-<environment>-<purpose>-rds` (e.g., `piksel-dev-odc-index-rds`)           | `identifier = "${local.name}-odc-index-rds"` where `local.name` typically resolves to `piksel-<environment>`.                                                      | ✅ Aligned | Assumes `local.name` is correctly defined elsewhere (e.g., `piksel-dev`).                                          |
+| **Standard Tagging**              | `Project`, `Environment`, `Purpose`, `ManagedBy`, `Owner`                         | `tags = merge(local.tags, { Purpose = "odc-index" })`. Assumes `local.tags` contains the standard tags (`Project`, `Environment`, `ManagedBy`, `Owner`).           | ✅ Aligned | Relies on `local.tags` being correctly populated.                                                                  |
+| **Encryption at Rest**            | Enabled using default `aws/rds` KMS key.                                          | `storage_encrypted = true`, `kms_key_id = null` (uses default AWS managed key).                                                                                    | ✅ Aligned |                                                                                                                    |
+| **Encryption in Transit**         | Enforce SSL/TLS via parameter group.                                              | Custom parameter group created/used (`parameter_group_name`) with `rds.force_ssl = 1`.                                                                             | ✅ Aligned | Requires the parameter group resource definition elsewhere or relies on module defaults if not explicitly defined. |
+| **Network Access**                | Private subnets, Public access disabled, VPC Security Group control.              | `db_subnet_group_name = module.vpc.database_subnet_group_name`, `publicly_accessible = false`, `vpc_security_group_ids = [module.rds_sg.security_group_id]`.       | ✅ Aligned | Deploys into private subnets defined by the VPC module and uses the specified RDS security group.                  |
+| **Authentication (IAM)**          | IAM Database Authentication enabled.                                              | `iam_database_authentication_enabled = true`.                                                                                                                      | ✅ Aligned |                                                                                                                    |
+| **Authentication (Master User)**  | Credentials generated and stored in AWS Secrets Manager.                          | `manage_master_user_password = true`, `master_user_secret_kms_key_id = null` (uses Secrets Manager with default KMS key).                                          | ✅ Aligned | Module handles secret creation and management.                                                                     |
+| **Automated Backups / PITR**      | Enabled.                                                                          | `backup_retention_period = var.odc_db_backup_retention_period` (set > 0 enables backups/PITR).                                                                     | ✅ Aligned | Specific retention period controlled by variable.                                                                  |
+| **Engine / Version**              | PostgreSQL (Specific version TBD in blueprint, requires PostGIS).                 | `engine = "postgres"`, `engine_version = var.odc_db_engine_version`, `family = "postgres17"`, `major_engine_version = "17"`.                                       | ✅ Aligned | Implements PostgreSQL 17. Version controlled by variable.                                                          |
+| **Extensions (PostGIS)**          | Required for ODC.                                                                 | Custom option group created/used (`option_group_name`) with `options = [{ option_name = "POSTGIS" }]`.                                                             | ✅ Aligned | Requires the option group resource definition elsewhere or relies on module defaults if not explicitly defined.    |
+| **Instance Class**                | Defined per environment (Variable).                                               | `instance_class = var.odc_db_instance_class`.                                                                                                                      | ✅ Aligned | Specific class controlled by variable.                                                                             |
+| **Storage (Type/Size/Autoscale)** | `gp3`, Size/Autoscaling defined per environment (Variable).                       | `storage_type = "gp3"`, `allocated_storage = var.odc_db_allocated_storage`, `max_allocated_storage = var.odc_db_max_allocated_storage`.                            | ✅ Aligned | Type is fixed to `gp3`, size and autoscaling controlled by variables.                                              |
+| **Multi-AZ**                      | Defined per environment (Variable).                                               | `multi_az = var.odc_db_multi_az`.                                                                                                                                  | ✅ Aligned | Specific setting controlled by variable.                                                                           |
+| **Monitoring / Logging**          | Enhanced Monitoring, Performance Insights, CloudWatch Logs (postgresql, upgrade). | `create_monitoring_role = true`, `monitoring_interval = 60`, `performance_insights_enabled = true`, `enabled_cloudwatch_logs_exports = ["postgresql", "upgrade"]`. | ✅ Aligned | Implements all specified monitoring and logging features.                                                          |
+| **Deletion Protection**           | Recommended, especially for staging/prod.                                         | `deletion_protection = var.odc_db_deletion_protection`.                                                                                                            | ✅ Aligned | Controlled by variable, allowing per-environment configuration.                                                    |
+| **Skip Final Snapshot**           | Recommended `false` for staging/prod.                                             | `skip_final_snapshot = var.odc_db_skip_final_snapshot`.                                                                                                            | ✅ Aligned | Controlled by variable, allowing per-environment configuration.                                                    |
+
+**Summary:** The provided Terraform code for the `dev` environment's ODC Index RDS instance (`module "odc_rds"`) shows strong alignment with the design principles and requirements laid out in the RDS Infrastructure Blueprint. Key configurations related to security, networking, naming, tagging, and core features are implemented as designed, often utilizing variables for environment-specific flexibility.
+
+## 10. Recommendations for Staging & Production Environments
+
+While the core Terraform module structure remains the same, the following variable adjustments and configurations are strongly recommended when deploying the ODC Index RDS instance (and similar RDS instances) to `staging` and `production` environments to enhance availability, durability, and operational safety:
+
+1.  **High Availability (Multi-AZ):**
+
+    - **Recommendation:** Set `var.odc_db_multi_az` to `true`.
+    - **Rationale:** Provides synchronous replication to a standby instance in a different Availability Zone, crucial for failover during instance or AZ failures. Staging should mirror production's Multi-AZ configuration for realistic testing.
+
+2.  **Data Durability & Recovery:**
+
+    - **Recommendation:**
+      - Increase `var.odc_db_backup_retention_period` significantly (e.g., `14` to `35` days, based on compliance and recovery needs).
+      - Set `var.odc_db_skip_final_snapshot` to `false`.
+      - Set `var.odc_db_deletion_protection` to `true`.
+    - **Rationale:** Ensures longer Point-in-Time Recovery capability, prevents data loss upon accidental deletion by requiring a final snapshot, and adds a safeguard against accidental termination via the console or API.
+
+3.  **Performance & Sizing:**
+
+    - **Recommendation:** Adjust `var.odc_db_instance_class`, `var.odc_db_allocated_storage`, and potentially `var.odc_db_max_allocated_storage` based on performance testing in staging and expected production load.
+    - **Rationale:** Production workloads typically require more resources than development. Staging should use instance classes and storage sizes representative of production to validate performance adequately. `gp3` storage allows independent scaling of IOPS/throughput if needed, which might be configured via the module if bottlenecks arise.
+
+4.  **Maintenance Windows & Apply Method:**
+
+    - **Recommendation:** Review the `apply_immediately = true` setting. For production, consider setting this to `false` within the module definition (if possible, or manage changes carefully outside of automated applies) and rely on defined RDS maintenance windows for parameter group changes requiring reboots (`apply_method = "pending-reboot"`).
+    - **Rationale:** Avoids potentially disruptive changes being applied immediately during peak hours. Leverages scheduled maintenance windows for less impactful updates.
+
+5.  **Cost:**
+    - **Recommendation:** Be aware that implementing Multi-AZ, larger instance classes, and longer backup retention will increase costs compared to the development environment. Budget accordingly.
+    - **Rationale:** These features provide essential resilience and performance for critical environments but come at a higher price point.
