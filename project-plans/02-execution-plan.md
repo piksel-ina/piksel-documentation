@@ -37,31 +37,51 @@
 - Sub-issue 2.2.1: Configure OIDC in Terraform ✅
 - Sub-issue 2.2.2: Set up VCS integration with GitHub ✅
 
-### Issue 2.3: Shared Resources (**piksel-infra**) [#4](https://github.com/piksel-ina/piksel-infra/issues/4) 🔄️
+### Issue 2.3: Provision Shared Infrastructure Resources (**piksel-infra/shared/**) [#4](https://github.com/piksel-ina/piksel-infra/issues/4) 🔄️
 
-- Sub-issue 2.3.1: Configure core networking (VPC, subnets, routing) ✅ [#4a](https://github.com/piksel-ina/piksel-infra/issues/4#issuecomment-2837380199)
-- Sub-issue 2.3.2: Set up internal DNS using Route53 private hosted zones
-- Sub-issue 2.3.3: Create DNS migration strategy for future external DNS
-- Sub-issue 2.3.4: Create ECR for docker images 🔄️
-- Sub-issue 2.3.5: Set up S3 buckets ✅ [#4b](https://github.com/piksel-ina/piksel-infra/issues/4#issuecomment-2837446027)
-- Sub-issue 2.3.6: Configure CloudWatch logging
-- Sub-issue 2.3.7: Set up RDS instances ✅ [#4d](https://github.com/piksel-ina/piksel-infra/issues/4#issuecomment-2840862754)
-- Sub-issue 2.3.8: Configure security groups and access policies ✅ [#4c](https://github.com/piksel-ina/piksel-infra/issues/4#issuecomment-2837821898)
-- Sub-issue 2.3.9: Set up backup procedures
+- Sub-issue 2.3.1: Configure core networking (VPC, subnets, routing)
+- Sub-issue 2.3.2: Set up internal DNS (Route53 private zones) in `shared/dns/`
+- Sub-issue 2.3.4: Create ECR repository definition
+- Sub-issue 2.3.5: Set up core S3 buckets for logging
+- Sub-issue 2.3.6: Configure central CloudWatch logging setup
+- Sub-issue 2.3.8: Configure baseline shared Security Groups
+- Sub-issue 2.3.9: Define backup policies/procedures.
+- Sub-issue 2.3.10: Create DNS migration strategy document (in `piksel-document`)
 
-### Issue 2.4: CI/CD for Infrastructure (**piksel-infra**) [#6](https://github.com/piksel-ina/piksel-infra/issues/6) ✅
+### Issue 2.3: Provision Shared Infrastructure Resources (**piksel-infra/shared/**) [#29](https://github.com/piksel-ina/piksel-infra/issues/29)
+
+- Sub-issue 2.3.1: Configure core networking (Shared VPC, Subnets, Route Tables, Transit Gateway Hub, AWS Resource Access Manager (RAM))
+- Sub-issue 2.3.2: Set up Internal Private Hosted Zones (`*.piksel.internal`) in Route 53
+- Sub-issue 2.3.3: Set up Public Hosted Zone (`piksel.big.go.id`) in Route 53
+- Sub-issue 2.3.4: Create ECR repository definitions
+- Sub-issue 2.3.5: Set up core S3 buckets (for Logs [VPC Flow Logs, ELB Access, CloudTrail], Artifacts, etc.)
+- Sub-issue 2.3.6: Configure central CloudWatch logging setup (Central Log Groups, Retention Policies)
+- Sub-issue 2.3.8: Configure baseline shared Security Groups
+- Sub-issue 2.3.9: Coordinate `piksel.big.go.id` NS Record Delegation with Internal BIG's IT Team
+- Sub-issue 2.3.12: Configure RAM sharing for PHZs and potentially Subnets
+
+### Issue 2.4: Configure `dev` Environment Infrastructure (**piksel-infra/dev/**) [#4](https://github.com/piksel-ina/piksel-infra/issues/4) 🔄️
+
+- Sub-issue 2.4.1: Configure core networking (VPC, subnets, routing) ✅ [#4a](https://github.com/piksel-ina/piksel-infra/issues/4#issuecomment-2837380199)
+- Sub-issue 2.4.2: Set up S3 buckets ✅ [#4b](https://github.com/piksel-ina/piksel-infra/issues/4#issuecomment-2837446027)
+- Sub-issue 2.4.3: Set up RDS instances ✅ [#4d](https://github.com/piksel-ina/piksel-infra/issues/4#issuecomment-2840862754)
+- Sub-issue 2.4.4: Configure security groups and access policies ✅ [#4c](https://github.com/piksel-ina/piksel-infra/issues/4#issuecomment-2837821898)
+- Sub-issue 2.4.5: Set up backup procedures
+- Sub-issue 2.4.6: Configure CloudWatch logging
+
+### Issue 2.5: CI/CD for Infrastructure (**piksel-infra**) [#6](https://github.com/piksel-ina/piksel-infra/issues/6) ✅
 
 > 📑 Note: Issue Closed, but infrastructure testing haven't been implemented yet
 
-- Sub-issue 2.4.1: Create GitHub Actions workflow for terraform validation ✅
-- Sub-issue 2.4.2: Set up deployment workflow using OIDC authentication ✅
-- Sub-issue 2.4.3: Create infrastructure testing scripts ⚠️
+- Sub-issue 2.5.1: Create GitHub Actions workflow for terraform validation ✅
+- Sub-issue 2.5.2: Set up deployment workflow using OIDC authentication ✅
+- Sub-issue 2.5.3: Create infrastructure testing scripts ⚠️
 
-### Issue 2.5: Infrastructure Documentation (**piksel-infra**) [#27](https://github.com/piksel-ina/piksel-infra/issues/27) 🔄️
+### Issue 2.6: Infrastructure Documentation (**piksel-infra**) [#27](https://github.com/piksel-ina/piksel-infra/issues/27) 🔄️
 
-- Sub-issue 2.5.1: Implement terraform-docs via pre-commit for automated module docs. ✅
-- Sub-issue 2.5.2: Create high-level infrastructure architecture documentation. ✅
-- Sub-issue 2.5.3: Develop piksel-infra repository README (purpose, structure, workflow). 🔄️
+- Sub-issue 2.6.1: Implement terraform-docs via pre-commit for automated module docs. ✅
+- Sub-issue 2.6.2: Create high-level infrastructure architecture documentation. ✅
+- Sub-issue 2.6.3: Develop piksel-infra repository README (purpose, structure, workflow). 🔄️
 
 ## 3️⃣ - Core Service Implementation
 

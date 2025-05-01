@@ -56,16 +56,23 @@ piksel-infra/
 │       ├── main.tf
 │       ├── variables.tf
 │       └── outputs.tf
-├── dev/
-│   ├── README.md               # Dev environment specifics
+├── shared/                     # For shared resources like ECR and Route53
+│   ├── README.md               
+│   ├── main.tf                 # Defines the piksel-core ECR repository
+│   ├── variables.tf            # Variables for shared resources
+│   ├── outputs.tf              # Outputs for shared resources 
+│   ├── providers.tf            # AWS Provider configuration for shared resources
+│   └── shared.auto.tfvars      # Environment Specific Variable Declarations
+├── dev/                        # Dev environment specifics
+│   ├── README.md              
 │   ├── main.tf                 # Uses registry modules
 │   ├── variables.tf
 │   ├── outputs.tf
 │   ├── providers.tf
-│   └── terraform.tfvars
-├── staging/
+│   └── dev.auto.tfvars
+├── staging/                    # Staging environment specifics
 │   └── [same structure as dev]
-└── prod/
+└── prod/                       # Production environment specifics
     └── [same structure as dev]
 ```
 <!-- prettier-ignore-end -->
