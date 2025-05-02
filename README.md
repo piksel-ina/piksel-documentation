@@ -10,17 +10,10 @@ Welcome to Piksel's central documentation repository. This repository serves as 
 ```
 piksel-document/
 ├── architecture/           # System architecture documentation
-│   └── network.md
 ├── assets/                 # Supporting images and files
 ├── operations/             # Operational procedures and guides
-│   ├── 01-repository-strategy-and-cicd.md
-│   └── 02-AWS-identity-center-guide.md
 ├── project-plans/          # Project planning and execution documents
-│   ├── 01-milestones.md
-│   └── 02-execution-plan.md
 └── security/               # Security policies and implementation guides
-    ├── 01-piksel-AWS-Organization-Foundational-Security-Guidelines.md
-    └── 02-piksel-OIDC-implementation.md
 ```
 <!-- prettier-ignore-end -->
 
@@ -30,6 +23,7 @@ piksel-document/
 
 - [AWS Organization Security Guidelines](security/01-piksel-AWS-Organization-Foundational-Security-Guidelines.md) - Foundation of our AWS account structure and security policies
 - [OIDC Implementation Guide](security/02-piksel-OIDC-implementation.md) - Details on our OpenID Connect implementation for AWS services
+- [Monitoring IAM Access Guide](security/03-monitoring-iam-access-analyzer-findings.md) - Details on how to monitor and managing findings from IAM Analyzer
 
 ### Operations
 
@@ -38,9 +32,12 @@ piksel-document/
 
 ### Architecture
 
-- [Network Architecture](architecture/network.md) - Network design and infrastructure layout
-- [Object Storage Architecture](architecture/object-storage.md) - Technical specifications for the AWS S3 infrastructure
-- [Database Architecture](architecture/database.md) - Technical specifications for the AWS Relational Database Service (RDS)
+- [Network Architecture](architecture/network.md) - Network design and infrastructure layout.
+- [Object Storage Architecture](architecture/object-storage.md) - Technical specifications for the AWS S3 infrastructure.
+- [Database Architecture](architecture/database.md) - Technical specifications for the AWS Relational Database Service (RDS).
+- [Container Registry](architecture/container-registry.md) - Technical specifications for the AWS Elastic Container Registry (ECR) infrastructure.
+- [Domain Name System](architecture/dns.md) - Design and management strategy for project DNS infrastructure (internal and public).
+- [IAM Strategy](architecture/iam-strategy.md) - Strategy, principles, and patterns for AWS Identity and Access Management (IAM).
 
 ### Project Planning
 
