@@ -171,6 +171,18 @@
   7.  Consider rotating the Emergency User password and potentially the MFA device after use.
 - **Alerting:** Configure high-priority alerts for any console login attempt or API call made by the Emergency IAM User(s) or assumption of the `PikselEmergencyAccessRole`.
 
+### 5.5. IAM Access Monitoring (IAM Access Analyzer)
+
+- **Enablement:** AWS IAM Access Analyzer **MUST** be enabled in **all relevant AWS regions** within **each account** (`Piksel Development`, `Piksel Staging`, `Piksel Production`, `Piksel Shared`, Management, Security, etc.) to continuously monitor for unintended external or cross-account resource access based on resource policies.
+- **Management:** Configuration of Access Analyzer **SHOULD** be managed via **Terraform** (`aws_accessanalyzer_analyzer`) for consistency and adherence to IaC principles. This ensures it is treated as part of the account baseline.
+- **Scope:** Configure analyzers to monitor the entire account (default) or specific resource types as needed.
+- **Review Cadence:** Findings from IAM Access Analyzer **MUST** be reviewed regularly (e.g., monthly or quarterly) as part of the periodic review process (see Section 5.4).
+- **Findings Management:**
+  - Investigate active findings promptly.
+  - Remediate policies granting unintended access.
+- Archive findings that represent intentional and approved access configurations to reduce noise.
+  - **Organization Analyzer:** If AWS Organizations is in use, configuring a **centralized Organization-level analyzer** via a delegated administrator account (typically the Security account) is the preferred approach for central visibility, supplementing account-level analyzers if needed.
+
 ### 5.7. Regular Review
 
 - **Quarterly:** Review IAM Access Analyzer findings, IAM group memberships, permission set assignments, and high-privilege roles.

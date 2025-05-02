@@ -37,17 +37,6 @@
 - Sub-issue 2.2.1: Configure OIDC in Terraform ✅
 - Sub-issue 2.2.2: Set up VCS integration with GitHub ✅
 
-### Issue 2.3: Provision Shared Infrastructure Resources (**piksel-infra/shared/**) [#4](https://github.com/piksel-ina/piksel-infra/issues/4) 🔄️
-
-- Sub-issue 2.3.1: Configure core networking (VPC, subnets, routing)
-- Sub-issue 2.3.2: Set up internal DNS (Route53 private zones) in `shared/dns/`
-- Sub-issue 2.3.4: Create ECR repository definition
-- Sub-issue 2.3.5: Set up core S3 buckets for logging
-- Sub-issue 2.3.6: Configure central CloudWatch logging setup
-- Sub-issue 2.3.8: Configure baseline shared Security Groups
-- Sub-issue 2.3.9: Define backup policies/procedures.
-- Sub-issue 2.3.10: Create DNS migration strategy document (in `piksel-document`)
-
 ### Issue 2.3: Provision Shared Infrastructure Resources (**piksel-infra/shared/**) [#29](https://github.com/piksel-ina/piksel-infra/issues/29)
 
 - Sub-issue 2.3.1: Configure core networking (Shared VPC, Subnets, Route Tables, Transit Gateway Hub, AWS Resource Access Manager (RAM))
