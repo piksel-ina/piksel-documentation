@@ -25,12 +25,11 @@
 
 ## 2️⃣ - Infrastructure Configuration [#1](https://github.com/piksel-ina/piksel-infra/issues/1) 🔄️
 
-### Issue 2.1: AWS Base Infrastructure (**piksel-infra**) [#3](https://github.com/piksel-ina/piksel-infra/issues/3) 🔄️
+### Issue 2.1: AWS Base Infrastructure (**piksel-infra**) [#3](https://github.com/piksel-ina/piksel-infra/issues/3) ✅
 
 - Sub-issue 2.1.1: Create AWS account structure [#3a](https://github.com/piksel-ina/piksel-infra/issues/3#issuecomment-2801091792) ✅
 - Sub-issue 2.1.2: Configure IAM roles for OIDC authentication [#3b](https://github.com/piksel-ina/piksel-infra/issues/3#issuecomment-2803761832) ✅
-- Sub-issue 2.1.3: Set up IAM Access Analyzer
-- Sub-issue 2.1.4: Create IAM activity monitoring and reporting workflow
+- Sub-issue 2.1.3: Define IAM Access Analyzer Strategy [#3c](https://github.com/piksel-ina/piksel-infra/issues/3#issuecomment-2846257762) ✅
 
 ### Issue 2.2: Terraform Cloud Setup (**piksel-infra**) [#12](https://github.com/piksel-ina/piksel-infra/issues/12) ✅
 
@@ -48,6 +47,7 @@
 - Sub-issue 2.3.8: Configure baseline shared Security Groups
 - Sub-issue 2.3.9: Coordinate `piksel.big.go.id` NS Record Delegation with Internal BIG's IT Team
 - Sub-issue 2.3.12: Configure RAM sharing for PHZs and potentially Subnets
+- Sub-issue 2.3.13: Enable IAM Access Analyzer in Shared Account
 
 ### Issue 2.4: Configure `dev` Environment Infrastructure (**piksel-infra/dev/**) [#4](https://github.com/piksel-ina/piksel-infra/issues/4) 🔄️
 
@@ -57,6 +57,7 @@
 - Sub-issue 2.4.4: Configure security groups and access policies ✅ [#4c](https://github.com/piksel-ina/piksel-infra/issues/4#issuecomment-2837821898)
 - Sub-issue 2.4.5: Set up backup procedures
 - Sub-issue 2.4.6: Configure CloudWatch logging
+- Sub-issue 2.4.7: Enable IAM Access Analyzer in Dev Account
 
 ### Issue 2.5: CI/CD for Infrastructure (**piksel-infra**) [#6](https://github.com/piksel-ina/piksel-infra/issues/6) ✅
 
