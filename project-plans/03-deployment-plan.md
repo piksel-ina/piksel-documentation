@@ -16,6 +16,9 @@ Okay, here's a brief document outlining the deployment stack and its relation to
 ### Deployment 1: Infrastructure & Core Services (`piksel-infra`)
 
 - **Tool:** Terraform
+- **Provider:**
+  - Defines providers for AWS, Kubernetes, Helm, and Kubectl.
+  - Cluster Authentication: The kubernetes, helm, and kubectl providers are configured to securely connect to the EKS cluster using its endpoint, a base64 decoded CA certificate (cluster_ca_certificate), and an authentication token
 - **Key Outputs/Provisions:**
   - AWS EKS Cluster (Control Plane, Fargate, Karpenter).
   - VPC, Subnets, IAM Roles (for EKS, services, IRSA).
@@ -28,6 +31,9 @@ Okay, here's a brief document outlining the deployment stack and its relation to
     - Namespaces (flux-system, monitoring, hub, odc, stac, db, argo),
     - `db-endpoint` service
     - some K8s Secrets (e.g., Grafana admin, JupyterHub values, ODC DB read, Argo SSO client secret, Argo artifact S3 access credentials, and other application credentials)
+    - via Terraform helm:
+      - Karpenter (for node auto-scaling)
+      - ExternalDNS (for managing DNS records based on Ingress/Services)
   - Deploys Flux to `flux-system`, points to piksel-apps GitOps repository.
 - **Purpose:** Establishes the foundational cloud environment and bootstraps essential services.
 - **Output**: Running EKS cluster, core AWS services, Flux ready.
