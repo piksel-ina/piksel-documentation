@@ -1,4 +1,4 @@
-# 🌏 Piksel Project: Execution Plan
+# 🌏 Piksel Project: Execution Document
 
 ➡️[Piksel Project Board](https://github.com/orgs/piksel-ina/projects/3)
 
@@ -36,18 +36,14 @@
 - Sub-issue 2.2.1: Configure OIDC in Terraform ✅
 - Sub-issue 2.2.2: Set up VCS integration with GitHub ✅
 
-### Issue 2.3: Provision Shared Infrastructure Resources (**piksel-infra/shared/**) [#29](https://github.com/piksel-ina/piksel-infra/issues/29) 🔄️
+### Issue 2.3: Provision Shared Infrastructure Resources (**piksel-infra/shared/**) [#29](https://github.com/piksel-ina/piksel-infra/issues/29) ✅
 
-- Sub-issue 2.3.1: Configure core networking (Shared VPC, Subnets, Route Tables, Transit Gateway Hub, AWS Resource Access Manager (RAM))
-- Sub-issue 2.3.2: Set up Internal Private Hosted Zones (`*.piksel.internal`) in Route 53
-- Sub-issue 2.3.3: Set up Public Hosted Zone (`piksel.big.go.id`) in Route 53
-- Sub-issue 2.3.4: Create ECR repository definitions
-- Sub-issue 2.3.5: Set up core S3 buckets (for Logs [VPC Flow Logs, ELB Access, CloudTrail], Artifacts, etc.)
-- Sub-issue 2.3.6: Configure central CloudWatch logging setup (Central Log Groups, Retention Policies)
-- Sub-issue 2.3.8: Configure baseline shared Security Groups
-- Sub-issue 2.3.9: Coordinate `piksel.big.go.id` NS Record Delegation with Internal BIG's IT Team
-- Sub-issue 2.3.12: Configure RAM sharing for PHZs and potentially Subnets
-- Sub-issue 2.3.13: Enable IAM Access Analyzer in Shared Account
+- Sub-issue 2.3.1: Configure core networking (Shared VPC, Subnets, Route Tables, Transit Gateway Hub, AWS Resource Access Manager (RAM)) [#29a](https://github.com/piksel-ina/piksel-infra/issues/29#issuecomment-2861919968)
+- Sub-issue 2.3.2: Set up Internal Private Hosted Zones (`*.piksel.internal`) in Route 53 [#29c](https://github.com/piksel-ina/piksel-infra/issues/29#issuecomment-2878676177)
+- Sub-issue 2.3.3: Set up Public Hosted Zone (`piksel.big.go.id`) in Route 53 [#29c](https://github.com/piksel-ina/piksel-infra/issues/29#issuecomment-2878676177)
+- Sub-issue 2.3.4: Create ECR repository definitions [#29b](https://github.com/piksel-ina/piksel-infra/issues/29#issuecomment-2862299840)
+- Sub-issue 2.3.5: Configure RAM sharing for PHZs and Subnets [#29c](https://github.com/piksel-ina/piksel-infra/issues/29#issuecomment-2878676177)
+- Sub-issue 2.3.6: Associate dev vpc with shared hosted zone [#29c](https://github.com/piksel-ina/piksel-infra/issues/29#issuecomment-2878676177)
 
 ### Issue 2.4: Configure `dev` Environment Infrastructure (**piksel-infra/dev/**) [#4](https://github.com/piksel-ina/piksel-infra/issues/4) ✅
 
@@ -67,11 +63,11 @@
 - Sub-issue 2.5.2: Set up deployment workflow using OIDC authentication ✅
 - Sub-issue 2.5.3: Create infrastructure testing scripts ⚠️
 
-### Issue 2.6: Infrastructure Documentation (**piksel-infra**) [#27](https://github.com/piksel-ina/piksel-infra/issues/27) 🔄️
+### Issue 2.6: Infrastructure Documentation (**piksel-infra**) [#27](https://github.com/piksel-ina/piksel-infra/issues/27) ✅
 
 - Sub-issue 2.6.1: Implement terraform-docs via pre-commit for automated module docs. ✅
 - Sub-issue 2.6.2: Create high-level infrastructure architecture documentation. ✅
-- Sub-issue 2.6.3: Develop piksel-infra repository README (purpose, structure, workflow). 🔄️
+- Sub-issue 2.6.3: Develop piksel-infra repository README (purpose, structure, workflow). ✅
 
 ## 3️⃣ - Core Service Implementation
 
