@@ -23,7 +23,7 @@
 - `piksel-document`: Initialize repository for project documentation
 - `piksel-test`: Initialize repository for integration testing
 
-## 2️⃣ - Infrastructure Configuration [#1](https://github.com/piksel-ina/piksel-infra/issues/1) 🔄️
+## 2️⃣ - Infrastructure Configuration [#1](https://github.com/piksel-ina/piksel-infra/issues/1)
 
 ### Issue 2.1: AWS Base Infrastructure (**piksel-infra**) [#3](https://github.com/piksel-ina/piksel-infra/issues/3) ✅
 
@@ -68,6 +68,12 @@
 - Sub-issue 2.6.1: Implement terraform-docs via pre-commit for automated module docs. ✅
 - Sub-issue 2.6.2: Create high-level infrastructure architecture documentation. ✅
 - Sub-issue 2.6.3: Develop piksel-infra repository README (purpose, structure, workflow). ✅
+
+### Issue 2.7: Terraform Stack Workflow Initial Setup [#46](https://github.com/piksel-ina/piksel-infra/issues/46)🔄️
+
+- Sub-issue 2.7.1: Implement Terraform Stacks Workflow
+- Sub-issue 2.7.2: Configure Terraform OIDC Authentication
+- Sub-issue 2.7.3: Deploy Initial VPC Infrastructure
 
 ## 3️⃣ - Core Service Implementation
 
