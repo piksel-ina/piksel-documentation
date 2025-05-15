@@ -69,11 +69,18 @@
 - Sub-issue 2.6.2: Create high-level infrastructure architecture documentation. ✅
 - Sub-issue 2.6.3: Develop piksel-infra repository README (purpose, structure, workflow). ✅
 
-### Issue 2.7: Terraform Stack Workflow Initial Setup [#46](https://github.com/piksel-ina/piksel-infra/issues/46)🔄️
+### Issue 2.7: Terraform Stack Workflow Initial Setup [#46](https://github.com/piksel-ina/piksel-infra/issues/46)✅
 
-- Sub-issue 2.7.1: Implement Terraform Stacks Workflow
-- Sub-issue 2.7.2: Configure Terraform OIDC Authentication
-- Sub-issue 2.7.3: Deploy Initial VPC Infrastructure
+- Sub-issue 2.7.1: Implement Terraform Stacks Workflow [#46a](https://github.com/piksel-ina/piksel-infra/issues/46#issuecomment-2882558565) ✅
+- Sub-issue 2.7.2: Configure Terraform OIDC Authentication [#46b](https://github.com/piksel-ina/piksel-infra/issues/46#issuecomment-2882564453) ✅
+- Sub-issue 2.7.3: Deploy Initial VPC Infrastructure [#46c](https://github.com/piksel-ina/piksel-infra/issues/46#issuecomment-2882568717) ✅
+
+### Issue 2.8: Deploy Centralized Infrastructure with Terraform Stacks [#47](https://github.com/piksel-ina/piksel-infra/issues/47)🔄️
+
+- Sub-issue 2.8.1: Deploy Centralized DNS in Shared Environment using Terraform Stacks
+- Sub-issue 2.8.2: Establish VPC Peering for Connectivity using Terraform Stacks
+- Sub-issue 2.8.3: Deploy ECR with VPC Endpoint using Terraform Stacks
+- Sub-issue 2.8.4: Assign Internal DNS Name for ECR Discovery using Terraform Stacks
 
 ## 3️⃣ - Core Service Implementation
 
