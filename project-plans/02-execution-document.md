@@ -77,10 +77,11 @@
 
 ### Issue 2.8: Deploy Centralized Infrastructure with Terraform Stacks [#47](https://github.com/piksel-ina/piksel-infra/issues/47)🔄️
 
-- Sub-issue 2.8.1: Deploy Centralized DNS in Shared Environment using Terraform Stacks
-- Sub-issue 2.8.2: Establish VPC Peering for Connectivity using Terraform Stacks
-- Sub-issue 2.8.3: Deploy ECR with VPC Endpoint using Terraform Stacks
-- Sub-issue 2.8.4: Assign Internal DNS Name for ECR Discovery using Terraform Stacks
+- Sub-issue 2.8.1: Deploy Centralized DNS in Shared Environment using Terraform Stacks [#47a](https://github.com/piksel-ina/piksel-infra/issues/47#issuecomment-2892734746) ✅
+- Sub-issue 2.8.2: Establish Transit Gateway for Connectivity using Terraform Stacks [#47a](https://github.com/piksel-ina/piksel-infra/issues/47#issuecomment-2892734746) ✅
+- Sub-issue 2.8.3: Deploy ECR with VPC Endpoint using Terraform Stacks [#47b](https://github.com/piksel-ina/piksel-infra/issues/47#issuecomment-2895083663) ✅
+
+> Note: Changed from a single repository to two separate repositories to support the deployment of two stacks (piksel-hub as upstream and piksel-infrastructure as downstream) due to differing lifecycles
 
 ## 3️⃣ - Core Service Implementation
 
