@@ -6,8 +6,6 @@
 | **Date**    | 2025-05-22                |
 | **Owner**   | Cloud Infrastructure Team |
 
----
-
 ## 1. Background and Rationale
 
 To achieve a secure, manageable, and scalable cloud environment, Piksel adopts a multi-account AWS architecture.
@@ -28,8 +26,6 @@ To achieve a secure, manageable, and scalable cloud environment, Piksel adopts a
   - [piksel-hub](https://github.com/piksel-ina/piksel-hub) (_upstream_): Provisions shared resources in the hub account.
   - [piksel-infrastructure](https://github.com/piksel-ina/piksel-infra) (_downstream_): Provisions resources in spoke accounts, consuming outputs from the hub stack.  
     Each stack resides in a separate GitHub repository, which adds complexity but improves maintainability and control.
-
----
 
 ## 2. Centralized DNS and Networking
 
@@ -100,8 +96,6 @@ To achieve a secure, manageable, and scalable cloud environment, Piksel adopts a
 > - [AWS Documentation: Scaling DNS Management Across Multiple Accounts](https://docs.aws.amazon.com/whitepapers/latest/hybrid-cloud-dns-options-for-vpc/scaling-dns-management-across-multiple-accounts-and-vpcs.html)
 > - [How to associate multi account VPC and a phz](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/hosted-zone-private-associate-vpcs-different-accounts.html).
 
----
-
 ## 3. Centralized ECR Management
 
 ### Overview
@@ -141,8 +135,6 @@ A centralized Amazon Elastic Container Registry (ECR) is deployed in the Shared 
 9. **Inbound Resolver Endpoint**  
    DNS queries from Spoke VPCs are forwarded to the inbound resolver in the Shared Account, enabling successful resolution of ECR and S3 endpoint hostnames.
 
----
-
 ### Terraform Implementation
 
 - **ECR Repository**
@@ -164,34 +156,50 @@ A centralized Amazon Elastic Container Registry (ECR) is deployed in the Shared 
 - **CI/CD Integration** with OIDC and scoped IAM roles provides secure, automated image delivery.
 - **DNS and Networking** are configured for seamless cross-account access, supporting scalable multi-environment deployments.
 
----
+## 4. Transit Gateway (TGW) Security Considerations & Controls
 
-## 5. **TGW Considerations and Security Plan**
+Deploying a Transit Gateway (TGW) is essential for scalable, multi-VPC connectivity and future on-premises integration. However, TGW can reduce isolation between environments. Here’s why TGW is used, what security risks it brings, and how those risks are mitigated.
 
-- **Account and Environment Isolation**  
-  TGW route tables are structured to ensure that only authorized VPCs can communicate, maintaining strict separation between development, staging, and production environments.
-- **Security Controls**  
-  Network ACLs, Security Groups, and IAM policies are implemented to restrict access. Only approved network traffic is permitted between VPCs and accounts.
-- **Monitoring and Auditing**  
-  VPC Flow Logs, Route 53 query logs, and AWS CloudTrail are enabled to provide comprehensive visibility and support compliance requirements. Regular reviews are conducted to identify and address potential issues.
-- **Governance**  
-  Changes are documented and permissions are reviewed regularly to ensure ongoing security as the environment evolves.
+### Architecture & Security Controls
 
----
+<img src="../assets/security_measures.png" width="800" height="auto">
 
-## 6. **Conclusion and Next Steps**
+### Security Measures (Referencing Diagram Numbers)
+
+1. **Corporate Data Center (On-Premises)**  
+   _Not yet connected._ TGW is designed to support future VPN/Direct Connect.
+
+2. **Segmented Route Tables (Rtb)**  
+   Each VPC attachment has its own TGW route table, controlling which VPCs can communicate. It prevents unwanted lateral movement; only necessary routes are propagated.
+
+3. **No Direct Connectivity Between Spoke VPCs**  
+   Dev and Staging VPCs cannot talk to each other directly via TGW. Isolation is preserved; only Shared Account services (e.g., ECR) are reachable.
+
+4. **Security Groups (SGs) and NACLs**  
+   Strict rules allow only required traffic (e.g., ECR image pulls) and deny all else. Network access is tightly scoped, minimizing attack surface.
+
+5. **Logging and Monitoring**  
+   VPC Flow Logs and TGW Flow Logs are enabled. All traffic is auditable; suspicious activity is detected and alerted.
+
+**Additional Controls:**
+
+- **DNS Segmentation:** Only necessary DNS queries are resolved via the inbound resolver.
+- **Explicit IAM & Resource Policies:** Further restrict access at the AWS resource level.
+
+### **Why Not Other Alternatives?**
+
+- **Public Routing:**  
+  Not secure; exposes resources to the internet—unacceptable for internal workloads.
+- **AWS PrivateLink:**  
+  Secure and isolated, but operationally complex and costly for broad, multi-service connectivity. Not practical for full-mesh or future on-premises integration.
+
+### **Key Outcomes**
+
+- **Scalability** for future hybrid cloud and VPC growth.
+- **Maintained isolation** between environments.
+- **Auditable, monitored, and controlled** network flows.
+
+## 5. **Conclusion and Next Steps**
 
 This architecture establishes a secure and scalable foundation for Piksel’s cloud workloads. Centralization of DNS and ECR, combined with Transit Gateway-based networking, streamlines management and enhances security.  
 **Next steps:** Continue automation of processes, conduct regular security reviews, and maintain up-to-date documentation as the environment evolves.
-
----
-
-## 7. **Appendices**
-
-- **Architecture Diagrams:** (Attach latest network and DNS diagrams)
-- **Terraform Examples:** (Include sample module and stack definitions)
-- **Policy Templates:** (Sample IAM, VPC endpoint, and DNS policies)
-
----
-
-Let me know if further adjustments are needed or if a different format is required.
