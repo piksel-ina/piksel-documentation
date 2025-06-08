@@ -96,7 +96,94 @@ Below is an explanation of each numbered component in the diagram:
 15. **Centralized ECR**  
     A single Elastic Container Registry in the shared account, serving as the source for all container images pulled by workloads in spoke accounts over the private network.
 
-## 4. Related Documents
+## 4. Security Considerations
+
+Security is of paramount importance in any cloud infrastructure deployment. Understanding this critical need, I have implemented several foundational security measures to establish a secure baseline for our AWS spoke account architecture. These measures provide essential protection while enabling rapid deployment and functionality.
+
+### 4.1 Currently Implemented Security Measures
+
+**1. Network Security:**
+
+- Private subnets isolate EKS worker nodes from direct internet access
+- NAT Gateway provides controlled outbound internet access
+- Security Groups configured for layered defense
+- VPC Flow Logs enabled for traffic monitoring
+- Security Group allows UDP/TCP port 53 from Shared Account VPC (10.0.0.0/16)
+
+**2. Cross-Account Access:**
+
+- Transit Gateway enables controlled inter-account communication
+- ECR access controlled via IAM policies and VPC endpoints
+- DNS resolution through authorized Route 53 private hosted zones
+
+**3. Identity and Access Management:**
+
+- Spoke accounts follow principle of least privilege
+- EKS service accounts use IRSA for fine-grained permissions
+- Cross-account roles scoped to specific resources
+
+**4. Compliance:**
+
+- Data residency ensured in ap-southeast-3 region
+
+### 4.2 Outstanding Security Implementations
+
+Understanding the limitations of time and resources while recognizing the need for faster deployment, I had to prioritize certain security implementations over others. The following items are categorized by urgency and should be addressed in future iterations:
+
+**1. High Priority**
+
+**Network Security Gaps:**
+
+- Network ACLs not configured (additional layer of defense)
+- CloudTrail logging across all accounts
+- EKS audit logging for Kubernetes API server activities
+
+**ECR Security:**
+
+- ECR image vulnerability scanning
+- Image signing and verification
+
+**2. Medium Priority**
+
+**DNS Security:**
+
+- Route 53 Resolver DNS Firewall for DNS poisoning protection
+- DNS query monitoring for suspicious activity
+- DNS over HTTPS implementation
+
+**3. Nice to Have**
+
+**Advanced Security Features:**
+
+- GuardDuty across all accounts
+- AWS Config rules for compliance monitoring
+- Security Hub for centralized security findings
+- VPC Flow Logs analysis with CloudWatch Insights
+- AWS WAF for application-layer protection
+- AWS Systems Manager Session Manager
+- Automated security scanning in CI/CD pipeline
+- AWS Network Firewall
+- Zero-trust network architecture
+- Container runtime security monitoring
+- Incident response procedures
+
+**Compliance Enhancements:**
+
+- Encryption compliance documentation
+- Audit trail maintenance procedures
+- Security assessment scheduling
+- Penetration testing framework
+
+### 4.3 Operational Recommendations
+
+It is strongly recommended to have _dedicated personnel_ or _a security team_ responsible for ongoing monitoring and auditing activities. This includes oversight of:
+
+- access controls,
+- security configurations,
+- compliance adherence, and
+- threat detection across all accounts and services.
+
+## 5. Related Documents
 
 - [Piksel Multi Account Setup](https://github.com/piksel-ina/piksel-document/blob/main/architecture/hub-spoke-design.md)
 - [EKS Cluster Setup]()
