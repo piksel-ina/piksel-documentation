@@ -44,7 +44,7 @@ To achieve a secure, manageable, and scalable cloud environment, Piksel adopts a
 2. **Route 53 Public Hosted Zones**\
    Two public hosted zones are created in the shared account, these zones manage public-facing DNS records:
    - _piksel.big.go.id_
-   - _app.piksel.big.go.id_\
+   - _app.piksel.big.go.id_
 3. **Route 53 Private Hosted Zones**\
     Private hosted zones are centralized in the shared account, and these zones are associated with the appropriate spoke VPCs to provide internal DNS resolution.
    - _piksel.internal_
