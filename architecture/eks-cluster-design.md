@@ -93,7 +93,7 @@ To simplify node management and ensure high availability independent of EC2 node
 
 - This is achieved by creating Fargate Profiles that target specific `namespaces`.
 - It is essential that the following namespaces are **defined and created within the Terraform** configuration; otherwise, the Fargate Profiles will not be able to schedule pods into them:
-  - [**kube-system**](https://github.com/piksel-ina/piksel-document/blob/main/architecture/kube-system.md): Houses core Kubernetes services like CoreDNS, kube-proxy, VPC CNI, and the EBS CSI controller (~8-15 pods).
+  - [**kube-system**](./eks-addons.md): Houses core Kubernetes services like CoreDNS, kube-proxy, VPC CNI, and the EBS CSI controller (~8-15 pods).
   - **karpenter**: Runs the Karpenter autoscaler controller (~1-2 pods).
   - **flux-system**: Contains the GitOps controllers managed by FluxCD (~5-8 pods).
   - **aws-external-dns-helm**: Hosts the ExternalDNS controller responsible for managing DNS records (~1-2 pods).
@@ -225,7 +225,7 @@ It is **strongly recommended** to have _dedicated personnel_ or _a security team
 
 - [Piksel Multi Account Setup](https://github.com/piksel-ina/piksel-document/blob/main/architecture/hub-spoke-design.md)
 - [Piksel Spoke Network](https://github.com/piksel-ina/piksel-document/blob/main/architecture/spoke-network-design.md)
-- [kube-system details](https://github.com/piksel-ina/piksel-document/blob/main/architecture/kube-system.md)
+- [EKS Add-ons Setup](./eks-addons.md)
 - [jupyterhub workload details](#jupyterhub-workload)
 - [odc workload details](#odc-workload)
 - [terria workload details](#terria-workload)
