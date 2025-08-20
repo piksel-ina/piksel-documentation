@@ -2,8 +2,9 @@ import { themes as prismThemes } from "prism-react-renderer";
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: "Piksel",
-  tagline: "Digital Earth Indonesia",
+  title: "The Future of Earth Observation in Indonesia",
+  tagline:
+    "Piksel brings together satellite imagery and cloud computing technology to enable digital earth observation across the Indonesian region",
   favicon: "img/piksel-logo.ico",
   future: {
     v4: true,
@@ -77,12 +78,12 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
-      image: "img/docusaurus-social-card.jpg",
+      image: "img/piksel-logo.svg",
       navbar: {
-        title: "My Site",
+        title: "Piksel",
         logo: {
-          alt: "My Site Logo",
-          src: "img/logo.svg",
+          alt: "Piksel Logo",
+          src: "img/piksel-logo.svg",
         },
         items: [
           {
