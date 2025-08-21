@@ -15,7 +15,7 @@ const useCaseData = [
   {
     id: 2,
     image:
-      "https://images.unsplash.com/photo-1755001244508-58fcc65797ec?q=80&w=3987&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     title: "Technology",
     description:
       "Cutting-edge solutions for modern challenges in data management and analysis, powered by innovative research and development.",
@@ -24,7 +24,7 @@ const useCaseData = [
   {
     id: 3,
     image:
-      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+      "https://plus.unsplash.com/premium_photo-1666256629413-ea053d34ff36?q=80&w=987&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     title: "Research",
     description:
       "Supporting scientific research with reliable data and innovative tools that enable breakthrough discoveries and insights.",

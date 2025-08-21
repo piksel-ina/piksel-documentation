@@ -42,3 +42,15 @@
   align-items: center;
   justify-content: center;
 }
+
+@media (max-width: 996px) {
+  .headerWrapper {
+    height: 87vh;
+  }
+}
+
+@media (max-width: 768px) {
+  .headerWrapper {
+    height: 77vh;
+  }
+}

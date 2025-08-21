@@ -4,31 +4,3 @@
 .useCaseSection {
   padding: var(--ifm-spacing-vertical) 0;
 }
-
-.sectionHeader {
-  margin-bottom: var(--ifm-spacing-vertical);
-}
-
-.sectionTitle {
-  font-size: var(--ifm-h1-font-size);
-  font-weight: var(--ifm-font-weight-bold);
-  margin-bottom: var(--ifm-spacing-vertical);
-  color: var(--ifm-color-emphasis-800);
-}
-
-.sectionSubtitle {
-  font-size: var(--ifm-font-size-large);
-  color: var(--ifm-color-emphasis-600);
-  max-width: 600px;
-  margin: 0 auto;
-  line-height: var(--ifm-line-height-base);
-}
-
-/* Dark theme support */
-:global([data-theme="dark"]) .sectionTitle {
-  color: var(--ifm-color-emphasis-100);
-}
-
-:global([data-theme="dark"]) .sectionSubtitle {
-  color: var(--ifm-color-emphasis-300);
-}

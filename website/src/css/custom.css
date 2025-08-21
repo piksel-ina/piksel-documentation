@@ -82,7 +82,7 @@ h3,
 }
 
 .hero__subtitle {
-  font-size: clamp(0.7rem, 2.2vw, 1.1rem) !important;
+  font-size: clamp(1rem, 2.2vw, 1.4rem) !important;
   margin-top: clamp(0.65rem, 1.5vw, 1rem);
   max-width: min(40rem, 90vw);
   line-height: 1.5;
@@ -90,7 +90,7 @@ h3,
 
 .hero--primary .button {
   font-size: clamp(0.6rem, 2vw, 1.2rem) !important;
-  margin-top: clamp(1rem, 2vw, 1.5rem);
+  margin-top: clamp(1rem, 3vw, 2rem);
 }
 
 .hero--primary > .button .button--secondary {
@@ -100,9 +100,9 @@ h3,
 
 /* NAVBAR */
 .navbar {
-  background: transparent !important;
   background-color: var(--ifm-navbar-background-color) !important;
   backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 /* SECTION */
@@ -124,4 +124,10 @@ h3,
   color: var(--ifm-color-background-color);
   text-align: center;
   margin-top: clamp(0.5rem, 1vw, 1rem);
+}
+
+@media (max-width: 996px) {
+  .navbar {
+    backdrop-filter: none;
+  }
 }

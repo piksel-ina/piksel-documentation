@@ -63,7 +63,7 @@
 }
 
 .modernCardTitle {
-  font-size: clamp(1.5rem, 2vw, 2rem);
+  font-size: clamp(1.5rem, 8vw, 2.2rem) !important;
   font-weight: var(--ifm-font-weight-bold);
   color: white;
   margin: 0;
