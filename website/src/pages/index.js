@@ -3,6 +3,7 @@ import Link from "@docusaurus/Link";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import Layout from "@theme/Layout";
 import HomepageFeatures from "@site/src/components/HomepageFeatures";
+import UseCase from "@site/src/components/UseCases";
 import Heading from "@theme/Heading";
 import styles from "./index.module.css";
 import Translate, { translate } from "@docusaurus/Translate";
@@ -65,6 +66,7 @@ export default function Home() {
         <HomepageHeader />
       </div>
       <main>
+        <UseCase />
         <HomepageFeatures />
       </main>
     </Layout>

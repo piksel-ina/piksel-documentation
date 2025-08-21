@@ -44,7 +44,7 @@
   --ifm-color-primary: #3dcff7;
   --ifm-color-primary-dark: #1fc8f6;
   --ifm-color-primary-darker: #11c4f5;
-  --ifm-color-primary-darkest: #09a4cf;
+  --ifm-color-primary-darkest: #028db7;
   --ifm-color-primary-light: #5bd6f8;
   --ifm-color-primary-lighter: #69daf9;
   --ifm-color-primary-lightest: #96e5fb;
@@ -103,4 +103,25 @@ h3,
   background: transparent !important;
   background-color: var(--ifm-navbar-background-color) !important;
   backdrop-filter: blur(10px);
+}
+
+/* SECTION */
+.section__header {
+  display: flex;
+  justify-content: center;
+  margin-top: clamp(2rem, 8vh, 4rem);
+}
+
+.section__title {
+  font-size: clamp(2rem, 3vw, 2.5rem) !important;
+  font-weight: var(--ifm-font-weight-bold);
+  color: var(--ifm-color-primary-darkest);
+  text-align: center;
+}
+
+.section__subtitle {
+  font-size: clamp(1rem, 2vw, 1.3rem) !important;
+  color: var(--ifm-color-background-color);
+  text-align: center;
+  margin-top: clamp(0.5rem, 1vw, 1rem);
 }
