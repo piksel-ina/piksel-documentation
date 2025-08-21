@@ -3,19 +3,19 @@
 }
 
 .heroBanner {
-  padding: 6rem 0;
-  padding-top: 2rem;
   text-align: center;
   position: relative;
   overflow: hidden;
-  margin-bottom: 2rem;
+  background: transparent !important;
 }
 
 .heroText {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  text-align: left;
+  align-items: center;
+  text-align: center;
+  color: var(--ifm-color-secondary-lightest);
 }
 
 .buttons {
@@ -24,84 +24,21 @@
   justify-content: center;
 }
 
-.underlined {
-  position: relative;
-  display: inline-block;
-  text-decoration: none;
-}
-
-.underlined::after {
-  content: "";
-  position: absolute;
-  bottom: 0.2rem;
-  left: 0;
+.headerWrapper {
+  background-image: linear-gradient(
+      0deg,
+      color-mix(in srgb, var(--ifm-color-black) 30%, transparent 50%) 30%,
+      color-mix(in srgb, var(--ifm-color-black) 90%, transparent 80%) 50%
+    ),
+    url("/img/hero_image.webp");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding-top: var(--ifm-navbar-height);
+  margin-top: calc(-1 * var(--ifm-navbar-height));
   width: 100%;
-  height: 0.1rem;
-  z-index: 2;
-  background-color: var(--ifm-color-primary-alpha-50);
-  box-shadow: 0 2px 5px 0.2px var(--ifm-color-primary-alpha-30);
-}
-
-.heroImageContainer {
-  position: relative;
-  width: 100%;
+  height: 90vh;
   display: flex;
-  justify-content: center;
   align-items: center;
-  padding-left: 3.5rem;
-}
-
-.heroImage {
-  width: 100%;
-  height: auto;
-  transition: filter 0.3s ease;
-}
-
-[data-theme="dark"] .heroImage {
-  filter: brightness(0.85) contrast(1.05);
-}
-
-@media screen and (max-width: 996px) {
-  .heroBanner {
-    padding: 2rem;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .heroImage {
-    transition: none;
-  }
-}
-@media screen and (max-width: 996px) {
-  .heroBanner .row {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .heroImageContainer {
-    order: -1;
-    max-width: 15rem;
-    margin: 0 auto 2rem auto;
-    padding-left: 0;
-  }
-
-  .heroText {
-    text-align: center !important;
-    order: 1;
-  }
-
-  .heroImage {
-    width: 100%;
-    max-width: 15rem;
-  }
-}
-
-@media screen and (max-width: 576px) {
-  .heroImageContainer {
-    max-width: 12.5rem;
-  }
-
-  .heroImage {
-    max-width: 12.5rem;
-  }
+  justify-content: center;
 }

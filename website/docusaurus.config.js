@@ -80,7 +80,7 @@ const config = {
     ({
       image: "img/piksel-logo.svg",
       navbar: {
-        title: "Piksel",
+        title: "PIKSEL",
         logo: {
           alt: "Piksel Logo",
           src: "img/piksel-logo.svg",
@@ -89,10 +89,10 @@ const config = {
           {
             type: "docSidebar",
             sidebarId: "tutorialSidebar",
-            position: "left",
+            position: "right",
             label: "Tutorial",
           },
-          { to: "/blog", label: "Blog", position: "left" },
+          { to: "/blog", label: "Blog", position: "right" },
           {
             href: "https://github.com/facebook/docusaurus",
             label: "GitHub",
