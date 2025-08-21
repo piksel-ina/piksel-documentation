@@ -2,13 +2,10 @@ import { themes as prismThemes } from "prism-react-renderer";
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: "The Future of Earth Observation in Indonesia",
+  title: "Piksel - Digital Earth Indonesia",
   tagline:
     "Piksel brings together satellite imagery and cloud computing technology to enable digital earth observation across the Indonesian region",
   favicon: "img/piksel-logo.ico",
-  future: {
-    v4: true,
-  },
   url: "https://staging.pik-sel.id",
   baseUrl: "/",
   organizationName: "piksel-ina",
@@ -20,7 +17,19 @@ const config = {
 
   i18n: {
     defaultLocale: "en",
-    locales: ["en"],
+    locales: ["en", "id"],
+    localeConfigs: {
+      id: {
+        label: "Indonesia",
+        direction: "ltr",
+        htmlLang: "id-ID",
+      },
+      en: {
+        label: "English",
+        direction: "ltr",
+        htmlLang: "en-US",
+      },
+    },
   },
 
   presets: [
@@ -94,8 +103,12 @@ const config = {
           },
           { to: "/blog", label: "Blog", position: "right" },
           {
-            href: "https://github.com/facebook/docusaurus",
+            href: "https://github.com/piksel-ina/piksel-documentation",
             label: "GitHub",
+            position: "right",
+          },
+          {
+            type: "localeDropdown",
             position: "right",
           },
         ],
@@ -143,7 +156,7 @@ const config = {
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+        copyright: `copyright © ${new Date().getFullYear()} Piksel Indonesia`,
       },
       prism: {
         theme: prismThemes.github,
