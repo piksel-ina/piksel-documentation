@@ -344,34 +344,38 @@
   },
   "useCase.title": {
     "message": "Contoh Implementasi",
-    "description": "Judul bagian kasus penggunaan"
+    "description": "The title of the use cases section"
   },
   "useCase.subtitle": {
     "message": "Lihat bagaimana solusi kami membantu di berbagai sektor",
-    "description": "Subjudul bagian kasus penggunaan"
+    "description": "The subtitle of the use cases section"
   },
   "useCase.card.environment.title": {
     "message": "Lingkungan",
-    "description": "Judul untuk kartu kasus penggunaan lingkungan"
+    "description": "Title for environment use case card"
   },
   "useCase.card.environment.description": {
     "message": "Kami menyediakan data dan citra berkualitas tentang lanskap Indonesia untuk peneliti dan pengelola lahan dalam mengatasi tantangan lingkungan.",
-    "description": "Deskripsi untuk kartu kasus penggunaan lingkungan"
+    "description": "Description for environment use case card"
   },
   "useCase.card.technology.title": {
     "message": "Teknologi",
-    "description": "Judul untuk kartu kasus penggunaan teknologi"
+    "description": "Title for technology use case card"
   },
   "useCase.card.technology.description": {
     "message": "Solusi modern untuk pengelolaan dan analisis data yang didukung riset dan inovasi terdepan.",
-    "description": "Deskripsi untuk kartu kasus penggunaan teknologi"
+    "description": "Description for technology use case card"
   },
   "useCase.card.research.title": {
     "message": "Riset",
-    "description": "Judul untuk kartu kasus penggunaan riset"
+    "description": "Title for research use case card"
   },
   "useCase.card.research.description": {
     "message": "Mendukung penelitian ilmiah dengan data akurat dan tools inovatif untuk penemuan baru.",
-    "description": "Deskripsi untuk kartu kasus penggunaan riset"
+    "description": "Description for research use case card"
+  },
+  "useCase.readMore.button": {
+    "message": "Lihat Implementasi Lainnya",
+    "description": "Button text to view more use cases"
   }
 }

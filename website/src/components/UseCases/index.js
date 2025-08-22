@@ -115,6 +115,18 @@ export default function UseCase() {
             );
           })}
         </div>
+        <div className="text--center margin-top--lg">
+          <a
+            href="/use-cases"
+            className="button button--outline button--lg button--primary"
+          >
+            {translate({
+              id: "useCase.readMore.button",
+              message: "Read More Use Cases",
+              description: "Button text to view more use cases",
+            })}
+          </a>
+        </div>
       </div>
     </section>
   );
