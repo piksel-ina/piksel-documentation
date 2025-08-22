@@ -1,11 +1,11 @@
 :root {
-  --ifm-color-primary: #0077a6;
-  --ifm-color-primary-dark: #006b95;
-  --ifm-color-primary-darker: #00658d;
-  --ifm-color-primary-darkest: #005374;
-  --ifm-color-primary-light: #007eb0;
-  --ifm-color-primary-lighter: #008ac1;
-  --ifm-color-primary-lightest: #008fc7;
+  --ifm-color-primary: #2185dd;
+  --ifm-color-primary-dark: #1c7ed6;
+  --ifm-color-primary-darker: #1971c2;
+  --ifm-color-primary-darkest: #1864ab;
+  --ifm-color-primary-light: #339af0;
+  --ifm-color-primary-lighter: #59b1fa;
+  --ifm-color-primary-lightest: #74c0fc;
 
   --ifm-color-primary-alpha-10: color-mix(
     in srgb,
@@ -41,13 +41,13 @@
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
 [data-theme="dark"] {
-  --ifm-color-primary: #3dcff7;
-  --ifm-color-primary-dark: #1fc8f6;
-  --ifm-color-primary-darker: #11c4f5;
-  --ifm-color-primary-darkest: #028db7;
-  --ifm-color-primary-light: #5bd6f8;
-  --ifm-color-primary-lighter: #69daf9;
-  --ifm-color-primary-lightest: #96e5fb;
+  --ifm-color-primary: #41a6f9;
+  --ifm-color-primary-dark: #63b9fa;
+  --ifm-color-primary-darker: #87c7f9;
+  --ifm-color-primary-darkest: #bfe0fa;
+  --ifm-color-primary-light: #339af0;
+  --ifm-color-primary-lighter: #228be6;
+  --ifm-color-primary-lightest: #1c7ed6;
 }
 
 /* Apply Oswald to all headings */
@@ -89,8 +89,11 @@ h3,
 }
 
 .hero--primary .button {
-  font-size: clamp(0.6rem, 2vw, 1.2rem) !important;
+  font-size: clamp(1rem, 2vw, 1.2rem) !important;
   margin-top: clamp(1rem, 3vw, 2rem);
+  background-color: var(--ifm-color-primary-light);
+  color: var(--ifm-color-white);
+  border: none;
 }
 
 .hero--primary > .button .button--secondary {
