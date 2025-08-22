@@ -4,6 +4,7 @@ import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import Layout from "@theme/Layout";
 import HomepageFeatures from "@site/src/components/HomepageFeatures";
 import UseCase from "@site/src/components/UseCases";
+import OurServices from "../components/OurServices";
 import Heading from "@theme/Heading";
 import styles from "./index.module.css";
 import Translate, { translate } from "@docusaurus/Translate";
@@ -68,6 +69,7 @@ export default function Home() {
       </div>
       <main>
         <UseCase />
+        <OurServices />
         <HomepageFeatures />
       </main>
     </Layout>

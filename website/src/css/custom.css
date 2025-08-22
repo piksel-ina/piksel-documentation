@@ -6,6 +6,7 @@
   --ifm-color-primary-light: #339af0;
   --ifm-color-primary-lighter: #59b1fa;
   --ifm-color-primary-lightest: #74c0fc;
+  --ifm-color-complementary-dark: #fcb83a;
 
   --ifm-color-primary-alpha-10: color-mix(
     in srgb,
