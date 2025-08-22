@@ -53,12 +53,13 @@ export default function Home() {
     <Layout
       title={translate({
         id: "homepage.meta.title",
-        message: siteConfig.title,
+        message: "Piksel - Digital Earth Indonesia",
         description: "Site title for the homepage",
       })}
       description={translate({
         id: "homepage.meta.description",
-        message: "Description will go into a meta tag in <head />",
+        message:
+          "Piksel brings together satellite imagery and cloud computing technology to enable digital earth observation across the Indonesia region",
         description: "Meta description for the homepage",
       })}
     >

@@ -335,11 +335,43 @@
     "description": "The button text to read documentation"
   },
   "homepage.meta.description": {
-    "message": "Deskripsi halaman untuk tag meta di bagian <head />",
+    "message": "Piksel menghadirkan solusi observasi bumi digital dengan menggabungkan teknologi citra satelit dan komputasi awan untuk wilayah Indonesia",
     "description": "Meta description for the homepage"
   },
   "homepage.meta.title": {
-    "message": "Piksel - Observasi Bumi Digital Indonesia",
+    "message": "Piksel - Bumi Digital Indonesia",
     "description": "Site title for the homepage"
+  },
+  "useCase.title": {
+    "message": "Contoh Implementasi",
+    "description": "Judul bagian kasus penggunaan"
+  },
+  "useCase.subtitle": {
+    "message": "Lihat bagaimana solusi kami membantu di berbagai sektor",
+    "description": "Subjudul bagian kasus penggunaan"
+  },
+  "useCase.card.environment.title": {
+    "message": "Lingkungan",
+    "description": "Judul untuk kartu kasus penggunaan lingkungan"
+  },
+  "useCase.card.environment.description": {
+    "message": "Kami menyediakan data dan citra berkualitas tentang lanskap Indonesia untuk peneliti dan pengelola lahan dalam mengatasi tantangan lingkungan.",
+    "description": "Deskripsi untuk kartu kasus penggunaan lingkungan"
+  },
+  "useCase.card.technology.title": {
+    "message": "Teknologi",
+    "description": "Judul untuk kartu kasus penggunaan teknologi"
+  },
+  "useCase.card.technology.description": {
+    "message": "Solusi modern untuk pengelolaan dan analisis data yang didukung riset dan inovasi terdepan.",
+    "description": "Deskripsi untuk kartu kasus penggunaan teknologi"
+  },
+  "useCase.card.research.title": {
+    "message": "Riset",
+    "description": "Judul untuk kartu kasus penggunaan riset"
+  },
+  "useCase.card.research.description": {
+    "message": "Mendukung penelitian ilmiah dengan data akurat dan tools inovatif untuk penemuan baru.",
+    "description": "Deskripsi untuk kartu kasus penggunaan riset"
   }
 }
