@@ -1,0 +1,24 @@
+.darkNavbarColorModeToggle:hover {
+  background: var(--ifm-color-gray-800);
+}
+
+[data-theme="light"]
+  [class*="navbar"][class*="Homepage"]
+  [class*="toggleButton"] {
+  transition: all 0.3s ease;
+}
+
+[data-theme="light"]
+  [class*="navbar"][class*="Homepage"]
+  [class*="toggleButton"]:hover {
+  background: rgba(255, 255, 255, 0.2) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+}
+
+[data-theme="light"]
+  [class*="navbar"][class*="Homepage"]
+  [class*="toggleButton"]
+  svg {
+  color: white !important;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
+}

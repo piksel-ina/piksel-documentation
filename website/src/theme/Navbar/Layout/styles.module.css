@@ -1,0 +1,42 @@
+.navbarHideable {
+  transition: transform var(--ifm-transition-fast) ease;
+}
+
+.navbarHidden {
+  transform: translate3d(0, calc(-100% - 2px), 0);
+}
+
+.navbarHomepage {
+  background-color: color-mix(
+    in srgb,
+    var(--ifm-color-black),
+    rgba(0, 0, 0, 20%)
+  );
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+[data-theme="light"] .navbarHomepage {
+  --ifm-navbar-link-color: var(--ifm-color-white);
+  --ifm-navbar-link-hover-color: var(--ifm-color-primary);
+  --ifm-navbar-brand-color: var(--ifm-color-white);
+}
+
+[data-theme="dark"] .navbarHomepage {
+  --ifm-navbar-link-color: var(--ifm-color-gray-100);
+  --ifm-navbar-link-hover-color: var(--ifm-color-white);
+  --ifm-navbar-brand-color: var(--ifm-color-white);
+}
+
+.navbarHomepage .navbar__brand:hover,
+.navbarHomepage .navbar__item:hover {
+  transform: translateY(-1px);
+  transition: transform 0.2s ease;
+}
+
+.navbarHomepage .navbar-sidebar {
+  /* background-color: var(--ifm-navbar-background-color); */
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
