@@ -9,15 +9,12 @@
 .background {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    180deg,
-    color-mix(in srgb, var(--ifm-color-primary) 50%, var(--ifm-color-white) 50%)
-      0%,
-    var(--ifm-color-primary) 30%,
+  background: radial-gradient(
+    var(--ifm-color-primary-global),
     color-mix(
       in srgb,
-      var(--ifm-color-primary) 70%,
-      var(--ifm-color-gray-900) 30%
+      var(--ifm-color-primary-global) 60%,
+      var(--ifm-color-black) 40%
     )
   );
   overflow: hidden;
@@ -32,7 +29,7 @@
   background-color: var(--ifm-color-white);
   box-shadow: color-mix(
       in srgb,
-      var(--ifm-color-primary) 10%,
+      var(--ifm-color-primary-global) 10%,
       var(--ifm-color-white) 90%
     )
     0px 0px 20px 2px;
@@ -257,13 +254,9 @@
 /* Glassmorphism Content Card */
 .contentCard {
   backdrop-filter: blur(20px);
-  background: color-mix(
-    in srgb,
-    var(--ifm-background-color) 20%,
-    transparent 30%
-  );
-  border: rgba(var(--ifm-color-white), 0.9);
-  border-radius: var(--ifm-global-radius);
+  background: color-mix(in srgb, var(--ifm-color-white) 10%, transparent 30%);
+  border-radius: clamp(0.8rem, 1rem, 1.2rem);
+  border: 1.5px solid rgba(255, 255, 255, 0.2);
   padding: clamp(0.1rem, calc(var(--ifm-spacing-vertical) * 2.5), 2rem);
   margin: clamp(0.1rem, calc(var(--ifm-spacing-vertical) * 2.5), 2rem);
   box-shadow: var(--ifm-global-shadow-tl);
@@ -275,30 +268,33 @@
   gap: var(--ifm-spacing-vertical);
 }
 
-/* Header Badge */
 .headerBadge {
   display: flex;
   align-items: center;
-  gap: var(--ifm-spacing-horizontal);
-  margin-bottom: var(--ifm-spacing-vertical);
   align-self: flex-start;
+  margin-bottom: var(--ifm-spacing-vertical);
+  transform: translateY(-30%) translateX(-7%);
+  border-radius: 10rem;
+  padding: 0.2rem 0.7rem;
+  padding-right: 1.4rem;
+  background-color: var(--ifm-color-white);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  opacity: 0.9;
 }
 
 .badgeIcon {
-  padding: calc(var(--ifm-spacing-horizontal) / 1.5);
-  padding-bottom: calc(var(--ifm-spacing-horizontal) / 2.4);
-  border-radius: var(--ifm-global-radius);
-  backdrop-filter: blur(10px);
-  color: var(--ifm-color-white);
-  font-size: clamp(0.7rem, 1.4vh, 0.9rem);
+  color: var(--ifm-color-gray-600);
+  font-size: clamp(0.7rem, 1.7vh, 0.8rem);
+  transform: translateY(3px) translateX(-5px);
 }
 
 .badgeText {
-  color: var(--ifm-color-white);
-  font-weight: var(--ifm-font-weight-bold);
-  font-size: clamp(0.7rem, 2vh, 0.9rem);
+  white-space: nowrap;
+  font-weight: var(--ifm-font-weight-semibold);
+  font-size: clamp(0.8rem, 1.7vh, 0.9rem);
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  color: var(--ifm-color-gray-700);
+  margin-left: 4px;
 }
 
 /* Typography */

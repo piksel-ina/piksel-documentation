@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  ArrowRight,
-  MapPin,
-  Calendar,
-  Layers,
-  Blocks,
-  MonitorUp,
-} from "lucide-react";
+import { ArrowRight, MapPin, Layers, Blocks, MonitorUp } from "lucide-react";
 import styles from "./style.module.css";
 
 const OurServices = () => {
@@ -76,144 +69,12 @@ const OurServices = () => {
                 freely available on our interactive digital earth platform.
               </p>
 
-              {/* Steps Section */}
-              <div className={styles.stepsContainer}>
-                <h3 className={styles.stepsHeading}>
-                  <Layers size={20} />
-                  Use Our Services:
-                </h3>
-
-                {steps.map((item, index) => (
-                  <div key={index} className={styles.stepItem}>
-                    <item.icon size={16} className={styles.stepIcon} />
-                    <span className={styles.stepText}>{item.text}</span>
-                  </div>
-                ))}
-              </div>
-
               {/* CTA Button */}
               <div className={styles.ctaContainer}>
                 <button className={styles.ctaButton}>
                   Start Exploring
                   <ArrowRight size={20} className={styles.ctaIcon} />
                 </button>
-              </div>
-            </div>
-          </div>
-
-          {/* Right Content - Data Visualization */}
-          <div className={styles.visualizationContainer}>
-            <div className={styles.visualizationCard}>
-              {/* Timeline Visualization */}
-              <div className={styles.timelineContainer}>
-                {/* Satellite Background */}
-                <div className={styles.satelliteBackground}></div>
-
-                {/* SVG Data Streams */}
-                <svg className={styles.dataStreams} viewBox="0 0 400 300">
-                  <defs>
-                    <linearGradient
-                      id="stream1"
-                      x1="0%"
-                      y1="0%"
-                      x2="100%"
-                      y2="0%"
-                    >
-                      <stop
-                        offset="0%"
-                        stopColor="var(--ifm-color-primary)"
-                        stopOpacity="0.8"
-                      />
-                      <stop
-                        offset="50%"
-                        stopColor="var(--ifm-color-secondary)"
-                        stopOpacity="0.9"
-                      />
-                      <stop
-                        offset="100%"
-                        stopColor="var(--ifm-color-danger)"
-                        stopOpacity="0.8"
-                      />
-                    </linearGradient>
-                    <linearGradient
-                      id="stream2"
-                      x1="0%"
-                      y1="0%"
-                      x2="100%"
-                      y2="0%"
-                    >
-                      <stop
-                        offset="0%"
-                        stopColor="var(--ifm-color-success)"
-                        stopOpacity="0.8"
-                      />
-                      <stop
-                        offset="50%"
-                        stopColor="var(--ifm-color-warning)"
-                        stopOpacity="0.9"
-                      />
-                      <stop
-                        offset="100%"
-                        stopColor="var(--ifm-color-info)"
-                        stopOpacity="0.8"
-                      />
-                    </linearGradient>
-                  </defs>
-
-                  <path
-                    d="M50,250 Q100,200 150,180 T250,160 T350,140"
-                    stroke="url(#stream1)"
-                    strokeWidth="3"
-                    fill="none"
-                    className={styles.streamPath1}
-                  />
-                  <path
-                    d="M50,260 Q120,210 180,190 T280,170 T380,150"
-                    stroke="url(#stream2)"
-                    strokeWidth="3"
-                    fill="none"
-                    className={styles.streamPath2}
-                  />
-                  <path
-                    d="M50,270 Q140,220 200,200 T300,180 T400,160"
-                    stroke="url(#stream1)"
-                    strokeWidth="2"
-                    fill="none"
-                    className={styles.streamPath3}
-                  />
-                </svg>
-
-                {/* Year Labels */}
-                <div className={styles.yearLabels}>
-                  {yearLabels.map((year, index) => (
-                    <div key={year} className={styles.yearLabel}>
-                      <div
-                        className={styles.yearDot}
-                        style={{ animationDelay: `${index * 0.2}s` }}
-                      ></div>
-                      <span>{year}</span>
-                    </div>
-                  ))}
-                </div>
-
-                {/* Statistics Cards */}
-                <div className={styles.statsContainer}>
-                  {stats.map((stat, index) => (
-                    <div key={index} className={styles.statCard}>
-                      <div className={styles.statContent}>
-                        <div
-                          className={`${styles.statIndicator} ${
-                            styles[`stat${stat.color}`]
-                          }`}
-                        ></div>
-                        <div>
-                          <div className={styles.statValue}>{stat.value}</div>
-                          <div className={styles.statLabel}>{stat.label}</div>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
               </div>
             </div>
           </div>
