@@ -27,9 +27,16 @@ const OurServices = () => {
 
   return (
     <div className={`${styles.container} margin-top--xl padding-vert--xl `}>
-      {/* Background with Overlay */}
       <div className={styles.background}>
-        <div className={styles.backgroundOverlay}></div>
+        <div className={`${styles.light} ${styles.light1}`}></div>
+        <div className={`${styles.light} ${styles.light2}`}></div>
+        <div className={`${styles.light} ${styles.light3}`}></div>
+        <div className={`${styles.light} ${styles.light4}`}></div>
+        <div className={`${styles.light} ${styles.light5}`}></div>
+        <div className={`${styles.light} ${styles.light6}`}></div>
+        <div className={`${styles.light} ${styles.light7}`}></div>
+        <div className={`${styles.light} ${styles.light8}`}></div>
+        <div className={`${styles.light} ${styles.light9}`}></div>
       </div>
 
       {/* Floating Background Elements */}
