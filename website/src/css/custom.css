@@ -113,15 +113,29 @@ h3,
 .section__title {
   font-size: clamp(2rem, 3vw, 2.5rem) !important;
   font-weight: var(--ifm-font-weight-bold);
-  color: var(--ifm-color-primary-darkest);
   text-align: center;
+}
+
+.section__title--primary-darkest {
+  color: var(--ifm-color-primary-darkest);
+}
+
+.section__title--white {
+  color: var(--ifm-color-white);
 }
 
 .section__subtitle {
   font-size: clamp(1rem, 2vw, 1.3rem) !important;
-  color: var(--ifm-color-background-color);
   text-align: center;
   margin-top: clamp(0.5rem, 1vw, 1rem);
+}
+
+.section__subtitle--bg-color {
+  color: var(--ifm-color-background-color);
+}
+
+.section__subtitle--white-less {
+  color: #dde0e1;
 }
 
 @media (max-width: 996px) {

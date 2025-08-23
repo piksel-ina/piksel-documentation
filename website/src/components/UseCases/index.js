@@ -81,14 +81,14 @@ export default function UseCase() {
       <div className="container">
         <div className="section__header">
           <div className="text--center margin-bottom--lg">
-            <h2 className="section__title">
+            <h2 className="section__title section__title--primary-darkest">
               {translate({
                 id: "useCase.title",
                 message: "Our Use Cases",
                 description: "The title of the use cases section",
               })}
             </h2>
-            <p className="section__subtitle">
+            <p className="section__subtitle .section__subtitle--bg-color">
               {translate({
                 id: "useCase.subtitle",
                 message:

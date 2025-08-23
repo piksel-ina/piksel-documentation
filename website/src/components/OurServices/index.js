@@ -1,5 +1,5 @@
 import React from "react";
-import { MapPin, Database, BarChart3 } from "lucide-react";
+import { Map, FileCode2, Unplug, GitBranch } from "lucide-react";
 import Translate from "@docusaurus/Translate";
 import { translate } from "@docusaurus/Translate";
 import GlassCard from "../GlassCard";
@@ -9,31 +9,16 @@ const OurServices = () => {
   const services = [
     {
       id: 1,
-      icon: MapPin,
-      badgeText: translate({
-        id: "ourServices.service1.badge",
-        message: "Interactive Mapping",
-        description: "Badge text for interactive mapping service",
-      }),
+      icon: Map,
       title: translate({
         id: "ourServices.service1.title",
-        message: "Explore imagery on a",
+        message: "Piksel Map",
         description: "Title for interactive mapping service",
-      }),
-      highlightText: translate({
-        id: "ourServices.service1.highlight",
-        message: "digital map",
-        description: "Highlighted text for interactive mapping service",
-      }),
-      subtitle: translate({
-        id: "ourServices.service1.subtitle",
-        message: "See more than 30 years of landscape change",
-        description: "Subtitle for interactive mapping service",
       }),
       description: translate({
         id: "ourServices.service1.description",
         message:
-          "For decades satellites have been capturing imagery of Indonesian landscapes. Piksel corrects, curates, and makes this image data freely available on our interactive digital earth platform.",
+          "Explore and visualize geospatial datasets through our interactive web platform. Access satellite imagery, environmental data, and spatial analytics with intuitive mapping tools",
         description: "Description for interactive mapping service",
       }),
       buttonText: translate({
@@ -44,31 +29,16 @@ const OurServices = () => {
     },
     {
       id: 2,
-      icon: BarChart3,
-      badgeText: translate({
-        id: "ourServices.service2.badge",
-        message: "Data Analytics",
-        description: "Badge text for data analytics service",
-      }),
+      icon: FileCode2,
       title: translate({
         id: "ourServices.service2.title",
-        message: "Transform data into",
+        message: "Piksel Sandbox",
         description: "Title for data analytics service",
-      }),
-      highlightText: translate({
-        id: "ourServices.service2.highlight",
-        message: "actionable insights",
-        description: "Highlighted text for data analytics service",
-      }),
-      subtitle: translate({
-        id: "ourServices.service2.subtitle",
-        message: "Advanced analytics for better decision making",
-        description: "Subtitle for data analytics service",
       }),
       description: translate({
         id: "ourServices.service2.description",
         message:
-          "Our comprehensive analytics platform processes vast amounts of geospatial data to provide meaningful insights. From trend analysis to predictive modeling, we help organizations make data-driven decisions.",
+          "Experiment, learn, and prototype in our cloud-based Jupyter environment with pre-configured geospatial libraries, sample datasets, and collaborative features for spatial data analysis.",
         description: "Description for data analytics service",
       }),
       buttonText: translate({
@@ -79,31 +49,36 @@ const OurServices = () => {
     },
     {
       id: 3,
-      icon: Database,
-      badgeText: translate({
-        id: "ourServices.service3.badge",
-        message: "API Integration",
-        description: "Badge text for API integration service",
-      }),
+      icon: Unplug,
       title: translate({
         id: "ourServices.service3.title",
-        message: "Access data through",
+        message: "Piksel Data API",
         description: "Title for API integration service",
-      }),
-      highlightText: translate({
-        id: "ourServices.service3.highlight",
-        message: "powerful APIs",
-        description: "Highlighted text for API integration service",
-      }),
-      subtitle: translate({
-        id: "ourServices.service3.subtitle",
-        message: "Seamless integration for developers",
-        description: "Subtitle for API integration service",
       }),
       description: translate({
         id: "ourServices.service3.description",
         message:
-          "Build applications with our robust API infrastructure. Access real-time satellite data, historical imagery, and analytical tools through our developer-friendly REST APIs with comprehensive documentation.",
+          "Access comprehensive geospatial datasets through our robust API infrastructure. Retrieve satellite imagery, vector data, and processed analytics via RESTful endpoints.",
+        description: "Description for API integration service",
+      }),
+      buttonText: translate({
+        id: "ourServices.service3.button",
+        message: "Explore APIs",
+        description: "Button text for API integration service",
+      }),
+    },
+    {
+      id: 4,
+      icon: GitBranch,
+      title: translate({
+        id: "ourServices.service3.title",
+        message: "Piksel Workflows",
+        description: "Title for API integration service",
+      }),
+      description: translate({
+        id: "ourServices.service3.description",
+        message:
+          "Automate large-scale geospatial data processing with Argo Workflows. Execute complex analysis pipelines, satellite image processing, and spatial computations on scalable cloud infrastructure.",
         description: "Description for API integration service",
       }),
       buttonText: translate({
@@ -115,32 +90,39 @@ const OurServices = () => {
   ];
 
   return (
-    <div className={`${styles.container} margin-top--xl padding-vert--xl`}>
-      <div className={styles.background}>
-        <div className={`${styles.light} ${styles.light1}`}></div>
-        <div className={`${styles.light} ${styles.light2}`}></div>
-        <div className={`${styles.light} ${styles.light3}`}></div>
-        <div className={`${styles.light} ${styles.light4}`}></div>
-        <div className={`${styles.light} ${styles.light5}`}></div>
-        <div className={`${styles.light} ${styles.light6}`}></div>
-        <div className={`${styles.light} ${styles.light7}`}></div>
-        <div className={`${styles.light} ${styles.light8}`}></div>
-        <div className={`${styles.light} ${styles.light9}`}></div>
-      </div>
+    <div className={`${styles.container} margin-top--xl padding-vert--lg`}>
+      <div className={styles.background}></div>
 
       <div className="container">
-        <div className="row">
+        <div className="section__header">
+          <div className="text--center">
+            <h2 className="section__title section__title--white ">
+              {translate({
+                id: "useCase.title",
+                message: "Our Services",
+                description: "The title of the our services section",
+              })}
+            </h2>
+            <p className="section__subtitle section__subtitle--white-less">
+              {translate({
+                id: "useCase.subtitle",
+                message: "Making geospatial data accessible for everyone",
+                description: "The subtitle of the our services section",
+              })}
+            </p>
+          </div>
+        </div>
+        <div className="row margin-top--md margin-bottom--xl">
           {services.map((service) => (
-            <div key={service.id} className="col col--6">
-              <GlassCard
-                icon={service.icon}
-                badgeText={service.badgeText}
-                title={service.title}
-                highlightText={service.highlightText}
-                subtitle={service.subtitle}
-                description={service.description}
-                buttonText={service.buttonText}
-              />
+            <div key={service.id} className="col col--3">
+              <div className={styles.cardWrapper}>
+                <GlassCard
+                  icon={service.icon}
+                  title={service.title}
+                  description={service.description}
+                  buttonText={service.buttonText}
+                />
+              </div>
             </div>
           ))}
         </div>
