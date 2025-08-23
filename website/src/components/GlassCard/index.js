@@ -4,41 +4,37 @@ import styles from "./style.module.css";
 
 const GlassCard = ({
   icon: Icon,
-  badgeText,
   title,
-  highlightText,
-  subtitle,
   description,
   buttonText = "Start Exploring",
+  buttonTextSecondary = "Learn More",
 }) => {
   return (
-    <div className={styles.contentCard}>
-      <div className={styles.cardContent}>
-        {/* Header Badge */}
-        <div className={styles.headerBadge}>
-          <div className={styles.badgeIcon}>
-            <Icon size={24} />
-          </div>
-          <span className={styles.badgeText}>{badgeText}</span>
+    <div className={styles.glassCard}>
+      <div className={styles.glassCard_content}>
+        <div className={styles.glassCard_icon}>
+          <Icon size={84} strokeWidth={0.5} />
         </div>
+        <h3 className={styles.glassCard_title}>{title}</h3>
 
-        {/* Main Heading */}
-        <h1 className={styles.mainHeading}>
-          {title}
-          <span className={styles.gradientText}> {highlightText}</span>
-        </h1>
-
-        {/* Subheading */}
-        <h2 className={styles.subHeading}>{subtitle}</h2>
-
-        {/* Description */}
-        <p className={styles.description}>{description}</p>
+        <p className={styles.glassCard_description}>{description}</p>
 
         {/* CTA Button */}
-        <div className={styles.ctaContainer}>
-          <button className={styles.ctaButton}>
+        <div className={styles.glassCard_cta}>
+          <button
+            className={`button button--outline ${styles.glassCard_ctaPrimary}`}
+          >
             {buttonText}
-            <ArrowRight size={20} className={styles.ctaIcon} />
+          </button>
+          <button
+            className={`button button--link ${styles.glassCard_ctaSecondary}`}
+          >
+            {buttonTextSecondary}
+            <ArrowRight
+              size={15}
+              strokeWidth={1.3}
+              className={styles.glassCard_ctaIcon}
+            />
           </button>
         </div>
       </div>
