@@ -1,25 +1,121 @@
 import React from "react";
-import { ArrowRight, MapPin, Layers, Blocks, MonitorUp } from "lucide-react";
+import { MapPin, Database, BarChart3 } from "lucide-react";
+import Translate from "@docusaurus/Translate";
+import { translate } from "@docusaurus/Translate";
+import GlassCard from "../GlassCard";
 import styles from "./style.module.css";
 
 const OurServices = () => {
-  const steps = [
-    { step: 1, text: "Access Piksel Maps", icon: MapPin },
-    { step: 2, text: "Explore map data", icon: Layers },
-    { step: 3, text: "Experiment with Piksel Sandbox", icon: Blocks },
-    { step: 4, text: "Add our products to GIS tools", icon: MonitorUp },
+  const services = [
+    {
+      id: 1,
+      icon: MapPin,
+      badgeText: translate({
+        id: "ourServices.service1.badge",
+        message: "Interactive Mapping",
+        description: "Badge text for interactive mapping service",
+      }),
+      title: translate({
+        id: "ourServices.service1.title",
+        message: "Explore imagery on a",
+        description: "Title for interactive mapping service",
+      }),
+      highlightText: translate({
+        id: "ourServices.service1.highlight",
+        message: "digital map",
+        description: "Highlighted text for interactive mapping service",
+      }),
+      subtitle: translate({
+        id: "ourServices.service1.subtitle",
+        message: "See more than 30 years of landscape change",
+        description: "Subtitle for interactive mapping service",
+      }),
+      description: translate({
+        id: "ourServices.service1.description",
+        message:
+          "For decades satellites have been capturing imagery of Indonesian landscapes. Piksel corrects, curates, and makes this image data freely available on our interactive digital earth platform.",
+        description: "Description for interactive mapping service",
+      }),
+      buttonText: translate({
+        id: "ourServices.service1.button",
+        message: "Start Exploring",
+        description: "Button text for interactive mapping service",
+      }),
+    },
+    {
+      id: 2,
+      icon: BarChart3,
+      badgeText: translate({
+        id: "ourServices.service2.badge",
+        message: "Data Analytics",
+        description: "Badge text for data analytics service",
+      }),
+      title: translate({
+        id: "ourServices.service2.title",
+        message: "Transform data into",
+        description: "Title for data analytics service",
+      }),
+      highlightText: translate({
+        id: "ourServices.service2.highlight",
+        message: "actionable insights",
+        description: "Highlighted text for data analytics service",
+      }),
+      subtitle: translate({
+        id: "ourServices.service2.subtitle",
+        message: "Advanced analytics for better decision making",
+        description: "Subtitle for data analytics service",
+      }),
+      description: translate({
+        id: "ourServices.service2.description",
+        message:
+          "Our comprehensive analytics platform processes vast amounts of geospatial data to provide meaningful insights. From trend analysis to predictive modeling, we help organizations make data-driven decisions.",
+        description: "Description for data analytics service",
+      }),
+      buttonText: translate({
+        id: "ourServices.service2.button",
+        message: "View Analytics",
+        description: "Button text for data analytics service",
+      }),
+    },
+    {
+      id: 3,
+      icon: Database,
+      badgeText: translate({
+        id: "ourServices.service3.badge",
+        message: "API Integration",
+        description: "Badge text for API integration service",
+      }),
+      title: translate({
+        id: "ourServices.service3.title",
+        message: "Access data through",
+        description: "Title for API integration service",
+      }),
+      highlightText: translate({
+        id: "ourServices.service3.highlight",
+        message: "powerful APIs",
+        description: "Highlighted text for API integration service",
+      }),
+      subtitle: translate({
+        id: "ourServices.service3.subtitle",
+        message: "Seamless integration for developers",
+        description: "Subtitle for API integration service",
+      }),
+      description: translate({
+        id: "ourServices.service3.description",
+        message:
+          "Build applications with our robust API infrastructure. Access real-time satellite data, historical imagery, and analytical tools through our developer-friendly REST APIs with comprehensive documentation.",
+        description: "Description for API integration service",
+      }),
+      buttonText: translate({
+        id: "ourServices.service3.button",
+        message: "Explore APIs",
+        description: "Button text for API integration service",
+      }),
+    },
   ];
-
-  const stats = [
-    { label: "Satellite Images", value: "2.3M+", color: "blue" },
-    { label: "Years of Data", value: "30+", color: "green" },
-    { label: "Coverage Area", value: "100%", color: "purple" },
-  ];
-
-  const yearLabels = ["1988", "1994", "2000", "2006", "2012", "2019"];
 
   return (
-    <div className={`${styles.container} margin-top--xl padding-vert--xl `}>
+    <div className={`${styles.container} margin-top--xl padding-vert--xl`}>
       <div className={styles.background}>
         <div className={`${styles.light} ${styles.light1}`}></div>
         <div className={`${styles.light} ${styles.light2}`}></div>
@@ -32,52 +128,21 @@ const OurServices = () => {
         <div className={`${styles.light} ${styles.light9}`}></div>
       </div>
 
-      {/* Floating Background Elements */}
-      <div className={styles.floatingElement1}></div>
-      <div className={styles.floatingElement2}></div>
-      <div className={styles.floatingElement3}></div>
-
-      {/* Main Content */}
-      <div className={`${styles.contentWrapper}`}>
-        <div className={styles.gridContainer}>
-          {/* Left Content - Glassmorphism Card */}
-          <div className={styles.contentCard}>
-            <div className={styles.cardContent}>
-              {/* Header Badge */}
-              <div className={styles.headerBadge}>
-                <div className={styles.badgeIcon}>
-                  <MapPin size={24} />
-                </div>
-                <span className={styles.badgeText}>Interactive Mapping</span>
-              </div>
-
-              {/* Main Heading */}
-              <h1 className={styles.mainHeading}>
-                Explore imagery on a
-                <span className={styles.gradientText}> digital map</span>
-              </h1>
-
-              {/* Subheading */}
-              <h2 className={styles.subHeading}>
-                See more than 30 years of landscape change
-              </h2>
-
-              {/* Description */}
-              <p className={styles.description}>
-                For decades satellites have been capturing imagery of Indonesian
-                landscapes. Piksel corrects, curates, and makes this image data
-                freely available on our interactive digital earth platform.
-              </p>
-
-              {/* CTA Button */}
-              <div className={styles.ctaContainer}>
-                <button className={styles.ctaButton}>
-                  Start Exploring
-                  <ArrowRight size={20} className={styles.ctaIcon} />
-                </button>
-              </div>
+      <div className="container">
+        <div className="row">
+          {services.map((service) => (
+            <div key={service.id} className="col col--6">
+              <GlassCard
+                icon={service.icon}
+                badgeText={service.badgeText}
+                title={service.title}
+                highlightText={service.highlightText}
+                subtitle={service.subtitle}
+                description={service.description}
+                buttonText={service.buttonText}
+              />
             </div>
-          </div>
+          ))}
         </div>
       </div>
     </div>
