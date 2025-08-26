@@ -91,3 +91,9 @@
   transform: translateY(2px);
   margin-left: 3px;
 }
+
+@media (max-width: 800px) {
+  .glassCard_content {
+    flex: 0;
+  }
+}

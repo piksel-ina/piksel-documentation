@@ -36,9 +36,8 @@
   height: 100%;
 }
 
-/* Remove padding from edges */
-@media (min-width: 768px) {
+@media (max-width: 800px) {
   .cardWrapper {
-    padding: 12px;
+    height: auto;
   }
 }

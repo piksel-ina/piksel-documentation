@@ -2,7 +2,7 @@ import { themes as prismThemes } from "prism-react-renderer";
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: "Piksel - Digital Earth Indonesia",
+  title: "Piksel",
   tagline:
     "Piksel brings together satellite imagery and cloud computing technology to enable digital earth observation across the Indonesian region",
   favicon: "img/piksel-logo.ico",

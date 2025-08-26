@@ -71,18 +71,18 @@ const OurServices = () => {
       id: 4,
       icon: GitBranch,
       title: translate({
-        id: "ourServices.service3.title",
+        id: "ourServices.service4.title",
         message: "Piksel Workflows",
         description: "Title for API integration service",
       }),
       description: translate({
-        id: "ourServices.service3.description",
+        id: "ourServices.service4.description",
         message:
           "Automate large-scale geospatial data processing with Argo Workflows. Execute complex analysis pipelines, satellite image processing, and spatial computations on scalable cloud infrastructure.",
         description: "Description for API integration service",
       }),
       buttonText: translate({
-        id: "ourServices.service3.button",
+        id: "ourServices.service4.button",
         message: "Explore APIs",
         description: "Button text for API integration service",
       }),
@@ -112,9 +112,12 @@ const OurServices = () => {
             </p>
           </div>
         </div>
-        <div className="row margin-top--md margin-bottom--xl">
+        <div className="row margin-top--md margin-bottom--lg">
           {services.map((service) => (
-            <div key={service.id} className="col col--3">
+            <div
+              key={service.id}
+              className={`col col--3 margin-bottom--md ${styles.ourServices_content}`}
+            >
               <div className={styles.cardWrapper}>
                 <GlassCard
                   icon={service.icon}
