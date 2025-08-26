@@ -377,5 +377,61 @@
   "useCase.readMore.button": {
     "message": "Lihat Implementasi Lainnya",
     "description": "Button text to view more use cases"
+  },
+  "ourServices.title": {
+    "message": "Servis Kami",
+    "description": "The title of the our services section"
+  },
+  "ourServices.subtitle": {
+    "message": "Menyediakan data geospasial untuk semua",
+    "description": "The subtitle of the our services section"
+  },
+  "ourServices.service1.title": {
+    "message": "Piksel Map",
+    "description": "Title for interactive mapping service"
+  },
+  "ourServices.service1.description": {
+    "message": "EJelajahi dan visualisasikan dataset geospasial melalui platform web interaktif kami. Akses citra satelit, data lingkungan, dan analitik spasial dengan tools pemetaan yang mudah digunakan",
+    "description": "Description for interactive mapping service"
+  },
+  "ourServices.service1.button": {
+    "message": "Mulai Jelajah",
+    "description": "Button text for interactive mapping service"
+  },
+  "ourServices.service2.title": {
+    "message": "Piksel Sandbox",
+    "description": "Title for data analytics service"
+  },
+  "ourServices.service2.description": {
+    "message": "Bereksperimen, belajar, dan membuat prototipe di lingkungan Jupyter berbasis cloud kami dengan library geospasial yang sudah dikonfigurasi, dataset contoh, dan fitur kolaborasi untuk analisis data spasial",
+    "description": "Description for data analytics service"
+  },
+  "ourServices.service2.button": {
+    "message": "Lihat Analitik",
+    "description": "Button text for data analytics service"
+  },
+  "ourServices.service3.title": {
+    "message": "Piksel Workflows",
+    "description": "Title for API integration service"
+  },
+  "ourServices.service3.description": {
+    "message": "Akses dataset geospasial yang komprehensif melalui infrastruktur API yang robust. Dapatkan citra satelit, data vektor, dan analitik yang telah diproses via endpoint RESTful",
+    "description": "Description for API integration service"
+  },
+  "ourServices.service3.button": {
+    "message": "Jelajahi API",
+    "description": "Button text for API integration service"
+  },
+  "ourServices.service4.title": {
+    "message": "Piksel Workflows",
+    "description": "Title for API integration service"
+  },
+  "ourServices.service4.description": {
+    "message": "Otomatisasi pemrosesan data geospasial skala besar dengan Argo Workflows. Jalankan pipeline analisis kompleks, pemrosesan citra satelit, dan komputasi spasial pada infrastruktur cloud yang dapat diskalakan",
+    "description": "Description for API integration service"
+  },
+  "ourServices.service4.button": {
+    "message": "Jelajahi API",
+    "description": "Button text for API integration service"
   }
 }

@@ -98,14 +98,14 @@ const OurServices = () => {
           <div className="text--center">
             <h2 className="section__title section__title--white ">
               {translate({
-                id: "useCase.title",
+                id: "ourServices.title",
                 message: "Our Services",
                 description: "The title of the our services section",
               })}
             </h2>
             <p className="section__subtitle section__subtitle--white-less">
               {translate({
-                id: "useCase.subtitle",
+                id: "ourServices.subtitle",
                 message: "Making geospatial data accessible for everyone",
                 description: "The subtitle of the our services section",
               })}
