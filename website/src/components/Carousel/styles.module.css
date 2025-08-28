@@ -19,10 +19,20 @@
   color: var(--ifm-color-content-primary);
 }
 
+.carouselWrapper {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  gap: 1rem;
+}
+
 .carouselContainer {
   overflow: hidden;
   position: relative;
   width: 100%;
+  flex: 1;
+  touch-action: pan-y pinch-zoom;
 }
 
 .carouselTrack {
@@ -74,6 +84,7 @@
   color: var(--ifm-color-content-primary);
   cursor: pointer;
   transition: all 0.2s ease;
+  z-index: 10;
 }
 
 .navButton:hover:not(:disabled) {
@@ -84,6 +95,27 @@
 .navButton:disabled {
   cursor: not-allowed;
   opacity: 0.5;
+}
+
+/* Side navigation buttons for mobile */
+.navButtonLeft,
+.navButtonRight {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: var(--ifm-background-color);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.navButtonLeft {
+  left: -20px;
+  z-index: 10;
+}
+
+.navButtonRight {
+  right: -20px;
+  z-index: 10;
 }
 
 .pagination {
@@ -111,7 +143,7 @@
   background-color: var(--ifm-color-primary);
 }
 
-/* Responsive styles */
+/* Mobile-specific styles */
 @media (max-width: 767px) {
   .header {
     flex-direction: column;
@@ -122,10 +154,47 @@
   .title {
     font-size: 1.75rem;
   }
+
+  .carouselWrapper {
+    position: relative;
+    padding: 0 30px;
+  }
+
+  .navButtonLeft {
+    left: 0;
+  }
+
+  .navButtonRight {
+    right: 0;
+  }
+
+  .carouselContainer {
+    border-radius: 12px;
+  }
+
+  /* Enhanced touch target for mobile */
+  .navButton {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  /* Reduce padding for mobile items */
+  .carouselItem {
+    padding: 0 0.5rem;
+  }
 }
 
 @media (max-width: 996px) {
   .carousel {
     padding: 1.5rem 1rem;
+  }
+}
+
+/* Ensure proper touch scrolling on mobile */
+@media (max-width: 767px) {
+  .carouselContainer {
+    -webkit-overflow-scrolling: touch;
   }
 }
