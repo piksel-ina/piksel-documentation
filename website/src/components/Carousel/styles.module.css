@@ -1,6 +1,6 @@
 .carousel {
   padding: 2rem 0;
-  max-width: 1200px;
+  max-width: 80rem;
   margin: 0 auto;
   width: 100%;
 }
@@ -14,9 +14,9 @@
 
 .title {
   margin: 0;
-  font-size: 2rem;
+  font-size: 2.5rem;
   font-weight: bold;
-  color: var(--ifm-color-content-primary);
+  color: color-mix(in srgb, var(--ifm-color-content-primary) 95%, white 5%);
 }
 
 .carouselWrapper {
@@ -24,7 +24,6 @@
   align-items: center;
   position: relative;
   width: 100%;
-  gap: 1rem;
 }
 
 .carouselContainer {
@@ -43,9 +42,13 @@
 
 .carouselItem {
   flex: 0 0 auto;
-  padding: 0 0.75rem;
+  padding: 0 1rem;
   box-sizing: border-box;
   height: 100%;
+}
+
+.carouselItem:first-child {
+  padding-left: 0;
 }
 
 /* Responsive widths for carousel items */
@@ -64,6 +67,9 @@
 @media (max-width: 767px) {
   .carouselItem {
     width: 100%;
+  }
+  .carouselItem:first-child {
+    padding-left: 0.5rem;
   }
 }
 
@@ -94,7 +100,7 @@
 
 .navButton:disabled {
   cursor: not-allowed;
-  opacity: 0.5;
+  opacity: 0.3;
 }
 
 /* Side navigation buttons for mobile */
@@ -162,25 +168,25 @@
 
   .navButtonLeft {
     left: 0;
+    transform: translateX(-2px);
   }
 
   .navButtonRight {
     right: 0;
+    transform: translateX(2px);
   }
 
   .carouselContainer {
     border-radius: 12px;
   }
 
-  /* Enhanced touch target for mobile */
   .navButton {
-    width: 44px;
-    height: 44px;
-    min-width: 44px;
-    min-height: 44px;
+    width: 2rem;
+    height: 2rem;
+    min-width: 2rem;
+    min-height: 2rem;
   }
 
-  /* Reduce padding for mobile items */
   .carouselItem {
     padding: 0 0.5rem;
   }

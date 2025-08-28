@@ -2,7 +2,7 @@ import React from "react";
 import Carousel from "../Carousel";
 import styles from "./styles.module.css";
 
-const Articles = ({ articles = [], title = "Latest Articles" }) => {
+const Articles = ({ articles = [], title = "Featured Articles" }) => {
   // Sample articles data if none provided
   const defaultArticles = [
     {
@@ -10,7 +10,8 @@ const Articles = ({ articles = [], title = "Latest Articles" }) => {
       title: "Getting Started with Docusaurus",
       description:
         "Learn how to build amazing documentation sites with Docusaurus v3",
-      image: "https://via.placeholder.com/300x200/2e8555/ffffff?text=Article+1",
+      image:
+        "https://images.unsplash.com/photo-1756151224665-eba765e8c3b5?w=1200&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwyfHx8ZW58MHx8fHx8",
       link: "/docs/getting-started",
       date: "2024-01-15",
     },
@@ -19,7 +20,8 @@ const Articles = ({ articles = [], title = "Latest Articles" }) => {
       title: "Advanced Configuration",
       description:
         "Dive deep into Docusaurus configuration and customization options",
-      image: "https://via.placeholder.com/300x200/1976d2/ffffff?text=Article+2",
+      image:
+        "https://images.unsplash.com/photo-1754922493956-364a7623a016?w=1200&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwzfHx8ZW58MHx8fHx8",
       link: "/docs/advanced-config",
       date: "2024-01-20",
     },
@@ -28,7 +30,8 @@ const Articles = ({ articles = [], title = "Latest Articles" }) => {
       title: "Plugin Development",
       description:
         "Create custom plugins to extend your Docusaurus site functionality",
-      image: "https://via.placeholder.com/300x200/7c4dff/ffffff?text=Article+3",
+      image:
+        "https://images.unsplash.com/photo-1755257422437-5248f69bf52e?w=1200&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw3fHx8ZW58MHx8fHx8",
       link: "/docs/plugin-development",
       date: "2024-01-25",
     },
@@ -36,7 +39,8 @@ const Articles = ({ articles = [], title = "Latest Articles" }) => {
       id: 4,
       title: "Deployment Guide",
       description: "Deploy your Docusaurus site to various hosting platforms",
-      image: "https://via.placeholder.com/300x200/f57c00/ffffff?text=Article+4",
+      image:
+        "https://images.unsplash.com/photo-1755429518361-1d6060edcf3c?w=1200&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxMXx8fGVufDB8fHx8fA%3D%3D",
       link: "/docs/deployment",
       date: "2024-02-01",
     },
@@ -44,7 +48,8 @@ const Articles = ({ articles = [], title = "Latest Articles" }) => {
       id: 5,
       title: "SEO Optimization",
       description: "Optimize your documentation site for search engines",
-      image: "https://via.placeholder.com/300x200/388e3c/ffffff?text=Article+5",
+      image:
+        "https://images.unsplash.com/photo-1755603461859-9da81ff3afea?w=1200&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxOHx8fGVufDB8fHx8fA%3D%3D",
       link: "/docs/seo",
       date: "2024-02-05",
     },
@@ -71,7 +76,7 @@ const Articles = ({ articles = [], title = "Latest Articles" }) => {
       )}
 
       <div className={styles.articleBody}>
-        <h3 className={styles.articleTitle}>{article.title}</h3>
+        <h2 className={styles.articleTitle}>{article.title}</h2>
 
         <p className={styles.articleDescription}>{article.description}</p>
 

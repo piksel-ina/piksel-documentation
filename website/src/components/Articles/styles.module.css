@@ -1,25 +1,26 @@
 .articlesWrapper {
   width: 100%;
+  margin: 4rem 0;
 }
 
 .articleCard {
   height: 100%;
-  min-height: 400px;
+  min-height: 27rem;
   border: 1px solid var(--ifm-color-emphasis-200);
   border-radius: var(--ifm-card-border-radius);
   overflow: hidden;
   transition: all 0.2s ease;
   cursor: pointer;
-  background-color: var(--ifm-background-color);
+  background-color: var(--ifm-background-color-95);
   display: flex;
   flex-direction: column;
   box-shadow: var(--ifm-global-shadow-lw);
 }
 
 .articleCard:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--ifm-global-shadow-md);
-  border-color: var(--ifm-color-emphasis-300);
+  border: 1px solid var(--ifm-color-primary);
+  box-shadow: 0 2px 20px rgba(var(--ifm-color-primary), 0.3),
+    0 2px 40px rgba(var(--ifm-color-primary), 0.1);
 }
 
 .articleCard:focus {
@@ -29,7 +30,7 @@
 
 .articleImage {
   width: 100%;
-  height: 200px;
+  height: 12rem;
   overflow: hidden;
   flex-shrink: 0;
   background-color: var(--ifm-color-emphasis-100);
@@ -41,10 +42,7 @@
   object-fit: cover;
   display: block;
   transition: transform 0.3s ease;
-}
-
-.articleCard:hover .articleImage img {
-  transform: scale(1.05);
+  z-index: -1;
 }
 
 .articleBody {
@@ -53,19 +51,6 @@
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
-}
-
-.articleTitle {
-  margin: 0;
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: var(--ifm-color-content-primary);
-  line-height: 1.3;
-  display: -webkit-box;
-  line-clamp: 2;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
 }
 
 .articleDescription {
@@ -89,7 +74,6 @@
   font-weight: 500;
 }
 
-/* Responsive adjustments */
 @media (max-width: 767px) {
   .articleCard {
     min-height: 350px;

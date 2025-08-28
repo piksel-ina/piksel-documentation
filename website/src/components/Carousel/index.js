@@ -75,17 +75,13 @@ const Carousel = ({
     const isLeftSwipe = distance > minSwipeDistance;
     const isRightSwipe = distance < -minSwipeDistance;
 
-    // Only allow swipes within boundaries
     if (isLeftSwipe && currentIndex < maxIndex) {
-      // Swipe left (next) - only if not at the end
       setCurrentIndex(currentIndex + 1);
     } else if (isRightSwipe && currentIndex > 0) {
-      // Swipe right (previous) - only if not at the start
       setCurrentIndex(currentIndex - 1);
     }
   };
 
-  // Calculate the transform value
   const getTransformValue = () => {
     const percentage = (currentIndex * 100) / currentItemsPerView;
     return `translateX(-${percentage}%)`;
@@ -97,9 +93,8 @@ const Carousel = ({
 
   return (
     <div className={`${styles.carousel} ${className}`}>
-      {/* Header with title and desktop navigation */}
       <div className={styles.header}>
-        {title && <h2 className={styles.title}>{title}</h2>}
+        {title && <h3 className={styles.title}>{title}</h3>}
 
         {showNavigation && !isMobile && (
           <div className={styles.navigationButtons}>
@@ -124,9 +119,7 @@ const Carousel = ({
         )}
       </div>
 
-      {/* Carousel container with side navigation for mobile */}
       <div className={styles.carouselWrapper}>
-        {/* Left navigation button for mobile */}
         {showNavigation && isMobile && (
           <button
             onClick={prevSlide}
@@ -163,7 +156,6 @@ const Carousel = ({
           </div>
         </div>
 
-        {/* Right navigation button for mobile */}
         {showNavigation && isMobile && (
           <button
             onClick={nextSlide}
@@ -176,7 +168,6 @@ const Carousel = ({
         )}
       </div>
 
-      {/* Pagination dots */}
       {showPagination && maxIndex > 0 && (
         <div className={styles.pagination}>
           {Array.from({ length: maxIndex + 1 }, (_, index) => (
