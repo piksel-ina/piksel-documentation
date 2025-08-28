@@ -433,5 +433,38 @@
   "ourServices.service4.button": {
     "message": "Jelajahi API",
     "description": "Button text for API integration service"
+  },
+  "articles.defaultArticles.gettingStarted.title": {
+    "message": "Getting Started with Docusaurus"
+  },
+  "articles.defaultArticles.gettingStarted.description": {
+    "message": "Learn how to build amazing documentation sites with Docusaurus v3"
+  },
+  "articles.defaultArticles.advancedConfiguration.title": {
+    "message": "Advanced Configuration"
+  },
+  "articles.defaultArticles.advancedConfiguration.description": {
+    "message": "Dive deep into Docusaurus configuration and customization options"
+  },
+  "articles.defaultArticles.pluginDevelopment.title": {
+    "message": "Plugin Development"
+  },
+  "articles.defaultArticles.pluginDevelopment.description": {
+    "message": "Create custom plugins to extend your Docusaurus site functionality"
+  },
+  "articles.defaultArticles.deploymentGuide.title": {
+    "message": "Deployment Guide"
+  },
+  "articles.defaultArticles.deploymentGuide.description": {
+    "message": "Deploy your Docusaurus site to various hosting platforms"
+  },
+  "articles.defaultArticles.seoOptimization.title": {
+    "message": "SEO Optimization"
+  },
+  "articles.defaultArticles.seoOptimization.description": {
+    "message": "Optimize your documentation site for search engines"
+  },
+  "articles.title": {
+    "message": "Sorotan Artikel"
   }
 }

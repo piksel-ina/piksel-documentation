@@ -1,61 +1,100 @@
 import React from "react";
+import Translate, { translate } from "@docusaurus/Translate";
 import Carousel from "../Carousel";
 import styles from "./styles.module.css";
 
-const Articles = ({ articles = [], title = "Featured Articles" }) => {
-  // Sample articles data if none provided
+const Articles = ({ articles = [], title }) => {
   const defaultArticles = [
     {
       id: 1,
-      title: "Getting Started with Docusaurus",
-      description:
-        "Learn how to build amazing documentation sites with Docusaurus v3",
+      title: translate({
+        id: "articles.defaultArticles.satelliteImageryBasics.title",
+        message: "Understanding Satellite Imagery for Indonesia",
+      }),
+      description: translate({
+        id: "articles.defaultArticles.satelliteImageryBasics.description",
+        message:
+          "Learn the fundamentals of satellite imagery analysis and how it applies to Indonesian geographical features and environmental monitoring.",
+      }),
       image:
-        "https://images.unsplash.com/photo-1756151224665-eba765e8c3b5?w=1200&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwyfHx8ZW58MHx8fHx8",
-      link: "/docs/getting-started",
+        "https://images.unsplash.com/photo-1446776653964-20c1d3a81b06?w=1200&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c2F0ZWxsaXRlJTIwaW1hZ2VyeXxlbnwwfHwwfHx8MA%3D%3D",
+      link: "/docs/satellite-imagery-basics",
       date: "2024-01-15",
     },
     {
       id: 2,
-      title: "Advanced Configuration",
-      description:
-        "Dive deep into Docusaurus configuration and customization options",
+      title: translate({
+        id: "articles.defaultArticles.cloudComputing.title",
+        message: "Cloud Computing for Geospatial Data",
+      }),
+      description: translate({
+        id: "articles.defaultArticles.cloudComputing.description",
+        message:
+          "Discover how cloud computing revolutionizes geospatial data processing and analysis for large-scale earth observation projects.",
+      }),
       image:
-        "https://images.unsplash.com/photo-1754922493956-364a7623a016?w=1200&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwzfHx8ZW58MHx8fHx8",
-      link: "/docs/advanced-config",
+        "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1200&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8Y2xvdWQlMjBjb21wdXRpbmd8ZW58MHx8MHx8fDA%3D",
+      link: "/docs/cloud-computing-geospatial",
       date: "2024-01-20",
     },
     {
       id: 3,
-      title: "Plugin Development",
-      description:
-        "Create custom plugins to extend your Docusaurus site functionality",
+      title: translate({
+        id: "articles.defaultArticles.environmentalMonitoring.title",
+        message: "Environmental Monitoring with Piksel",
+      }),
+      description: translate({
+        id: "articles.defaultArticles.environmentalMonitoring.description",
+        message:
+          "Explore how Piksel's digital earth technology helps monitor deforestation, urban growth, and climate change impacts across Indonesia.",
+      }),
       image:
-        "https://images.unsplash.com/photo-1755257422437-5248f69bf52e?w=1200&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw3fHx8ZW58MHx8fHx8",
-      link: "/docs/plugin-development",
+        "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1200&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Zm9yZXN0JTIwbW9uaXRvcmluZ3xlbnwwfHwwfHx8MA%3D%3D",
+      link: "/docs/environmental-monitoring",
       date: "2024-01-25",
     },
     {
       id: 4,
-      title: "Deployment Guide",
-      description: "Deploy your Docusaurus site to various hosting platforms",
+      title: translate({
+        id: "articles.defaultArticles.apiIntegration.title",
+        message: "Integrating Piksel Data API",
+      }),
+      description: translate({
+        id: "articles.defaultArticles.apiIntegration.description",
+        message:
+          "Step-by-step guide to integrate Piksel's geospatial data API into your applications and workflows.",
+      }),
       image:
-        "https://images.unsplash.com/photo-1755429518361-1d6060edcf3c?w=1200&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxMXx8fGVufDB8fHx8fA%3D%3D",
-      link: "/docs/deployment",
+        "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1200&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YXBpJTIwaW50ZWdyYXRpb258ZW58MHx8MHx8fDA%3D",
+      link: "/docs/api-integration",
       date: "2024-02-01",
     },
     {
       id: 5,
-      title: "SEO Optimization",
-      description: "Optimize your documentation site for search engines",
+      title: translate({
+        id: "articles.defaultArticles.workflowAutomation.title",
+        message: "Automating Geospatial Workflows",
+      }),
+      description: translate({
+        id: "articles.defaultArticles.workflowAutomation.description",
+        message:
+          "Learn how to automate large-scale geospatial data processing using Piksel Workflows and Argo technology.",
+      }),
       image:
-        "https://images.unsplash.com/photo-1755603461859-9da81ff3afea?w=1200&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxOHx8fGVufDB8fHx8fA%3D%3D",
-      link: "/docs/seo",
+        "https://images.unsplash.com/photo-1518186285589-2f7649de83e0?w=1200&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YXV0b21hdGlvbnxlbnwwfHwwfHx8MA%3D%3D",
+      link: "/docs/workflow-automation",
       date: "2024-02-05",
     },
   ];
 
   const articlesData = articles.length > 0 ? articles : defaultArticles;
+
+  const defaultTitle = translate({
+    id: "articles.title",
+    message: "Featured Articles",
+  });
+
+  const displayTitle = title || defaultTitle;
 
   const renderArticle = (article) => (
     <div
@@ -97,7 +136,7 @@ const Articles = ({ articles = [], title = "Featured Articles" }) => {
     <div className={styles.articlesWrapper}>
       <Carousel
         items={articlesData}
-        title={title}
+        title={displayTitle}
         renderItem={renderArticle}
         itemsPerView={{ desktop: 3, tablet: 2, mobile: 1 }}
         showNavigation={true}
