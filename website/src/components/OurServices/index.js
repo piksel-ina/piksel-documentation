@@ -90,7 +90,7 @@ const OurServices = () => {
   ];
 
   return (
-    <div className={`${styles.container} margin-top--xl padding-vert--lg`}>
+    <div className={`${styles.container} padding-top--lg padding-bottom--xl`}>
       <div className={styles.background}></div>
 
       <div className="container">

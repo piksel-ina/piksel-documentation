@@ -1,6 +1,17 @@
-/* UseCase.module.css */
-
-/* Section styling */
 .useCaseSection {
   padding: var(--ifm-spacing-vertical) 0;
+  background-color: color-mix(
+    in srgb,
+    var(--ifm-color-white) 99%,
+    var(--ifm-color-black) 1%
+  );
+  padding-bottom: 5rem;
+}
+
+[data-theme="dark"] .useCaseSection {
+  background-color: color-mix(
+    in srgb,
+    var(--ifm-color-white) 5%,
+    var(--ifm-color-black) 95%
+  );
 }
