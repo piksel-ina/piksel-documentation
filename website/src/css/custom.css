@@ -155,6 +155,11 @@ h3,
   filter: brightness(0) invert(1);
 }
 
+.navbar__items .navbar__item.navbar__link[href="/docs/intro"] {
+  padding-left: 2.5rem;
+}
+
+
 /* Responsiveness */
 @media (min-width: 576px) and (max-width: 997px) {
   .col--3 {

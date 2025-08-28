@@ -98,15 +98,10 @@ const config = {
           {
             type: "docSidebar",
             sidebarId: "tutorialSidebar",
-            position: "right",
-            label: "Tutorial",
+            position: "left",
+            label: "Documentation",
           },
-          { to: "/blog", label: "Blog", position: "right" },
-          {
-            href: "https://github.com/piksel-ina/piksel-documentation",
-            label: "GitHub",
-            position: "right",
-          },
+          { to: "/blog", label: "Blog", position: "left" },
           {
             type: "localeDropdown",
             position: "right",
@@ -117,46 +112,95 @@ const config = {
         style: "dark",
         links: [
           {
-            title: "Docs",
+            title: "Services",
             items: [
               {
-                label: "Tutorial",
-                to: "/docs/intro",
+                label: "Piksel Map",
+                to: "/map",
+              },
+              {
+                label: "Piksel Sandbox",
+                to: "/sandbox",
+              },
+              {
+                label: "Piksel Data API",
+                to: "/api",
+              },
+              {
+                label: "Piksel Workflows",
+                to: "/workflows",
               },
             ],
           },
           {
-            title: "Community",
+            title: "Use Cases",
             items: [
               {
-                label: "Stack Overflow",
-                href: "https://stackoverflow.com/questions/tagged/docusaurus",
+                label: "Environment",
+                to: "/environment",
               },
               {
-                label: "Discord",
-                href: "https://discordapp.com/invite/docusaurus",
+                label: "Technology",
+                to: "/technology",
               },
               {
-                label: "X",
-                href: "https://x.com/docusaurus",
+                label: "Research",
+                to: "/research",
               },
             ],
           },
           {
-            title: "More",
+            title: "Resources",
             items: [
+              {
+                label: "Documentation",
+                to: "/docs",
+              },
+              {
+                label: "API Reference",
+                to: "/docs/api",
+              },
+              {
+                label: "Tutorials",
+                to: "/docs/tutorials",
+              },
               {
                 label: "Blog",
                 to: "/blog",
               },
               {
-                label: "GitHub",
-                href: "https://github.com/facebook/docusaurus",
+                label: "Github",
+                href: "https://github.com/piksel-ina/piksel-documentation",
+              },
+            ],
+          },
+          {
+            title: "Contact",
+            items: [
+              {
+                label: "Email: piksel@big.go.id",
+                href: "mailto:piksel@big.go.id",
+              },
+              {
+                label: "Phone: 021-8752062",
+                href: "tel:+62218752062",
+              },
+              {
+                label: "BIG Indonesia",
+                href: "https://www.big.go.id",
               },
             ],
           },
         ],
-        copyright: `copyright © ${new Date().getFullYear()} Piksel Indonesia`,
+        copyright: `
+    <div style="text-align: left; margin-top: 25px;">
+      <div>Copyright © ${new Date().getFullYear()} Piksel Indonesia - Badan Informasi Geospasial (BIG)</div>
+      <div style="font-size: 0.8em; margin-top: 8px; color: #888;">
+        Jl. Raya Jakarta - Bogor KM. 46 Cibinong 16911, Indonesia<br/>
+        Tel: 021-8752062 ext.3608/3611/3103 | Fax: 021-87908988/8753155
+      </div>
+    </div>
+  `,
       },
       prism: {
         theme: prismThemes.github,
