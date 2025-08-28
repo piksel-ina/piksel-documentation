@@ -391,7 +391,7 @@
     "description": "Title for interactive mapping service"
   },
   "ourServices.service1.description": {
-    "message": "EJelajahi dan visualisasikan dataset geospasial melalui platform web interaktif kami. Akses citra satelit, data lingkungan, dan analitik spasial dengan tools pemetaan yang mudah digunakan",
+    "message": "Jelajahi dan visualisasikan dataset geospasial melalui platform web interaktif kami.",
     "description": "Description for interactive mapping service"
   },
   "ourServices.service1.button": {
@@ -403,7 +403,7 @@
     "description": "Title for data analytics service"
   },
   "ourServices.service2.description": {
-    "message": "Bereksperimen, belajar, dan membuat prototipe di lingkungan Jupyter berbasis cloud kami dengan library geospasial yang sudah dikonfigurasi, dataset contoh, dan fitur kolaborasi untuk analisis data spasial",
+    "message": "Bereksperimen, belajar, dan membuat prototipe di Jupyter berbasis cloud.",
     "description": "Description for data analytics service"
   },
   "ourServices.service2.button": {
@@ -415,7 +415,7 @@
     "description": "Title for API integration service"
   },
   "ourServices.service3.description": {
-    "message": "Akses dataset geospasial yang komprehensif melalui infrastruktur API yang robust. Dapatkan citra satelit, data vektor, dan analitik yang telah diproses via endpoint RESTful",
+    "message": "Akses dataset geospasial yang komprehensif melalui infrastruktur RESTful API",
     "description": "Description for API integration service"
   },
   "ourServices.service3.button": {
@@ -427,44 +427,44 @@
     "description": "Title for API integration service"
   },
   "ourServices.service4.description": {
-    "message": "Otomatisasi pemrosesan data geospasial skala besar dengan Argo Workflows. Jalankan pipeline analisis kompleks, pemrosesan citra satelit, dan komputasi spasial pada infrastruktur cloud yang dapat diskalakan",
+    "message": "Otomatisasi pemrosesan data geospasial skala besar dengan Argo Workflows.",
     "description": "Description for API integration service"
   },
   "ourServices.service4.button": {
     "message": "Jelajahi API",
     "description": "Button text for API integration service"
   },
-  "articles.defaultArticles.gettingStarted.title": {
-    "message": "Getting Started with Docusaurus"
-  },
-  "articles.defaultArticles.gettingStarted.description": {
-    "message": "Learn how to build amazing documentation sites with Docusaurus v3"
-  },
-  "articles.defaultArticles.advancedConfiguration.title": {
-    "message": "Advanced Configuration"
-  },
-  "articles.defaultArticles.advancedConfiguration.description": {
-    "message": "Dive deep into Docusaurus configuration and customization options"
-  },
-  "articles.defaultArticles.pluginDevelopment.title": {
-    "message": "Plugin Development"
-  },
-  "articles.defaultArticles.pluginDevelopment.description": {
-    "message": "Create custom plugins to extend your Docusaurus site functionality"
-  },
-  "articles.defaultArticles.deploymentGuide.title": {
-    "message": "Deployment Guide"
-  },
-  "articles.defaultArticles.deploymentGuide.description": {
-    "message": "Deploy your Docusaurus site to various hosting platforms"
-  },
-  "articles.defaultArticles.seoOptimization.title": {
-    "message": "SEO Optimization"
-  },
-  "articles.defaultArticles.seoOptimization.description": {
-    "message": "Optimize your documentation site for search engines"
-  },
   "articles.title": {
-    "message": "Sorotan Artikel"
+    "message": "Artikel Unggulan"
+  },
+  "articles.defaultArticles.feat01.title": {
+    "message": "Memahami Citra Satelit untuk Indonesia"
+  },
+  "articles.defaultArticles.feat01.description": {
+    "message": "Pelajari dasar-dasar analisis citra satelit dan penerapannya pada fitur geografis Indonesia serta pemantauan lingkungan."
+  },
+  "articles.defaultArticles.feat02.title": {
+    "message": "Komputasi Awan untuk Data Geospasial"
+  },
+  "articles.defaultArticles.feat02.description": {
+    "message": "Temukan bagaimana komputasi awan merevolusi pemrosesan dan analisis data geospasial untuk proyek observasi bumi skala besar."
+  },
+  "articles.defaultArticles.feat03.title": {
+    "message": "Pemantauan Lingkungan dengan Piksel"
+  },
+  "articles.defaultArticles.feat03.description": {
+    "message": "Jelajahi bagaimana teknologi digital earth Piksel membantu memantau deforestasi, pertumbuhan perkotaan, dan dampak perubahan iklim di seluruh Indonesia."
+  },
+  "articles.defaultArticles.feat04.title": {
+    "message": "Mengintegrasikan API Data Piksel"
+  },
+  "articles.defaultArticles.feat04.description": {
+    "message": "Panduan langkah demi langkah untuk mengintegrasikan API data geospasial Piksel ke dalam aplikasi dan alur kerja Anda."
+  },
+  "articles.defaultArticles.feat05.title": {
+    "message": "Mengotomatisasi Alur Kerja Geospasial"
+  },
+  "articles.defaultArticles.feat05.description": {
+    "message": "Pelajari cara mengotomatisasi pemrosesan data geospasial skala besar menggunakan Piksel Workflows dan teknologi Argo."
   }
 }

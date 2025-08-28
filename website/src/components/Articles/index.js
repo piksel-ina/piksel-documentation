@@ -8,11 +8,11 @@ const Articles = ({ articles = [], title }) => {
     {
       id: 1,
       title: translate({
-        id: "articles.defaultArticles.satelliteImageryBasics.title",
+        id: "articles.defaultArticles.feat01.title",
         message: "Understanding Satellite Imagery for Indonesia",
       }),
       description: translate({
-        id: "articles.defaultArticles.satelliteImageryBasics.description",
+        id: "articles.defaultArticles.feat01.description",
         message:
           "Learn the fundamentals of satellite imagery analysis and how it applies to Indonesian geographical features and environmental monitoring.",
       }),
@@ -24,11 +24,11 @@ const Articles = ({ articles = [], title }) => {
     {
       id: 2,
       title: translate({
-        id: "articles.defaultArticles.cloudComputing.title",
+        id: "articles.defaultArticles.feat02.title",
         message: "Cloud Computing for Geospatial Data",
       }),
       description: translate({
-        id: "articles.defaultArticles.cloudComputing.description",
+        id: "articles.defaultArticles.feat02.description",
         message:
           "Discover how cloud computing revolutionizes geospatial data processing and analysis for large-scale earth observation projects.",
       }),
@@ -40,11 +40,11 @@ const Articles = ({ articles = [], title }) => {
     {
       id: 3,
       title: translate({
-        id: "articles.defaultArticles.environmentalMonitoring.title",
+        id: "articles.defaultArticles.feat03.title",
         message: "Environmental Monitoring with Piksel",
       }),
       description: translate({
-        id: "articles.defaultArticles.environmentalMonitoring.description",
+        id: "articles.defaultArticles.feat03.description",
         message:
           "Explore how Piksel's digital earth technology helps monitor deforestation, urban growth, and climate change impacts across Indonesia.",
       }),
@@ -56,11 +56,11 @@ const Articles = ({ articles = [], title }) => {
     {
       id: 4,
       title: translate({
-        id: "articles.defaultArticles.apiIntegration.title",
+        id: "articles.defaultArticles.feat04.title",
         message: "Integrating Piksel Data API",
       }),
       description: translate({
-        id: "articles.defaultArticles.apiIntegration.description",
+        id: "articles.defaultArticles.feat04.description",
         message:
           "Step-by-step guide to integrate Piksel's geospatial data API into your applications and workflows.",
       }),
@@ -72,11 +72,11 @@ const Articles = ({ articles = [], title }) => {
     {
       id: 5,
       title: translate({
-        id: "articles.defaultArticles.workflowAutomation.title",
+        id: "articles.defaultArticles.feat05.title",
         message: "Automating Geospatial Workflows",
       }),
       description: translate({
-        id: "articles.defaultArticles.workflowAutomation.description",
+        id: "articles.defaultArticles.feat05.description",
         message:
           "Learn how to automate large-scale geospatial data processing using Piksel Workflows and Argo technology.",
       }),
@@ -109,16 +109,16 @@ const Articles = ({ articles = [], title }) => {
       }}
     >
       {article.image && (
-        <div className={styles.articleImage}>
-          <img src={article.image} alt={article.title} loading="lazy" />
+        <div className={styles.articleTop}>
+          <div className={styles.articleImage}>
+            <img src={article.image} alt={article.title} loading="lazy" />
+          </div>
+          <h2 className={styles.articleTitle}>{article.title}</h2>
         </div>
       )}
 
       <div className={styles.articleBody}>
-        <h2 className={styles.articleTitle}>{article.title}</h2>
-
         <p className={styles.articleDescription}>{article.description}</p>
-
         {article.date && (
           <div className={styles.articleDate}>
             {new Date(article.date).toLocaleDateString("en-US", {

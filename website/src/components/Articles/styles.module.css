@@ -28,6 +28,11 @@
   outline-offset: 2px;
 }
 
+.articleTop {
+  display: flex;
+  flex-direction: column;
+}
+
 .articleImage {
   width: 100%;
   height: 12rem;
@@ -45,8 +50,18 @@
   z-index: -1;
 }
 
+.articleTitle {
+  padding: 1.5rem 1.5rem 0 1.5rem;
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--ifm-color-content);
+}
+
 .articleBody {
   padding: 1.5rem;
+  padding-top: 0.75rem;
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -58,6 +73,7 @@
   color: var(--ifm-color-content-secondary);
   font-size: 0.9rem;
   line-height: 1.5;
+  margin: auto 0;
   flex: 1;
   display: -webkit-box;
   line-clamp: 2;
@@ -70,7 +86,7 @@
   font-size: 0.8rem;
   color: var(--ifm-color-content-secondary);
   opacity: 0.8;
-  margin-top: auto;
+  /* margin-top: auto; */
   font-weight: 500;
 }
 
