@@ -5,7 +5,7 @@ import Layout from "@theme/Layout";
 import HomepageFeatures from "@site/src/components/HomepageFeatures";
 import UseCase from "@site/src/components/UseCases";
 import OurServices from "../components/OurServices";
-import Articles from "../components/Carousel";
+import Articles from "../components/Articles";
 import Heading from "@theme/Heading";
 import styles from "./index.module.css";
 import Translate, { translate } from "@docusaurus/Translate";
