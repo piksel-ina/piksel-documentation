@@ -36,8 +36,14 @@
   height: 100%;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 575px) {
   .cardWrapper {
     height: auto;
+  }
+}
+
+@media (max-width: 997px) {
+  .ourServices_content {
+    margin-bottom: 2rem !important;
   }
 }

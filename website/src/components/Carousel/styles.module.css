@@ -49,13 +49,13 @@
 }
 
 /* Responsive widths for carousel items */
-@media (min-width: 1024px) {
+@media (min-width: 998px) {
   .carouselItem {
     width: 33.333333%;
   }
 }
 
-@media (min-width: 768px) and (max-width: 1023px) {
+@media (min-width: 768px) and (max-width: 997px) {
   .carouselItem {
     width: 50%;
   }
@@ -186,14 +186,10 @@
   }
 }
 
-@media (max-width: 996px) {
+@media (max-width: 800px) {
   .carousel {
     padding: 1.5rem 1rem;
   }
-}
-
-/* Ensure proper touch scrolling on mobile */
-@media (max-width: 767px) {
   .carouselContainer {
     -webkit-overflow-scrolling: touch;
   }

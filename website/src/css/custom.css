@@ -138,14 +138,28 @@ h3,
   color: #dde0e1;
 }
 
-@media (max-width: 996px) {
-  .navbar {
-    backdrop-filter: none;
+/* NAVBAR */
+[data-theme="light"] .navbar[class*="navbarHomepage"] .navbar__toggle {
+  filter: brightness(0) invert(1);
+}
+
+/* Responsiveness */
+@media (min-width: 576px) and (max-width: 997px) {
+  .col--3 {
+    flex: 0 0 50% !important;
+    max-width: 50% !important;
   }
 }
 
-/* NAVBAR */
+@media (max-width: 997px) {
+  .container {
+    padding: 0 1.5rem;
+  }
+}
 
-[data-theme="light"] .navbar[class*="navbarHomepage"] .navbar__toggle {
-  filter: brightness(0) invert(1);
+@media (max-width: 575px) {
+  .col--3 {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+  }
 }

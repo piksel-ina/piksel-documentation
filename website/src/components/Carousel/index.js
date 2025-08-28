@@ -17,19 +17,16 @@ const Carousel = ({
   );
   const [isMobile, setIsMobile] = useState(false);
 
-  // Touch handling state
   const [touchStart, setTouchStart] = useState(null);
   const [touchEnd, setTouchEnd] = useState(null);
   const carouselRef = useRef(null);
 
-  // Minimum swipe distance (in px)
-  const minSwipeDistance = 50;
+  const minSwipeDistance = 50; // in px
 
-  // Responsive items per view
   useEffect(() => {
     const handleResize = () => {
-      const mobile = window.innerWidth < 768;
-      const tablet = window.innerWidth < 1024;
+      const mobile = window.innerWidth < 800;
+      const tablet = window.innerWidth < 997;
 
       setIsMobile(mobile);
 

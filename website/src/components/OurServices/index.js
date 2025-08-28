@@ -18,7 +18,7 @@ const OurServices = () => {
       description: translate({
         id: "ourServices.service1.description",
         message:
-          "Explore and visualize geospatial datasets through our interactive web platform. Access satellite imagery, environmental data, and spatial analytics with intuitive mapping tools",
+          "Explore and visualize geospatial datasets through our interactive web platform.",
         description: "Description for interactive mapping service",
       }),
       buttonText: translate({
@@ -38,7 +38,7 @@ const OurServices = () => {
       description: translate({
         id: "ourServices.service2.description",
         message:
-          "Experiment, learn, and prototype in our cloud-based Jupyter environment with pre-configured geospatial libraries, sample datasets, and collaborative features for spatial data analysis.",
+          "Experiment, learn, and prototype in our cloud-based Jupyter environment.",
         description: "Description for data analytics service",
       }),
       buttonText: translate({
@@ -58,7 +58,7 @@ const OurServices = () => {
       description: translate({
         id: "ourServices.service3.description",
         message:
-          "Access comprehensive geospatial datasets through our robust API infrastructure. Retrieve satellite imagery, vector data, and processed analytics via RESTful endpoints.",
+          "Access comprehensive geospatial datasets through our robust API infrastructure.",
         description: "Description for API integration service",
       }),
       buttonText: translate({
@@ -78,7 +78,7 @@ const OurServices = () => {
       description: translate({
         id: "ourServices.service4.description",
         message:
-          "Automate large-scale geospatial data processing with Argo Workflows. Execute complex analysis pipelines, satellite image processing, and spatial computations on scalable cloud infrastructure.",
+          "Automate large-scale geospatial data processing with Argo Workflows.",
         description: "Description for API integration service",
       }),
       buttonText: translate({
@@ -112,7 +112,7 @@ const OurServices = () => {
             </p>
           </div>
         </div>
-        <div className="row margin-top--md margin-bottom--lg">
+        <div className="row margin-top--md">
           {services.map((service) => (
             <div
               key={service.id}
