@@ -4,7 +4,7 @@
     "description": "The label of footer link with label=Blog linking to /blog"
   },
   "copyright": {
-    "message": "Copyright © 2025 My Project, Inc. Built with Docusaurus.",
+    "message": "<div style=\"text-align: left; margin-top: 35px; font-size: 0.9em;\"><div>Hak Cipta © 2025 Piksel Indonesia - Badan Informasi Geospasial (BIG)</div><div style=\"font-size: 0.9em; margin-top: 8px; color: #888;\">Jl. Raya Jakarta - Bogor KM. 46 Cibinong 16911, Indonesia<br/>Tel: 021-8752062 ext.3608/3611/3103</div></div>",
     "description": "The footer copyright"
   },
   "link.title.Services": {

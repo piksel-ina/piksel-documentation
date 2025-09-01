@@ -193,11 +193,11 @@ const config = {
           },
         ],
         copyright: `
-    <div style="text-align: left; margin-top: 25px;">
+    <div style="text-align: left; margin-top: 35px;">
       <div>Copyright © ${new Date().getFullYear()} Piksel Indonesia - Badan Informasi Geospasial (BIG)</div>
       <div style="font-size: 0.8em; margin-top: 8px; color: #888;">
         Jl. Raya Jakarta - Bogor KM. 46 Cibinong 16911, Indonesia<br/>
-        Tel: 021-8752062 ext.3608/3611/3103 | Fax: 021-87908988/8753155
+        Tel: 021-8752062 ext.3608/3611/3103
       </div>
     </div>
   `,

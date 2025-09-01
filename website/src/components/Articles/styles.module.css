@@ -86,13 +86,15 @@
   font-size: 0.8rem;
   color: var(--ifm-color-content-secondary);
   opacity: 0.8;
-  /* margin-top: auto; */
   font-weight: 500;
 }
 
 @media (max-width: 767px) {
+  .articlesWrapper {
+    margin: 2rem 0;
+  }
   .articleCard {
-    min-height: 350px;
+    min-height: 460px;
   }
 
   .articleImage {
@@ -104,16 +106,21 @@
   }
 
   .articleTitle {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
+    padding: 1rem 1rem 0 1.2rem;
   }
 
   .articleDescription {
-    font-size: 0.85rem;
+    font-size: 0.9rem;
   }
 }
 
 @media (min-width: 768px) and (max-width: 997px) {
   .articleCard {
     min-height: 380px;
+  }
+  .articlesWrapper {
+    margin: 3rem 0;
+    padding: 0 1rem;
   }
 }
