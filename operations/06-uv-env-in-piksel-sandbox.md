@@ -14,9 +14,12 @@ You might notice these instances arrive with very few pre-installed libraries. T
 
 You also have full `sudo` access to install system-level packages, and we have included a visually stunning terminal to make your daily work a bit more pleasant.
 
+> [!IMPORTANT]  
+> Please be mindful when using `sudo`: installing conflicting system libraries or removing core packages can break your specific instance, potentially requiring a reset that could disrupt your workflow.
+
 ## B. Managing Environment with UV
 
-There are a few different scenarios you might encounter when setting up your work. If you are new to `uv`, do not worry—it is quite intuitive once you get the hang of it.
+There are a few different scenarios you might encounter when setting up your work. If you are new to `uv`, do not worry; it is quite intuitive once you get the hang of it.
 
 ### 1. Start from Scratch
 
@@ -106,12 +109,12 @@ If you are picking up a project that already has a **uv.lock** and/or **pyprojec
     uv sync
     ```
 
-    This looks at the lockfile and ensures your local .venv matches it exactly. It will install any missing packages and remove any that shouldn't be there.`
+    This looks at the lockfile and ensures your local .venv matches it exactly. It will install any missing packages and remove any that shouldn't be there.
 
 2.  Activate the environment:
 
     ```bash
-    source .venv/bin/activate`
+    source .venv/bin/activate
     ```
 
 ### 4. Deactivate and changing environment
@@ -223,29 +226,54 @@ We use `apt-get` on these instances.
 
 ## E. Common Issues
 
-### GDAL Version Mismatch
+### 1. GDAL Compilation Errors
 
-Working with geospatial data can sometimes be a learning curve, particularly regarding versions. A common challenge arises when the Python `gdal` package does not match the system's `libgdal` version.
+You might see an error that looks like a C++ failure, mentioning `command '/usr/bin/x86_64-linux-gnu-g++' failed` or referencing a missing header file:
 
-For example, if you are installing a tool like `odc-stats`, it requires `gdal`. To ensure it works correctly, we must align the Python package with the system library.
+<img src="../assets/gdal-version-mismatch.png" width=600px>
 
-Here is how to handle it:
+This happens because the Python package you are trying to install (`gdal`) does not match the version of the system library (`libgdal`) installed on the machine.
 
-1.  First, check the version of the system library installed on the instance:
+We can fix this by ensuring the versions match exactly:
+
+1.  **Check your System Version**
+
+    First, ask the system which version of the library is currently installed:
 
     ```bash
     gdal-config --version
     ```
 
-    _(On our current instances, this returns 3.12.0)_
+    _(On our current instances, this usually returns something like `3.12.0`)_
 
-2.  When installing your package, explicitly pin `gdal` to match that version. This tells `uv` to install `odc-stats` but force the underlying `gdal` binding to be exactly 3.12.0:
+2.  **Check Project Constraints**
+
+    Before updating, ensure your `pyproject.toml` or `requirements.txt` isn't forcing the wrong version.
+
+    - Look for gdal==3.x.x in your dependency file.
+    - If the version there does not match the system version found in Step 1, remove the version number (change it to just "gdal").
+
+3.  **Refresh the Lock File**
+
+    If your project has a `uv.lock` file, it might still be holding onto the old, incompatible version. You can force `uv` to re-evaluate the package to match your system:
 
     ```bash
-    uv add odc-stats gdal==3.12.0
+    # Update GDAL to match your system version
+    uv lock --upgrade-package gdal
+
+    # Then sync your environment
+    uv sync
     ```
 
-This approach ensures the Python bindings communicate perfectly with the system library. If things do not work the first time, remember that configuration issues are just part of the development journey.
+    _This often solves the issue automatically without further manual editing._
+
+4.  **Missing Headers**
+
+    If the versions match but the build still fails, you might be missing the development headers. Since you have `sudo` access, you can install them:
+
+    ```bash
+    sudo apt-get install libgdal-dev gdal-bin
+    ```
 
 ---
 
