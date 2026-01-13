@@ -162,7 +162,7 @@ chmod 600 ~/.ssh/dev-instance-taufik.pem
 
 # Windows (PowerShell - run as Administrator)
 icacls "$env:USERPROFILE\.ssh\dev-instance-taufik.pem" /inheritance:r
-icacls "$env:USERPROFILE\.ssh\dev-instance-taufik.pem" /grant:r "$env:USERNAME:(R)"
+icacls "$env:USERPROFILE\.ssh\dev-instance-taufik.pem" /grant:r "$($env:USERNAME):R"
 ```
 
 ### 3. Buat SSH Config File
